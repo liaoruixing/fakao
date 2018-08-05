@@ -1,18 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?><feed xmlns="http://www.w3.org/2005/Atom">
   <title>法纸鉴真</title>
   <id>http://www.fknk.ooo</id>
-  <updated>2018-08-05T16:42:03+08:00</updated>
+  <updated>2018-08-05T23:33:29+08:00</updated>
   <subtitle>个人法考资料</subtitle>
   <link href="http://www.fknk.ooo"></link>
   <author>
     <name>法纸鉴真</name>
   </author>
   <entry>
-    <title>法考笔记汇总</title>
+    <title>法考笔记汇总-卷一篇</title>
     <updated>2018-08-05T15:00:00+08:00</updated>
-    <id>tag:www.fknk.ooo,2018-08-05:/nk1-fuxibiji.html</id>
-    <content type="html">&lt;p&gt;个人复习笔记。&lt;/p&gt;&#xA;</content>
-    <link href="http://www.fknk.ooo/nk1-fuxibiji.html"></link>
+    <id>tag:www.fknk.ooo,2018-08-05:/nk1-fuxibiji1.html</id>
+    <content type="html">&lt;p&gt;个人复习笔记，含中国特色社会主义法治理论、法理学、宪法、中国法律史、国际法、司法制度与法律职业道德、刑法、刑事诉讼法、行政法与行政诉讼法。&lt;/p&gt;&#xA;</content>
+    <link href="http://www.fknk.ooo/nk1-fuxibiji1.html"></link>
+  </entry>
+  <entry>
+    <title>法考笔记汇总-卷二篇</title>
+    <updated>2018-08-05T15:00:00+08:00</updated>
+    <id>tag:www.fknk.ooo,2018-08-05:/nk1-fuxibiji2.html</id>
+    <content type="html">&lt;p&gt;个人复习笔记，含民法、知产、商法、经济法、环境资源法、劳动与社会保障法、国际私法、国际经济法和民事诉讼法（仲裁制度）。&lt;/p&gt;&#xA;</content>
+    <link href="http://www.fknk.ooo/nk1-fuxibiji2.html"></link>
   </entry>
   <entry>
     <title>柏浪涛的刑法案例</title>
