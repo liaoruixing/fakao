@@ -140,24 +140,24 @@ table tr th { border-bottom: 0px; }
 
 
 :root { --active-file-bg-color: rgba(32, 43, 51, 0.63); --active-file-text-color: white; --bg-color: #fff; --text-color: #333; --side-bar-bg-color: #f5f5f5; --control-text-color: #666; }
-html { color: rgb(51, 51, 51); background: rgb(255, 255, 255); text-size-adjust: 100%; text-rendering: optimizeLegibility; font-size: 14px; -webkit-font-smoothing: initial; }
-#write { max-width: 960px; padding-top: 2em; padding-left: 20px; padding-right: 20px; min-height: calc(100vh - 6em); -webkit-font-smoothing: antialiased; font-size: 14px; }
+html { color: rgb(51, 51, 51); background: rgb(255, 255, 255); text-size-adjust: 100%; text-rendering: optimizeLegibility; font-size: 14px; -webkit-font-smoothing: initial; border: 1px solid rgb(221, 221, 221); }
+#write { max-width: 960px; padding-top: 2em; padding-left: 40px; padding-right: 40px; min-height: calc(100vh - 6em); -webkit-font-smoothing: antialiased; font-size: 14px; border-top: 1px solid rgb(221, 221, 221); border-bottom: 1px solid rgb(221, 221, 221); }
 .typora-node #write { min-height: calc(100% - 6em); }
 pre.md-meta-block { background: rgb(245, 245, 245); padding: 1em; border-radius: 3px; font-size: 14px; }
 @media screen and (max-width: 800px) {
   html { font-size: 14px; }
-  #write { padding: 0px 20px; font-size: 14px; }
+  #write { padding: 2px 20px; font-size: 14px; }
 }
 @media screen and (min-width: 1100px) {
   body, #footer-word-count-info { background: rgb(245, 245, 245); }
   body.pin-outline, .pin-outline #footer-word-count-info, .pin-outline footer { background: rgb(255, 255, 255); }
-  #write { max-width: 1000px; padding: 40px 60px; background: rgb(255, 255, 255); margin: 3em auto; border-style: solid; border-color: rgb(221, 221, 221); border-image: initial; border-width: 0px 1px; }
-  .pin-outline #write { max-width: 1000px; background: rgb(255, 255, 255); margin: 0px; border: 0px; padding: 0px 40px; }
+  #write { max-width: 1000px; padding: 40px 20px; background: rgb(255, 255, 255); margin: 3em auto; border-style: solid; border-color: rgb(221, 221, 221); border-image: initial; border-width: 0px 1px; }
+  .pin-outline #write { max-width: 1000px; background: rgb(255, 255, 255); margin: 0px; border: 1px solid rgb(221, 221, 221); padding: 2px 20px; }
   footer { background-color: transparent; }
 }
 @media screen and (min-width: 1300px) {
   body.pin-outline, .pin-outline #footer-word-count-info, .pin-outline footer { background: rgb(245, 245, 245); }
-  .pin-outline #write { max-width: 1000px; padding: 40px 60px; background: rgb(255, 255, 255); margin: 2em auto; border-style: solid; border-color: rgb(221, 221, 221); border-image: initial; border-width: 0px 1px; }
+  .pin-outline #write { max-width: 1000px; padding: 40px 20px; background: rgb(255, 255, 255); margin: 2em auto; border-style: solid; border-color: rgb(221, 221, 221); border-image: initial; border-width: 0px 1px; }
   .pin-outline footer { background-color: transparent; }
   #footer-word-count-info { background: rgb(245, 245, 245); }
 }
@@ -240,6 +240,11 @@ a.md-toc-inner { border-bottom: 0px !important; }
 .file-node-icon.fa.fa-folder::before { color: rgba(32, 43, 51, 0.49); }
 #preference-dialog .megamenu-menu-panel h1 { margin-bottom: 1em; }
 ::-webkit-scrollbar-corner { display: none; background: transparent; }
+
+
+
+
+
  .typora-export p, .typora-export .footnote-line {white-space: normal;} 
 </style>
         <meta charset="utf-8">
