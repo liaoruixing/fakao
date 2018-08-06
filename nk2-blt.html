@@ -1,6 +1,248 @@
 <!DOCTYPE html>
 <html>
     <head>
+	<style type='text/css'>html {overflow-x: initial !important;}:root { --bg-color:#ffffff; --text-color:#333333; --select-text-bg-color:#B5D6FC; --select-text-font-color:auto; }
+html { font-size: 14px; background-color: var(--bg-color); color: var(--text-color); font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; -webkit-font-smoothing: antialiased; }
+body { margin: 0px; padding: 0px; height: auto; bottom: 0px; top: 0px; left: 0px; right: 0px; font-size: 1rem; line-height: 1.42857; overflow-x: hidden; background: inherit; }
+a.url { word-break: break-all; }
+a:active, a:hover { outline: 0px; }
+.in-text-selection, ::selection { text-shadow: none; background: var(--select-text-bg-color); color: var(--select-text-font-color); }
+#write { margin: 0px auto; height: auto; width: inherit; word-break: normal; word-wrap: break-word; position: relative; padding-bottom: 70px; white-space: pre-wrap; overflow-x: visible; }
+.first-line-indent #write p .md-line { text-indent: 0px; }
+.first-line-indent #write li, .first-line-indent #write p, .first-line-indent #write p .md-line:first-child { text-indent: 2em; }
+.for-image #write { padding-left: 8px; padding-right: 8px; }
+body.typora-export { padding-left: 30px; padding-right: 30px; }
+@media screen and (max-width: 500px) {
+  body.typora-export { padding-left: 0px; padding-right: 0px; }
+  .CodeMirror-sizer { margin-left: 0px !important; }
+  .CodeMirror-gutters { display: none !important; }
+}
+#write > blockquote:first-child, #write > div:first-child, #write > figure:first-child, #write > ol:first-child, #write > p:first-child, #write > pre:first-child, #write > ul:first-child { margin-top: 30px; }
+#write li > figure:first-child { margin-top: -20px; }
+#write ol, #write ul { position: relative; }
+img { max-width: 100%; vertical-align: middle; }
+button, input, select, textarea { color: inherit; font-style: inherit; font-variant: inherit; font-weight: inherit; font-stretch: inherit; font-size: inherit; line-height: inherit; font-family: inherit; }
+input[type="checkbox"], input[type="radio"] { line-height: normal; padding: 0px; }
+*, ::after, ::before { box-sizing: border-box; }
+#write h1, #write h2, #write h3, #write h4, #write h5, #write h6, #write p, #write pre { width: inherit; }
+#write h1, #write h2, #write h3, #write h4, #write h5, #write h6, #write p { position: relative; }
+h1, h2, h3, h4, h5, h6 { break-after: avoid-page; break-inside: avoid; orphans: 2; }
+p { orphans: 4; }
+h1 { font-size: 2rem; }
+h2 { font-size: 1.8rem; }
+h3 { font-size: 1.6rem; }
+h4 { font-size: 1.4rem; }
+h5 { font-size: 1.2rem; }
+h6 { font-size: 1rem; }
+h1, h2, h3, h4, h5, h6 { margin-top: 1rem; margin-bottom: 1rem; }
+p { -webkit-margin-before: 1rem; -webkit-margin-after: 1rem; -webkit-margin-start: 0px; -webkit-margin-end: 0px; }
+.mathjax-block { margin-top: 0px; margin-bottom: 0px; -webkit-margin-before: 0px; -webkit-margin-after: 0px; }
+.hidden { display: none; }
+.md-blockmeta { color: rgb(204, 204, 204); font-weight: 700; font-style: italic; }
+a { cursor: pointer; }
+sup.md-footnote { padding: 2px 4px; background-color: rgba(238, 238, 238, 0.7); color: rgb(85, 85, 85); border-radius: 4px; cursor: pointer; }
+sup.md-footnote a, sup.md-footnote a:hover { color: inherit; text-transform: inherit; text-decoration: inherit; }
+#write input[type="checkbox"] { cursor: pointer; width: inherit; height: inherit; }
+figure { overflow-x: auto; margin: 1.2em 0px; max-width: calc(100% + 16px); padding: 0px; }
+figure > table { margin: 0px !important; }
+tr { break-inside: avoid; break-after: auto; }
+thead { display: table-header-group; }
+table { border-collapse: collapse; border-spacing: 0px; width: 100%; overflow: auto; break-inside: auto; text-align: left; }
+table.md-table td { min-width: 80px; }
+.CodeMirror-gutters { border-right: 0px; background-color: inherit; }
+.CodeMirror { text-align: left; }
+.CodeMirror-placeholder { opacity: 0.3; }
+.CodeMirror pre { padding: 0px 4px; }
+.CodeMirror-lines { padding: 0px; }
+div.hr:focus { cursor: none; }
+pre { white-space: pre-wrap; }
+pre.contain-cm { white-space: normal; }
+.CodeMirror-gutters { margin-right: 4px; }
+.md-fences { font-size: 0.9rem; display: block; break-inside: avoid; text-align: left; overflow: visible; white-space: pre; background: inherit; position: relative !important; }
+.md-diagram-panel { width: 100%; margin-top: 10px; text-align: center; padding-top: 0px; padding-bottom: 8px; overflow-x: auto; }
+.md-fences.mock-cm { white-space: pre-wrap; }
+.show-fences-line-number .md-fences { padding-left: 0px; }
+.show-fences-line-number .md-fences.mock-cm { padding-left: 40px; }
+.CodeMirror-line { break-inside: avoid; }
+.footnotes { opacity: 0.8; font-size: 0.9rem; margin-top: 1em; margin-bottom: 1em; }
+.footnotes + .footnotes { margin-top: 0px; }
+.md-reset { margin: 0px; padding: 0px; border: 0px; outline: 0px; vertical-align: top; background: 0px 0px; text-decoration: none; text-shadow: none; float: none; position: static; width: auto; height: auto; white-space: nowrap; cursor: inherit; -webkit-tap-highlight-color: transparent; line-height: normal; font-weight: 400; text-align: left; box-sizing: content-box; direction: ltr; }
+li div { padding-top: 0px; }
+blockquote { margin: 1rem 0px; }
+li .mathjax-block, li p { margin: 0.5rem 0px; }
+li { margin: 0px; position: relative; }
+blockquote > :last-child { margin-bottom: 0px; }
+blockquote > :first-child, li > :first-child { margin-top: 0px; }
+.footnotes-area { color: rgb(136, 136, 136); margin-top: 0.714rem; padding-bottom: 0.143rem; white-space: normal; }
+.footnote-line { white-space: pre-wrap; }
+@media print {
+  body, html { border: 1px solid transparent; height: 99%; break-after: avoid; break-before: avoid; }
+  #write { margin-top: 0px; border-color: transparent !important; }
+  .typora-export * { -webkit-print-color-adjust: exact; }
+  html.blink-to-pdf { font-size: 13px; }
+  .typora-export #write { padding-left: 1cm; padding-right: 1cm; padding-bottom: 0px; break-after: avoid; }
+  .typora-export #write::after { height: 0px; }
+  @page { margin: 20mm 0px; }
+}
+.footnote-line { margin-top: 0.714em; font-size: 0.7em; }
+a img, img a { cursor: pointer; }
+pre.md-meta-block { font-size: 0.8rem; min-height: 0.8rem; white-space: pre-wrap; background: rgb(204, 204, 204); display: block; overflow-x: hidden; }
+p > img:only-child { display: block; margin: auto; }
+.md-line > .md-image:only-child, p > .md-image:only-child { display: inline-block; width: 100%; text-align: center; }
+#write .MathJax_Display { margin: 0.8em 0px 0px; }
+.mathjax-block { white-space: pre; overflow: hidden; width: 100%; }
+p + .mathjax-block { margin-top: -1.143rem; }
+.mathjax-block:not(:empty)::after { display: none; }
+[contenteditable="true"]:active, [contenteditable="true"]:focus { outline: 0px; box-shadow: none; }
+.md-task-list-item { position: relative; list-style-type: none; }
+.task-list-item.md-task-list-item { padding-left: 0px; }
+.md-task-list-item > input { position: absolute; top: 0px; left: 0px; margin-left: -1.2em; margin-top: calc(1em - 10px); }
+.math { font-size: 1rem; }
+.md-toc { min-height: 3.58rem; position: relative; font-size: 0.9rem; border-radius: 10px; }
+.md-toc-content { position: relative; margin-left: 0px; }
+.md-toc-content::after, .md-toc::after { display: none; }
+.md-toc-item { display: block; color: rgb(65, 131, 196); }
+.md-toc-item a { text-decoration: none; }
+.md-toc-inner:hover { }
+.md-toc-inner { display: inline-block; cursor: pointer; }
+.md-toc-h1 .md-toc-inner { margin-left: 0px; font-weight: 700; }
+.md-toc-h2 .md-toc-inner { margin-left: 2em; }
+.md-toc-h3 .md-toc-inner { margin-left: 4em; }
+.md-toc-h4 .md-toc-inner { margin-left: 6em; }
+.md-toc-h5 .md-toc-inner { margin-left: 8em; }
+.md-toc-h6 .md-toc-inner { margin-left: 10em; }
+@media screen and (max-width: 48em) {
+  .md-toc-h3 .md-toc-inner { margin-left: 3.5em; }
+  .md-toc-h4 .md-toc-inner { margin-left: 5em; }
+  .md-toc-h5 .md-toc-inner { margin-left: 6.5em; }
+  .md-toc-h6 .md-toc-inner { margin-left: 8em; }
+}
+a.md-toc-inner { font-size: inherit; font-style: inherit; font-weight: inherit; line-height: inherit; }
+.footnote-line a:not(.reversefootnote) { color: inherit; }
+.md-attr { display: none; }
+.md-fn-count::after { content: "."; }
+code, pre, tt { font-family: var(--monospace); }
+.md-comment { color: rgb(162, 127, 3); opacity: 0.8; font-family: var(--monospace); }
+code { text-align: left; }
+a.md-print-anchor { border-width: initial !important; border-style: none !important; border-color: initial !important; display: inline-block !important; position: absolute !important; width: 1px !important; right: 0px !important; outline: 0px !important; background: 0px 0px !important; text-decoration: initial !important; text-shadow: initial !important; }
+.md-inline-math .MathJax_SVG .noError { display: none !important; }
+.mathjax-block .MathJax_SVG_Display { text-align: center; margin: 1em 0px; position: relative; text-indent: 0px; max-width: none; max-height: none; min-height: 0px; min-width: 100%; width: auto; display: block !important; }
+.MathJax_SVG_Display, .md-inline-math .MathJax_SVG_Display { width: auto; margin: inherit; display: inline-block !important; }
+.MathJax_SVG .MJX-monospace { font-family: monospace; }
+.MathJax_SVG .MJX-sans-serif { font-family: sans-serif; }
+.MathJax_SVG { display: inline; font-style: normal; font-weight: 400; line-height: normal; zoom: 90%; text-indent: 0px; text-align: left; text-transform: none; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; direction: ltr; max-width: none; max-height: none; min-width: 0px; min-height: 0px; border: 0px; padding: 0px; margin: 0px; }
+.MathJax_SVG * { transition: none; }
+.os-windows.monocolor-emoji .md-emoji { font-family: "Segoe UI Symbol", sans-serif; }
+.md-diagram-panel > svg { max-width: 100%; }
+[lang="flow"] svg, [lang="mermaid"] svg { max-width: 100%; }
+[lang="mermaid"] .node text { font-size: 1rem; }
+table tr th { border-bottom: 0px; }
+
+
+:root { --active-file-bg-color: rgba(32, 43, 51, 0.63); --active-file-text-color: white; --bg-color: #fff; --text-color: #333; --side-bar-bg-color: #f5f5f5; --control-text-color: #666; }
+html { color: rgb(51, 51, 51); background: rgb(255, 255, 255); text-size-adjust: 100%; text-rendering: optimizeLegibility; font-size: 14px; -webkit-font-smoothing: initial; }
+#write { max-width: 960px; padding-top: 2em; padding-left: 40px; padding-right: 40px; min-height: calc(100vh - 6em); -webkit-font-smoothing: antialiased; font-size: 14px; }
+.typora-node #write { min-height: calc(100% - 6em); }
+pre.md-meta-block { background: rgb(245, 245, 245); padding: 1em; border-radius: 3px; font-size: 14px; }
+@media screen and (max-width: 800px) {
+  html { font-size: 14px; }
+  #write { padding: 0px 20px; font-size: 14px; }
+}
+@media screen and (min-width: 1100px) {
+  body, #footer-word-count-info { background: rgb(245, 245, 245); }
+  body.pin-outline, .pin-outline #footer-word-count-info, .pin-outline footer { background: rgb(255, 255, 255); }
+  #write { max-width: 1000px; padding: 40px 60px; background: rgb(255, 255, 255); margin: 3em auto; border-style: solid; border-color: rgb(221, 221, 221); border-image: initial; border-width: 0px 1px; }
+  .pin-outline #write { max-width: 1000px; background: rgb(255, 255, 255); margin: 0px; border: 0px; padding: 0px 40px; }
+  footer { background-color: transparent; }
+}
+@media screen and (min-width: 1300px) {
+  body.pin-outline, .pin-outline #footer-word-count-info, .pin-outline footer { background: rgb(245, 245, 245); }
+  .pin-outline #write { max-width: 1000px; padding: 40px 60px; background: rgb(255, 255, 255); margin: 2em auto; border-style: solid; border-color: rgb(221, 221, 221); border-image: initial; border-width: 0px 1px; }
+  .pin-outline footer { background-color: transparent; }
+  #footer-word-count-info { background: rgb(245, 245, 245); }
+}
+html.borderbox *, html.borderbox ::before, html.borderbox ::after { box-sizing: border-box; }
+body, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, code, form, fieldset, legend, input, textarea, p, blockquote, th, td, hr, button, article, aside, details, figcaption, figure, footer, header, menu, nav, section { margin: 0px; padding: 0px; }
+article, aside, details, figcaption, figure, footer, header, menu, nav, section { display: block; }
+audio, canvas, video { display: inline-block; }
+body, button, input, select, textarea { font-style: normal; font-variant: normal; font-weight: 300; font-stretch: normal; font-size: 1em; line-height: 1.8; font-family: "Microsoft Yahei", "PingFang SC", "Lantinghei SC", "Hiragino Sans GB", "Microsoft Sans Serif", "WenQuanYi Micro Hei", sans; }
+body { font-family: "Microsoft Yahei", PingFang-SC-Regular, "PingFang SC", "Lantinghei SC", "Hiragino Sans GB", "Microsoft Sans Serif", "WenQuanYi Micro Hei", sans; }
+h1, h2, h3, h4, h5, h6 { font-family: "Microsoft Yahei", PingFang-SC-Regular, "PingFang SC", "Lantinghei SC", "Hiragino Sans GB", "Microsoft Sans Serif", "WenQuanYi Micro Hei", sans; -webkit-font-smoothing: initial; font-weight: 100; color: var(--text-color); line-height: 1.35; font-variant-numeric: lining-nums; }
+em { font-weight: bold; color: rgb(0, 0, 0); }
+strong em, em strong { font-weight: bold; color: rgb(0, 0, 0); }
+strong, b { font-weight: bold; color: rgb(0, 0, 0); }
+table { border-collapse: collapse; border-spacing: 0px; }
+fieldset, img { border: 0px; }
+blockquote { position: relative; color: rgb(153, 153, 153); font-size: 0.9em; border-left: 1px solid rgb(26, 188, 156); padding-left: 1em; margin: 0.5em 3em 0.5em 2em; }
+@media only screen and (max-width: 640px) {
+  blockquote { margin: 1em 0px; }
+}
+acronym, abbr { border-bottom: 1px dotted; font-variant-ligatures: normal; font-variant-caps: normal; }
+abbr { cursor: help; }
+address, caption, cite, code, dfn, th, var { font-style: normal; font-weight: 400; }
+ul, ol { list-style: none; }
+caption, th { text-align: left; }
+q::before, q::after { content: ""; }
+sub, sup { font-size: 75%; line-height: 0; position: relative; }
+:root sub, :root sup { vertical-align: baseline; }
+sup { top: -0.5em; }
+sub { bottom: -0.25em; }
+a { color: rgb(26, 188, 156); }
+a:hover { text-decoration: underline; }
+#write a { border-bottom: 1px solid rgb(26, 188, 156); }
+#write a:hover { border-bottom-color: rgb(85, 85, 85); color: rgb(85, 85, 85); text-decoration: none; }
+ins, a { text-decoration: none; }
+mark { font-family: "Microsoft Yahei", PingFang-SC-Regular, "PingFang SC", "Lantinghei SC", "Hiragino Sans GB", "Microsoft Sans Serif", "WenQuanYi Micro Hei", sans; background: rgb(255, 253, 209); border-bottom: 1px solid rgb(255, 237, 206); padding: 2px 0px; margin: 2px 1px; }
+pre, code, pre tt { font-family: "Microsoft Yahei", PingFang-SC-Regular, "PingFang SC", "Lantinghei SC", "Hiragino Sans GB", "Microsoft Sans Serif", "WenQuanYi Micro Hei", sans; }
+pre { background: rgb(248, 248, 248); border: 1px solid rgb(221, 221, 221); padding: 0em; display: block; }
+#write .md-fences { border: 1px solid rgb(221, 221, 221); padding: 1em 0.5em; display: block; }
+hr { border-top: none; border-right: none; border-left: none; border-image: initial; border-bottom: 1px solid rgb(207, 207, 207); margin-bottom: 0.8em; height: 10px; }
+#write strong { font-weight: bolder; color: rgb(0, 0, 0); }
+.code-tooltip.md-hover-tip strong { color: white; }
+#write p, #write .md-fences, #write ul, #write ol, #write dl, #write form, #write hr, #write figure, #write-p, #write-pre, #write-ul, #write-ol, #write-dl, #write-form, #write-hr, #write-table, blockquote { margin-bottom: 0.8em; }
+html { font-family: "Microsoft Yahei", PingFang-SC-Regular, "PingFang SC", Verdana, "Helvetica Neue", "Hiragino Sans GB", "Microsoft Sans Serif", "WenQuanYi Micro Hei", sans-serif; }
+#write h1, #write h2, #write h3, #write h4, #write h5, #write h6, #write-h1, #write-h2, #write-h3, #write-h4, #write-h5, #write-h6 { margin-top: 1em; margin-bottom: 0em; line-height: 1.35; color: rgb(0, 0, 0); }
+#write h1, #write-h1 { font-weight: bold; font-size: 1.6em; padding-bottom: 0.4em; border-bottom: 3px double rgb(238, 238, 238); }
+#write h2, #write-h2 { font-size: 1.4em; padding-bottom: 0.1em; border-bottom: 1px solid rgb(26, 188, 156) !important; }
+#write h3, #write-h3 { font-size: 1.2em; }
+#write h4, #write-h4 { font-size: 1.1em; }
+#write h5, #write h6, #write-h5, #write-h6 { font-size: 1em; font-weight: bold; }
+#write ul, #write-ul { margin-left: 1.3em; list-style: disc; }
+#write ol, #write-ol { list-style: decimal; margin-left: 1.9em; }
+#write li ul, #write li ol, #write-ul ul, #write-ul ol, #write-ol ul, #write-ol ol { margin-bottom: 0.5em; margin-left: 1em; }
+#write li ul, #write-ul ul, #write-ol ul { list-style: circle; }
+#write table th, #write table td { border: 1px solid rgb(221, 221, 221); padding: 0.1em 0.2em; color: rgb(102, 102, 102); font-family: "Microsoft Yahei", PingFang-SC-Regular, "PingFang SC", "Lantinghei SC", "Hiragino Sans GB", "Microsoft Sans Serif", "WenQuanYi Micro Hei", sans; font-size: 0.8em; }
+#write table .md-table-edit th { border: none; padding: 0px; color: inherit; }
+#write table th, #write-table th { background: rgb(251, 251, 251); font-family: "Microsoft Yahei", PingFang-SC-Regular, "PingFang SC", "Lantinghei SC", "Hiragino Sans GB", "Microsoft Sans Serif", "WenQuanYi Micro Hei", sans; font-size: 0.8em; }
+#write table thead th, #write-table thead th { background: rgb(241, 241, 241); font-family: "Microsoft Yahei", PingFang-SC-Regular, "PingFang SC", "Lantinghei SC", "Hiragino Sans GB", "Microsoft Sans Serif", "WenQuanYi Micro Hei", sans; font-size: 0.8em; font-weight: bold; }
+#write table caption { border-bottom: none; }
+#write em { font-weight: inherit; font-style: inherit; }
+li > p { margin-bottom: 0px !important; }
+#write img { max-width: 100%; }
+a.md-toc-inner { border-bottom: 0px !important; }
+.md-toc-h1:first-of-type:last-of-type { display: none; }
+.md-toc { font-size: inherit; }
+.md-toc-h1 .md-toc-inner { font-weight: normal; }
+.md-table-edit th { padding: 0px !important; border: 0px !important; }
+.mac-seamless-mode #write { min-height: calc((100vh - 6em) - 20px); }
+.typora-quick-open-item.active { color: var(--active-file-text-color); }
+.in-text-selection, ::selection { background: var(--active-file-bg-color); text-shadow: none; color: white; }
+.btn-primary { background-color: rgb(45, 45, 45); border-color: rgb(2, 2, 2); }
+.btn-primary:hover, .btn-primary:focus, .btn-primary.focus, .btn-primary:active, .btn-primary.active, .open > .dropdown-toggle.btn-primary { background-color: rgb(78, 76, 78); border: rgb(78, 76, 78); }
+#preference-dialog .modal-content { background: rgb(110, 117, 122); --bg-color: #6e757a; --text-color: #f1f1f1; color: rgb(241, 241, 241); }
+#typora-source, .typora-sourceview-on { --bg-color: #eee; background: rgb(238, 238, 238); }
+.cm-s-typora-default .cm-header, .cm-s-typora-default .cm-property { color: rgb(17, 96, 152); }
+.cm-s-typora-default .cm-link { color: rgb(17, 152, 125); }
+.cm-s-typora-default .cm-em { font-family: Georgia-Italic, STSongti-SC-Light, serif; color: rgb(111, 100, 0); }
+.cm-s-typora-default .cm-em { color: rgb(0, 22, 45); }
+.CodeMirror.cm-s-typora-default div.CodeMirror-cursor { border-left: 3px solid rgb(110, 117, 122); }
+.cm-s-typora-default .CodeMirror-selectedtext, .typora-sourceview-on .CodeMirror-focused .CodeMirror-selected { background: rgb(110, 117, 122); color: white; }
+.file-node-icon.fa.fa-folder::before { color: rgba(32, 43, 51, 0.49); }
+#preference-dialog .megamenu-menu-panel h1 { margin-bottom: 1em; }
+::-webkit-scrollbar-corner { display: none; background: transparent; }
+ .typora-export p, .typora-export .footnote-line {white-space: normal;} 
+</style>
+	
         <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 <meta http-equiv="Cache-Control" content="no-siteapp">
@@ -72,7 +314,7 @@
         <meta name="author" content="">
         <title>柏浪涛的刑法案例</title>
     </head>
-    <body>
+<body class='typora-export os-windows' >
         <article class="container">
             <header class="header-wrap">
   <a class="index" href="/">
@@ -96,813 +338,28 @@
                     
                     <span class="tags"><a class="tag" href="/tag/%e6%a1%88%e4%be%8b/index.html">案例</a></span>
                 </section>
-                <article class="content"><p>#柏浪涛的刑法案例</p>
-
-<p>##01.【案例】
-甲男微信摇到乙女，谈好六百，甲至乙处，乙在服务中得知甲只带三十，生气叫来两男殴打后，称若不给三万，此事告知你妈。后谈定，甲三天后领到工资两千送上。甲出来后本想报案，但想到此时抓乙等只能定未遂，便三天后送上两千，并再加送一千，因查了法律，三千才够起刑点，后报案。如何处理？</p>
-
-<blockquote>
-<p>【解析】乙威胁告知甲妈，对一般人不会产生恐惧心理，不构成敲诈勒索，但乙若知道甲对告知其母会恐惧，则乙属于敲诈，也即当被害人低于一般人时，行为人明知这点而加以利用，符合敲诈罪行为。案中乙应是知道的，否则不会以此威胁，甲也产生了恐惧。乙成立敲诈罪，但是未遂，因为甲给钱时已不是基于恐惧心理。</p>
-</blockquote>
-
-<p>##02.【案例】</p>
-
-<p>甲乙站在桥上，甲想教训乙，以伤害的故意用木棒朝乙打来，乙急忙后退闪躲，不料不慎跌落桥下，被河水淹死。甲构成：故意杀人罪既遂？故意伤害罪(既遂)致人死亡？故意伤害罪(未遂)致人死亡？故意伤害罪既遂与过失致死罪想象竞合，择一重？两罪并罚？</p>
-
-<blockquote>
-<p>【解析】甲无疑构成故意伤害罪(过失)致人死亡这个结果加重犯。但故意伤害罪这个基本犯是未遂，虽然死亡结果与伤害行为有因果关系，虽然死亡结果可以评价为伤害结果，但甲对该死亡结果只有过失，而无故意，若是故意则会构成故意杀人罪。故意伤害罪既遂要求对伤害结果持故意心理，而非过失。</p>
-</blockquote>
-
-<p>##03.【案例】</p>
-
-<p>甲欲杀害乙，用刀砍伤乙的手臂，手臂流血，鉴定为轻伤，此时甲被抓捕。乙因患罕见的血友病，流血不止，抢救无效死亡。经查实，甲对乙患此病毫不知情，也没有知道的可能性。甲构成：故意杀人罪既遂？未遂？故意杀人罪未遂与过失致死罪想象竞合，择一重？</p>
-
-<blockquote>
-<p>【解析】观点展示：意见一，客观上行为与死亡无因果关系，因为轻伤本身不会导致死亡，故杀人未遂。意见二，客观上有因果关系，因为没有轻伤，人不会死，故杀人既遂。意见三，客观上有因果关系，但主观上没有认识到这种行为会死人，故杀人未遂，若有认识到的可能性，又触犯过失致死，想象竞合择一重</p>
-</blockquote>
-
-<p>##04.【案例】
-（编自《心迷宫》）甲蹲在悬崖边上拉屎。乙欲害死甲，欲使甲掉下悬崖，故意在旁边问甲要不要抽根烟。甲：不用。乙：拉屎很无聊，来一根吧！便故意将一根烟扔向甲，但故意扔向偏悬崖外的方位。甲下意识地努力伸手去够，脚下打滑，掉下悬崖摔死。乙构成？</p>
-
-<blockquote>
-<p>【解析】甲在主观上对危险有认识能力，也有认识，在客观上对危险有控制支配能力，属于被害人自陷风险。乙扔烟的行为便不是杀人的实行行为，在客观上便无罪。题干用乙主观杀人故意来干扰，但应先判断客观。《刑法攻略》上有个类似案例，乙扔钱到湖中，甲跳进捡，淹死。乙无罪</p>
-</blockquote>
-
-<p>##05.【案例】
-圣诞这天，小芳要与狗蛋分手，转身要离去，狗蛋拿出刀，谈条件：你若不走，我不动手，若走，就动手杀了你！小芳看狗蛋目露凶光，怕其真动手，便又扑向怀里：小样，把刀收起来。狗蛋便收起刀。狗蛋构成故意杀人罪的：犯意表示？预备阶段的中止？实行阶段的中止？还是犯罪预备或未遂？</p>
-
-<blockquote>
-<p>【解析】首先，狗蛋是附条件的中止，而非未遂。其次，拔刀威胁，对小芳已构成现实紧迫的人身威胁，属于已经着手。所以构成实行阶段的中止。本案陷阱在于，容易将附条件的中止中的附条件当作是否着手的条件，其实该条件是是否走向既遂的条件，不是是否威胁的条件。</p>
-</blockquote>
-
-<p>##06.【案例】
-狗蛋拐骗到了一个小男孩，拐骗儿童罪已经既遂，带回老家，告知老婆小芳小孩是拐来的，让养着。小芳第二天带小孩找当警察的哥哥铁牛，告知小孩是拐来的，给办个户口。铁牛便给办了。小芳第三天带小孩来到村小学，告知校长是拐来的，让给办入学手续，校长给办了。这些大人们怎么处理？</p>
-
-<blockquote>
-<p>【解析】由于拐骗儿童罪是继续犯，所以既遂后有人参与帮助继续拐骗状态的，能够成立承继的共犯。因此，小芳，警察都构成拐骗罪共犯，校长不构成。</p>
-</blockquote>
-
-<p>##07.【案例】
-狗蛋欲抢劫小芳放在身边的包，将小芳推向一边(并无伤害或杀害故意)，准备拿包时，发现小芳头部恰巧碰在草丛中的一块石头上，小芳昏迷。狗蛋看小芳昏迷的脸庞如此迷人，便不再拿其包，并送到医院，但仍抢救无效死亡。对狗蛋如何处理？抢劫罪中止？既遂？抢劫罪致人死亡？</p>
-
-<blockquote>
-<p>【解析】 ①将人推倒在地取其物，属对人暴力而非对物暴力，属抢劫，而非抢夺。②恰巧碰草丛中石头，对死亡无预见可能性，属意外事件。若现场是工地，则属过失。所以不是抢劫致死。③未取物，抢劫属中止。即使按那错误司法解释，即轻伤构成既遂，此轻伤也应是故意或过失所为。</p>
-</blockquote>
-
-<p>##08.【案例】
-小芳欲杀狗蛋，计划先用安眠药吃昏狗蛋，然后用绳勒死。狗蛋昏了后，小芳准备勒时，看到狗蛋睡着的样子都那么帅，想起昔日时光，又放弃，离去。三十分钟后，由于小芳之前误将安眠药的量投得过大，狗蛋昏死了。对小芳如何处理？</p>
-
-<blockquote>
-<p>【解析】观点展示：多数意见认为小芳构成故意杀人罪既遂。少数意见认为小芳第一个行为构成过失致死罪，因为当时无杀人故意。第二个行为构成杀人中止，能杀死而放弃。因为是两个行为，不是想象竞合择一重，而是两罪并罚。在德国，第二种意见是多数意见。</p>
-</blockquote>
-
-<p>##09.【案例】
-（编自《心迷宫》）：白虎敲诈村长儿子甲的钱财，二人在野树林里撕扯，白虎被推倒地，碰到一片碎石，昏迷重伤。甲以为死亡，逃离。村长赶至，以为白虎死亡，为帮儿子，围上柴禾，点燃，制造白虎醉酒抽烟不慎点燃柴禾烧死自己的假象。白虎被烧死。村长父子如何处理？</p>
-
-<blockquote>
-<p>【解析】甲若是防卫过当，则应负过失致人重伤罪，但甲仅仅是推一把，行为并不过当，所以不负过失致人重伤罪。但甲离开后，假若白虎重伤导致死亡，则甲构成不作为的过失致人死亡罪。但白虎的死亡是由村长造成，村长触犯过失致人死亡罪和帮助毁灭证据罪，想象竞合择一重。</p>
-</blockquote>
-
-<p>##10.【案例】
-芈月传中，假如秦武王本不愿举鼎，某大臣甲欲害之，用激将法力促其举鼎。秦武王遂举鼎，结果体力不支，砸死自己。对甲如何处理？理由？</p>
-
-<blockquote>
-<p>【解析】秦王，成年人，一对危险有认识能力，也认识到，二有控制能力，仍去做，属被害人自陷风险，自己担责。大臣不存在欺骗。</p>
-</blockquote>
-
-<p>##11.【案例】
-某地，甲的妻子乙重病，因长期治疗导致家庭困顿。甲无奈便使用自己的社保卡为妻子买药治病，累计价值一万元药品。甲是否构成诈骗罪？无罪说的一个理由是，所涉社保基金是夫妻共同财产。对此该如何评价？若有罪，有无可辩护的减轻处罚理由？</p>
-
-<blockquote>
-<p>【解析】如果是用卡中余额买药，买时不要求身份属性，则不是诈骗。如果要求身份属性，是诈骗。实务那张判决书在描述事实时没有交待清楚，还有可能是到医院让医生开处方药，医生明知不是同一人而开，行为人是诈骗，属于二者间诈骗，还是三角诈骗？医生构成什么角色？都需要进一步探究。</p>
-</blockquote>
-
-<p>##12.【案例】
-某地，孕妇甲在乘坐公交车时，忽要生了，请求司机停车开门，司机坚持认为未到下一站，按规定不能停车开门。由于交通拥堵，行驶缓慢，及至下一站时，甲羊水流失过多，胎儿窒息，在送往医院途中窒息死亡。司机是否构成犯罪？何罪？其辩护理由是遵守交通规定，没有错。如何看待？</p>
-
-<blockquote>
-<p>【解析】司机构成不作为的过失致人重伤罪。在遵守公司规定和履行救助义务之间，应选择后者，因为生命健康法益更重要。胎儿无法评价为人，伤害胎儿只能评价为伤害母体。司机对胎儿死亡不是故意，而是过失。不履行救助义务就是不作为。行为同时符合民法和刑法时，优先适用刑法。</p>
-</blockquote>
-
-<p>##13.【案例】
-某地，甲的妻子乙在医院难产，需紧急剖腹产，但甲拒绝签字，要求继续顺产，此时乙已昏迷。鉴于乙和胎儿有生命危险，医生在没有甲签字的情形下，自行实施剖腹产，母乙平安。但甲控告医生的剖腹行为是非法行为，构成故意伤害罪。医生有无刑法上的理由辩护？若医生听从甲，放任死亡，有无罪？</p>
-
-<blockquote>
-<p>【解析】医生无罪，理由有：<br />
-①紧急避险，为救生命牺牲医院制度。<br />
-②义务冲务，在遵守医院制度与履行救死扶伤义务冲突时，可只履行后者。<br />
-③推定的被害人承诺，推定孕妇有承诺。若医生不救，涉嫌遗弃罪。这些只是纯刑法层面分析。我国医疗现状及处理与此相差甚远。</p>
-</blockquote>
-
-<p>##14.【案例】
-德国案例，甲绑架了乙(11岁)，甲被捕，让告知乙被藏匿地点，甲拒告知，及至第三天，警方由于担心乙会饿死，请来医生见证，对甲刑讯逼供，致重伤，甲忍受不了，终于说出地点。警方寻至，发现乙已死，系甲绑架后随即勒死。警察是否构成刑讯逼供罪，故意伤害罪？还是属于正当防卫，假想防卫？</p>
-
-<blockquote>
-<p>【解析】假设人质没死获救，德国主流观点是构成刑讯逼供等犯罪，理由是被告人的权利是基本权利，不能被当作工具。我国有力观点是只要符合严格条件可构成正当防卫，依该观点，本案是假想防卫。从保护人质角度讲，我赞同我国有力观点，但从我国警察执法状况看，又担心滥用。无唯一答案，观点展示。</p>
-</blockquote>
-
-<p>##15.【案例】
-甲欲杀乙，从某蛋糕店购买一个草莓蛋糕，注入毒液到下层部位，送给乙。乙刚吃完上层草莓，便呕吐不止。查明草莓已发霉，乙中毒，因乙是过敏体质，引起过敏休克死亡。甲构成杀人既遂？未遂？蛋糕店老板是否构成过失致人死亡？</p>
-
-<blockquote>
-<p>【解析】甲，客观行为与乙死亡无因果关系，所以是杀人未遂。蛋糕店老板，客观行为与乙死亡有因果关系，但主观上是意外事件。如果明知变质而销售，是生产销售不符合安全标准食品行为。若量很大，构成犯罪。有的同学对特殊体质问题一刀切，特殊体质与甲没关系，与老板，则不影响其因果关系。</p>
-</blockquote>
-
-<p>##16.【案例】
-甲因打架被派出所治安拘留十日。五年后，甲找工作，应聘某单位，被录用，在办理入职手续时，单位要求甲提供无违法犯罪证明。甲找派出所，派出所因其曾被治安拘留，拒绝提供该证明。甲因失业已久，求职心切，便花二百元，从乙处购买了伪造的该证明。甲事后被抓。对甲如何处理？</p>
-
-<blockquote>
-<p>【解析】派出所出具的无违法犯罪证明属于国家公文。买卖国家公文罪中，买卖包括购买和贩卖，这里的国家公文包括虚假的公文。因此甲构成此罪。但考虑到曾经只是违法，长期失业，不具有期待可能性，或期待可能性降低，可免责或减轻责任。</p>
-</blockquote>
-
-<p>##17.【案例】
-小芳因传销被警察抓到派出所，关在五层。男友狗蛋翻窗来救小芳，两人商量，并经小芳同意，狗蛋用绳子绑住小芳，自己抓住绳子这头将小芳从窗外徐徐下吊，中途狗蛋臂力不支，导致绳子从手中滑落。小芳大喊一声狗蛋！掉下摔死。对狗蛋怎么处理？</p>
-
-<blockquote>
-<p>【解析】由于未交待小芳是否涉嫌刑事犯罪，故对脱逃罪可暂且不表。虽然小芳作为被害人同意了狗蛋的危险行为，但狗蛋是实行行为人，支配了危险的发展，客观上应对死亡结果负责，主观上有过于自信的过失，构成过失致人死亡罪。这种情形与一般的被害人自陷风险有所区别。</p>
-</blockquote>
-
-<p>##18.【案例】
-小芳因传销又被警察抓到派出所。小芳悄悄告诉前来看自己的男友狗蛋：给我弄瓶老鼠药，我喝点，吓唬下警察，让他们怕我，赶紧放我。狗蛋感觉这办法好，遂照办。小芳喝后中毒死亡。对狗蛋如何处理？</p>
-
-<blockquote>
-<p>【解析】首先注意，该案不属于帮助他人自杀，小芳没想自杀。小芳属于被害人自陷风险，且是实行行为人，而狗蛋只是帮助被害人自陷风险，因被害人自陷风险，自己负责，所以帮助者无责任(帮助他人自杀是特例)。这与案例17的区别在于，后者中虽然被害人小芳自愿陷入风险，但狗蛋是危险的实行行为人。</p>
-</blockquote>
-
-<p>##19.【案例】
-狗蛋因喜欢上铁牛同志，甩了女友小芳，小芳羞怒，欲杀之，看到前方树下黑暗处站一人(铁牛)，以为是狗蛋，向其开枪，枪法太臭，打偏了，打死了附近路过的行人。事后查明，死者竟是狗蛋，原来狗蛋与铁牛相约在此地见面，铁牛先到，狗蛋晚到(来的晚不如来的早)。对小芳如何处理？</p>
-
-<blockquote>
-<p>【解析】小芳既有对象错误，又有打击错误，是两种错误的结合，这是考试增加难度的一种方式，这个点尚未考过。依主流的法定符合说，定杀人既遂。依少数的具体符合说，杀人未遂与过失致死竞合，择一重，定杀人未遂。</p>
-</blockquote>
-
-<p>##20.【案例】
-狗蛋是精神病患者，但有生理需求。某晚，邻居小芳来借醋，狗蛋突然使用暴力强奸小芳。狗蛋母亲在门外看到，心想儿子都三十岁了，还没沾过女人身体，便不制止，并望风。该案如何分析？</p>
-
-<blockquote>
-<p>【解析】违法是连带的，责任是个别的。二人共同制造了违法事实，责任分别评价。狗蛋母亲构成强奸罪片面帮助犯，不阻止是不作为帮助，望风是作为帮助，作为吸收不作为，最终认定为作为帮助。</p>
-</blockquote>
-
-<p>##21.【案例】
-蓝某晚上睡觉，忽然感觉有人偷窃其养殖的家禽，小偷陈某被发现，随即奔逃，蓝某追赶欲抓捕，当时雨天路滑，蓝某伸手从后面抓扯住陈某衣袖，陈某用力后甩挣脱蓝某，随即陈某侧身摔倒在水泥路面上，致颅脑损伤死亡。追赶行为是：A正当防卫,B防卫过当,C过失致人死亡,D意外事件</p>
-
-<blockquote>
-<p>【解析】一，小偷手中无家禽。1.客观上主人追赶行为与小偷死亡无相当的因果关系，死亡结果不能归责于主人。2.主观上主人对死亡结果无预见可能性，无过失，是意外事件。二，若小偷手中有家禽，主人夺回财物行为属正当防卫，防卫手段不过当，死亡结果与防卫行为无相当因果关系。</p>
-</blockquote>
-
-<p>##22.【案例】
-甲将一店家收银台用于收款的二维码偷换成自己的。乙购物后先扫描了二维码，告诉店家自己有急事先离开，在回家路上会继续完成支付，店家答应。由于店家的微信支付账号未用商号名称，而是个人支付账户，乙扫描二维码后，在支付时以为甲的账号是店家账号，便向甲账号支付了货款。甲构成何罪？谁是被害人？A.盗窃罪；B.侵占罪；C.诈骗罪，两者间诈骗；D.诈骗罪，三角诈骗。</p>
-
-<blockquote>
-<p>【解析】有观点认为甲是盗窃罪，盗窃了店家钱财。然盗窃罪是将他人占有的财物转移为自己占有，而甲并未将店家占有的财物转移为自己占有，因为店家尚未占有乙的钱财，乙也未将费用转移到店家。例如乙要向店家丙还款，甲冒充丙，欺骗乙，使乙向甲还款。甲构成诈骗罪，不属于三角诈骗，因为受骗人和受害人都是乙</p>
-</blockquote>
-
-<p>##23.【案例】
-甲欲入户强奸丙女，欺骗乙，帮我入户盗窃望风。乙答应照办。甲顺利入户强奸了丙。根据不同学说，该如何处理？</p>
-
-<blockquote>
-<p>【解析】依完全犯罪共同说，甲乙不构成共同犯罪，乙无罪。依部分犯罪共同说，甲乙构成非法侵入住宅罪的共同犯罪，甲另构成强奸罪。依行为共同说，其中温和派观点同部分犯罪共同说，其中彻底派认为，甲乙在违法阶层构成强奸罪共同犯罪(违法是连带的)，在责任阶层，乙无罪(责任是个别的)。</p>
-</blockquote>
-
-<p>##24.【案例】
-甲于1996年2月29日出生(闰年)，2010年(非闰年，无2月29日)问同学自己今年的生日应哪天过？有答2月28，有答3月1日，后决定3月1日过。在当天生日party上，甲酒性大发，在伙伴们的起哄下，强奸了一位女同学。甲是否需要负刑事责任？</p>
-
-<blockquote>
-<p>【解析】既然在2月29日出生，那么在未来的2月份第29天才是生日，这一天在非闰年称为三月一日，这一天就是生日。第二天才算已满十四周岁。因此，生日当天不负刑事责任。</p>
-</blockquote>
-
-<p>##25.【案例】
-顾客乙在商场收银台前排队，发现收银台有一钱包(顾客丙遗失的)，询问前面顾客甲：是不是你的钱包？甲对乙谎称是，并拿走。收银员看到整个这一幕，也相信了甲的话，在甲拿走时，未加阻挡，并说：是你的那你收好。对甲该如何处理？</p>
-
-<blockquote>
-<p>【解析】钱包转化为收银员占有。处分意识指意识到自己将自己占有的财物转移给他人占有。收银员没有意识到自己占有钱包，也便没有处分意识，因此甲不构成诈骗罪，而是盗窃罪。另一不定诈骗罪的理由是，甲欺骗对象是乙而非收银员，乙没有占有钱包，没有处分行为。诈骗罪要求，欺骗A，A产生认识错误并处分财物。</p>
-</blockquote>
-
-<p>##25.【案例】
-顾客乙在商场收银台前排队，发现收银台有一钱包(顾客丙遗失的)，询问前面顾客甲：是不是你的钱包？甲对乙谎称是，并拿走。收银员看到整个这一幕，也相信了甲的话，在甲拿走时，未加阻挡，并说：是你的那你收好。对甲该如何处理？</p>
-
-<blockquote>
-<p>【解析】钱包转化为收银员占有。处分意识指意识到自己将自己占有的财物转移给他人占有。收银员没有意识到自己占有钱包，也便没有处分意识，因此甲不构成诈骗罪，而是盗窃罪。另一不定诈骗罪的理由是，甲欺骗对象是乙而非收银员，乙没有占有钱包，没有处分行为。诈骗罪要求，欺骗A，A产生认识错误并处分财物。</p>
-</blockquote>
-
-<p>##26.【案例】
-甲指使杀手乙杀死丙，给乙看了丙的多张照片和生活视频，并多次带乙近距离偷看丙，指认丙。甲然后问乙：认识丙了吧？不会搞错对象吧？乙：丙烧成灰，我也认得。甲遂放心，等乙好消息。乙清晨藏在丙小区地下车库，看到丁出来，竟以为是丙，打死丁。甲构成：A.对象错误，B.打击错误，C.杀人既遂，D.杀人未遂，E.过失致人死亡罪</p>
-
-<blockquote>
-<p>【解析】甲构成打击错误。依法定符合说构成杀人罪教唆犯既遂。依具体符合说，内部两种观点，①对丙构成杀人罪教唆犯未遂，对丁构成过失致死罪，想象竞合；②对丙构成杀人罪教唆犯犯罪预备，因为乙对丙未着手，对丁构成过失致死，想象竞合。</p>
-</blockquote>
-
-<p>##27.【案例】
-甲乙丙欲共同入户盗窃，并约定：若有追捕者，要向其开枪，阻吓其追捕，以帮助自己及同伙逃跑。三人窃得财物，出门逃离时，甲看到身后一个身影，由于是雾霾天，误以为是前来追捕的主人，实际是同伙丙，向其开枪，致其重伤。甲乙：A.构成盗窃罪和故意伤害，并罚；B.构成事后转化抢劫致人重伤？丙：A.仅构成盗窃罪；B.构成盗窃罪和故意伤害罪，并罚；C.构成转化抢劫致人重伤？</p>
-
-<blockquote>
-<p>【解析】甲乙构成抢劫致人重伤，对象错误也能转化抢劫。甲不是偶然防卫。偶然防卫是客观上制止了不法侵害，但主观上没意识到。追捕行为不是不法侵害，何况丙未追捕。在此不要与攻略上的案例搞混。基于部分实行全部责任，丙也转化抢劫，但不构成抢劫致人重伤，因为这里的致人重伤不能包括被害人自己。</p>
-</blockquote>
-
-<p>##28.【案例】
-甲女因失恋，站在楼顶欲跳楼，楼下吃瓜群众围观，丙起哄：赶紧跳，我还等着上班呢！经此一激，甲向前迈了一步。楼下的乙(暗恋甲已久)很气愤，捡起一块砖将丙拍晕(轻伤)，丙消停了。甲见状也停止了脚步。丙：A.教唆他人自杀，构成犯罪；B.无罪。乙：A.正当防卫；B.防卫过当；C.紧急避险；D.故意伤害罪——摘自《车浩的刑法题》北京大学出版社</p>
-
-<blockquote>
-<p>【解析】一，丙不是教唆自杀，因为甲已有自杀念头，丙是心理性帮助自杀。对此，观点一认为不构成犯罪，理由是共犯从属性。观点二认为构成，因为生命需绝对保护。观点一目前在理论界渐呈多数说。二，乙。若认为丙构成犯罪，则乙是正当防卫。若认为丙不构成犯罪，但仍属轻微不法侵害，则乙属防卫过当，承担过失责任，而过失致人轻伤无罪。若认为丙不算不法侵害，观点一认为乙构成故意伤害罪，观点二认为乙构成紧急避险，甲的生命面临由丙促进的危险，为保护甲的生命，损害丙的轻微身体健康。</p>
-</blockquote>
-
-<p>##29.【案例】
-甲是民办幼儿园园长，根据政策条件，可申请到财政补助十万元。申请人很多。甲向教育局申请。局长乙答应批给，但要求甲收到后返还四万元。甲照办。对甲乙如何处理？</p>
-
-<blockquote>
-<p>【解析】由于甲得到十万元是合法所得，因此，不能算作与乙共同贪污所得。甲乙不构成贪污罪。甲构成行贿罪，乙构成受贿罪。行贿罪要求谋取不正当利益，这包括非法利益和谋取不正当竞争优势。</p>
-</blockquote>
-
-<p>##30.【案例】
-甲是民办幼儿园园长，根据政策条件，可申请到财政补助十万元。申请人很多。甲向教育局申请。局长乙答应批给，但要求甲申请十四万，让甲收到后返还四万元。甲照办。对甲乙如何处理？</p>
-
-<blockquote>
-<p>【解析】乙构成贪污罪，甲构成贪污罪共犯，配合乙贪污。甲虽然谋取了不正当的竞争优势，但这四万元不是甲所有的财物，不是甲送出的贿赂，故甲不构成行贿罪，乙也不构成受贿罪。</p>
-</blockquote>
-
-<p>##31.【案例】
-甲是民办幼儿园园长，根据政策条件，不可能申请到财政补助十万元。甲向教育局申请，送局长乙四万元。局长乙批给甲十万元。对甲乙如何处理？请全面分析。</p>
-
-<blockquote>
-<p>【解析】①关于职务行为的法益，甲构成行贿罪，乙构成受贿罪。②关于财产法益，从甲的身份角度，甲构成盗窃罪实行犯，乙是盗窃罪帮助犯；从乙的身份角度，乙构成贪污罪实行犯，甲是共犯。注意，乙虽然自已没留下十万元，全部给甲，但贪污罪的非法占有目的，既包括为自已占有，也包括为第三人占有。甲想象竞合，择一重罪，然后与行贿罪并罚。乙想象竞合择一重，然后与受贿罪并罚。</p>
-</blockquote>
-
-<p>##32.【案例】
-甲是民办幼儿园园长，根据政策条件，不可能申请到财政补助十万元。甲向教育局申请，对局长乙称：我目前没钱送你，你若批下十万元给我，我就将其中四万元给你。局长乙批给甲十万元。甲将其中四万元给乙。对甲乙如何处理？请全面分析。</p>
-
-<blockquote>
-<p>【解析】一，就财产法益而言，从乙的角度，乙明知甲不符合条件，将国家财产批给甲，构成贪污罪，贪污罪不要求为自己非法占有。甲是贪污罪的共犯。从甲的角度，构成盗窃罪，甲不可能是诈骗罪，因为乙没被骗，盗窃罪的成立条件最低，是转移占有型财产罪的兜底罪名，也即将非自己占有的财物通过平和手段转移为自已占有。乙是盗窃罪的共犯。每个人触犯两个罪，想象竞合择一重。比如选择都定贪污罪。二，就职务法益而言，乙构成受贿罪，甲构成行贿罪。三，罪数。甲的一、二罪，两个行为，应并罚。乙的一、二罪，两个行为，本应并罚，但由于贪污对象与受贿对象有包括关系，基于包括一罪原理，择一重论处，定贪污罪，因为数额更大。</p>
-</blockquote>
-
-<p>##33.【案例】
-甲继承叔叔一座房产，请乙装修，乙在装修时，发现地板下埋藏有两枚铜币，刚放在地板上，甲进屋，看见铜币，问乙：是你的？乙：是我随身带的，掉出来了。甲便不说什么。乙收工时带走铜币。不计数额，乙构成？A.诈骗，B.盗窃，C.侵占。</p>
-
-<blockquote>
-<p>【解析】甲虽不知道有铜币，但甲占有，有概括的占有意思，但甲没有具体的占有意思，也就没有“将自己占有的财物转移给他人占有”的处分意思，所以乙不构成诈骗罪。需指出，甲在客观上通过消极不作为将自己占有的财物转移给乙占有，也即有客观处分行为。乙构成盗窃罪。不构成侵占罪是因为乙事先在占有财物。</p>
-</blockquote>
-
-<p>##34.【案例】
-被告人黄某某伙同被告人孙磊，以购买淘宝商品为诱饵，通过阿里旺旺向淘宝卖家发送带有病毒的二维码，诱使被害人用手机扫描该二维码后即中病毒，再利用被害人手机短信被屏蔽的情况截取此后发送到被害人手机号码上的短信，通过修改支付宝密码的方式，从而非法获取被害人傅某某、孙某某、蔡某、高某、邱某某银行卡内的原有金额共计32083.77元，另通过以被害人孙某某、高某、邱某某名义向淘宝申请贷款41800元，待淘宝将上述资金打入各被害人的支付宝内，被告人再通过上述方式将其中的40590元非法占为己有。被告人的两种行为构成何罪？</p>
-
-<blockquote>
-<p>【解析】被告人的行为都构成盗窃罪。盗窃罪与诈骗罪的区分在于，是否存在“受骗人基于认识错误而处分财物”这一环节。案中不存在这一环节，故被告人构成盗窃罪。</p>
-</blockquote>
-
-<p>##35.【案例】
-警察甲下班途中，看到乙在拐卖妇女，便上前解救，乙威胁甲少管闲事。甲没有穿制服，但亮出警察证。乙并不畏惧，用刀砍甲。甲在下班途中，乙是否构成妨害公务罪第5款“暴力袭击正在依法执行职务的警察”？</p>
-
-<blockquote>
-<p>【解析】《人民警察法》第19条规定，人民警察在非工作时间，遇有其职责范围内的紧急情况，应当履行职责。因此，甲在下班途中，制止犯罪，属于依法执行公务。乙的行为属于妨害公务罪中的第5款行为。</p>
-</blockquote>
-
-<p>##36.【案例】
-甲乙参加英语四级考试，在考场上恰好邻座。甲乙便暗中商议好，在交卷时，甲在自己试卷上写上乙的姓名，乙在自己试卷上写上甲的姓名，二人然后交卷。甲乙是否构成代替考试罪？</p>
-
-<blockquote>
-<p>【解析】一般的代替考试，是指被替考者找一个替考者（枪手）代替自己参加考试。但是，甲乙的行为也属于代替考试，因为替考的本质是实际参加考试者与答卷上填写的考生信息不一致，不是同一个人。因此，甲乙构成代替考试罪。</p>
-</blockquote>
-
-<p>##37.【案例】
-在某个山村，甲使用暴力强奸乙女，被乙踹倒，掉进粪池，甲奋力向上爬，乙见状，怕甲上来有可能继续实施犯罪，用砖头砸甲，致甲重伤。乙是否构成正当防卫？</p>
-
-<blockquote>
-<p>【解析】关键看甲是否还保有继续作案的能力，如果粪坑较深，甲自救已很困难，则乙属于事后防卫，构成故意伤害罪；如果粪坑较浅，甲很容易爬上来，也即掉坑只是小挫折，不足以形成大障碍，则乙是正当防卫。</p>
-</blockquote>
-
-<p>##38.【案例】
-一个男Gay（同性恋）看到一个少女误以为是位美少年(15岁)，强拉到一偏僻处，欲实施强奸时，发现其是一个女的，便提裤离去。这该怎么认定？</p>
-
-<blockquote>
-<p>【解析】依照刑法，男同强奸美少年（15岁），构成强制猥亵罪。男同发现被害人是女的，构成强制猥亵罪未遂，属于特定对象不存在而导致的未遂。此外应注意的是，依照刑法，男同强奸男童，构成猥亵儿童罪。女同强奸女童，构成猥亵儿童罪。</p>
-</blockquote>
-
-<p>##39.【案例】
-小芳在自己家里与情夫狗剩亲热，不料被打猎回来的丈夫狗蛋撞见了。小芳见此情景，急忙喊：“他在强奸我，赶紧抓强奸犯！”狗蛋便用枪托将狗剩打晕，造成重伤。</p>
-
-<blockquote>
-<p>【解析】狗剩没有实施强奸罪，狗蛋误以为狗剩实施强奸罪，属于假想防卫，不构成故意伤害罪，而构成过失致人重伤罪。由于狗剩是小芳邀请来家里的，不构成非法侵入住宅罪。小芳利用狗蛋的不知情，伤害狗剩，构成故意伤害罪的间接正犯。</p>
-</blockquote>
-
-<p>##40.【案例】
-赵某，男，20周岁，某天下午，尾随一女青年钱某进入闹市区的公共厕所。钱某进入女厕部，关上隔挡门，赵某站在隔挡门外，将裤子脱至膝盖，等候钱某出来。钱某出来后，发现一个男的脱了裤子站在面前，大惊失色，大声质问。赵某趁机搂抱钱某，钱某在被亲吻搂抱中奋力反抗，赵某便扇钱某耳光，钱某脚踹赵某，并逃跑。赵某由于脱着裤子，无法及时追赶。钱某逃离。此类事件，赵某在一个月内又实施了两次，被害妇女均得以逃脱。赵某被捕后声称自己只有猥亵意图，没有强奸意图。事后鉴定，赵某精神正常，但有窥探癖。赵某构成强奸罪还是强制猥亵罪？</p>
-
-<blockquote>
-<p>【解析】两罪的区别在主观意图是强奸意图还是强制猥亵意图。对此，需要结合客观素材予以确定。在闹市区的公共厕所，随时有人进出，赵某脱了裤子在门外等待，这些举动表明赵某不是决意实施强奸。赵某意图将自己的下体暴露给妇女，并借此猥亵妇女，应构成强制猥亵罪。另外，当无法查明赵某的意图是强奸意图还是猥亵意图时，由于强奸意图与猥亵意图不是A与&gt;A的对立排斥关系，而是A与A+B的包容评价关系，强奸意图可以包容评价为猥亵意图，所以可以认定为具有猥亵意图。这种认定不会侵犯人权。</p>
-</blockquote>
-
-<p>##41.【案例】
-有个太子，担心被其他皇子暗杀，出门打猎时，让太监与自己互换衣服。某皇子派的杀手将太监当作太子，向其射箭，但箭法太烂，射偏了，却未料射中附近的太子，太子死。杀手以为没完成任务，逃遁。对皇子和杀手如何处理？</p>
-
-<blockquote>
-<p>【解析】杀手对太监是对象错误，该错误不重要，对太子是打击错误，法定符合说认为，杀手对太监是杀人未遂，对太子是杀人既遂，想象竞合定杀人既遂，依此，皇子是教唆犯既遂。具体符合说认为，杀手对太监是杀人未遂，对太子是过失致人死亡，想象竞合定杀人未遂，依此，皇子是教唆犯未遂。</p>
-</blockquote>
-
-<p>##42.【案例】
-甲男来到乙女理发店，见只有乙一人，便抢劫，未料乙是跆拳道高手，将甲制服，捆绑到地下室，给甲强行灌春药，然后让甲为自己性服务，如此持续了三天三夜，才释放甲。甲拿起衣服走出地下室时，倒地不起，很快没气。法医鉴定，因心脏功能衰竭而死。对甲乙如何处理？</p>
-
-<blockquote>
-<p>【解析】乙女制服甲构成正当防卫，后构成非法拘禁罪，强制猥亵罪，故意伤害罪致人死亡，并罚。详解并罚的原因，虽然强制猥亵的强制手段是拘禁，本应与拘禁罪想象竞合，但是，三天拘禁期内不可能一直在实施猥亵，如果只能猥亵，侵犯人身自由这个法益就没得到评价。虽然强制猥亵的手段包括伤害，但只定强制猥亵，没有评价身体健康法益，因为强制猥亵罪没有结果加重犯，且强灌春药本身就是故意伤害。</p>
-</blockquote>
-
-<p>##43.【案例】
-甲因停车问题，与小区保安发生矛盾，保安乙丙将甲打成重伤，乙丙赶紧打电话向保安队长丁汇报，丁指示：乙送人去医院，丙负责将摄像头摄像记录消毁，因为打人场面有摄像头录下。丙正在消毁时，警察赶到，丙已消毁一部分。对乙丙丁如何处理？</p>
-
-<blockquote>
-<p>【解析】乙丙构成故意伤害罪。丁教唆本犯销毁证据，构成帮助毁灭证据罪，该罪的帮助包括教唆。丁不构成包庇罪，该罪是向司法机关积极作假证明，帮助掩盖罪行。丁，一没向司法机关，二没积极作假证明如伪造证据。</p>
-</blockquote>
-
-<p>##44.【案例】
-张某在李某的酒店组织卖淫，李某知情，收取房租。乙是保镖，丙是保安，丁是管账人，戊是收银员。哪些人构成协助组织卖淫罪？李某构成什么？</p>
-
-<blockquote>
-<p>【解析】李某构成容留卖淫罪。乙，丁构成协助组织卖淫罪。</p>
-</blockquote>
-
-<p>##45.【案例】
-乙不欠甲钱，甲用刀逼迫乙写下乙欠甲十万元的欠条。甲持欠条起诉乙，法官相信，判乙败诉，强制执行了乙的财产。甲构成什么？</p>
-
-<blockquote>
-<p>【解析】注意区分。情形一，甲欠乙钱，甲使用暴力强迫乙写下收条，使用暴力免除债务，构成抢劫罪，抢劫财产性利益。情形二，本案，根据行为与行为对象同时存在原则，使用暴力时，尚不存在行为对象，既不存在可抢劫的财物，也不存在可抢劫的财产性利益。这一点与情形一有所不同。故甲不构成抢劫罪。这种强迫行为在日本构成强迫罪，我国刑法没有单纯的强迫罪，故这种行为只能无罪处理。甲的起诉行为既构成虚假诉讼罪既遂，又构成诈骗罪，诉讼诈骗，想象竞合择一重。</p>
-</blockquote>
-
-<p>##46.【案例】
-乙有套房，甲伪造乙的身份证等相关材料，对丙称自己有套房，可卖给丙。二人来到房产中心，甲递交伪造材料，对工作人员丁称，自己要将自己的一套房(实为乙的)卖给丙。丁见材料齐全，便办理了过户手续。甲构成什么？</p>
-
-<blockquote>
-<p>【解析】房屋本身难以盗窃，但房屋的产权可以盗窃或诈骗。工作人员丁虽是受骗人，但没有处分他人房屋产权的权限，工作职责只是按照产权人的指示办理过户手续，故甲不构成三角诈骗，而是盗窃罪。甲对丙，观点一是诈骗罪，因为丙有财产损失，观点二是不构成诈骗罪。若依观点一，甲一个行为同时构成盗窃罪和诈骗罪，想象竞合，择一重。甲伪造身份证构成伪造身份证件罪，与后罪是牵连犯关系，择一重。</p>
-</blockquote>
-
-<p>##47.【案例】
-甲公司将二十张手机充值卡交给乙，委托乙出售。乙将其中三张卡的薄膜刮开，看到充值密码，给自己和朋友的三个手机号码充值，然后又将薄膜覆盖好，予以出售。购买者发现充不了值，找乙。乙称自己是代理，不知情，请找甲公司。不考虑数额，乙构成什么？侵占还是盗窃，诈骗？</p>
-
-<blockquote>
-<p>【解析】本案暗含一个事实：乙将二十张充值卡售出的钱交给了甲公司。甲公司委托乙出售，乙可以自己刮开，自己充值，只要将相应价款给甲公司即可。故乙对甲公司不构成盗窃罪，甲公司没有损失。如果改为：甲公司让乙仅仅保管，三天后原物返还，甲刮开充值又覆盖，然后返还，则乙构成盗窃罪，盗窃封缄物，乙虽占有卡，但没占有里面的财产利益。乙对买家构成诈骗罪。</p>
-</blockquote>
-
-<p>##48.【案例】
-甲以为某批画作是文物，走私进境，实际是淫秽物品。对甲如何处理？</p>
-
-<blockquote>
-<p>【解析】走私文物罪的走私方向是出口。将文物带进境内，是被允许的，此时的文物可以包容评价为普通财物。甲以为是文物而走私进境，没有犯走私文物罪的故意，只有犯走私普通货物罪的故意。甲客观上走私进来的是淫秽物品，淫秽物品可以包容评价为普通货物。所以，对甲以走私普通货物物品罪论处。</p>
-</blockquote>
-
-<p>##49.【案例】
-甲欠乙十万元，向乙称，自己将欠乙的债务转移给丙公司，由丙公司负责向乙偿还，并出具丙公司与甲签订的债务转移协议，称若丙公司不偿还，可告它。乙表示同意，便持甲提供的协议等材料起诉丙公司，丙公司败诉，被强制执行。实际上，甲伪造了丙公司的一系列公章及相关协议。对甲如何处理？</p>
-
-<blockquote>
-<p>【解析】甲对丙构成三角诈骗(诉讼诈骗)的间接正犯(既遂)，利用不知情的乙实施，受骗人是法官，受害人是丙公司；甲同时构成虚假诉讼罪的间接正犯(既遂)；甲对乙构成诈骗罪，骗免债务，诈骗财产性利益(既遂)。一个行为，想象竞合，择一重。甲构成伪造公司印章罪，与上述诈骗罪属于牵连犯，择一重。</p>
-</blockquote>
-
-<p>##50.【案例】
-乙欠朋友甲一万元，将一张存有三万元的银行卡交给甲，告知密码，让甲自己取一万元，然后归还卡。甲在ATM机上取了三万，隐瞒真相，将卡还给乙。乙事后发现卡中没钱了。甲构成什么？</p>
-
-<blockquote>
-<p>【解析】乙将卡交给甲，甲便占有卡(代为保管)，甲如果不还卡，属于侵占行为，但侵占一张卡，不使用不构成犯罪，因为主人不会有财产损失。如果使用，对人用，定信用卡诈骗罪，对机器使用，定盗窃罪。司法解释规定，捡拾一张卡对机器使用，定信用卡诈骗罪。但本案中，甲不属于捡拾，而属于代为保管，故不需要适用司法解释。由于甲对机器使用，定盗窃罪，数额是两万。</p>
-</blockquote>
-
-<p>##51.【案例】
-甲坐在公交车上，看到乙钱包外露在口袋，便趁乙不备，拔出来，然后向车窗外扔去，看到街边一群不认识的人，故意扔到人群中，人群中的丙捡到了，拿走了。甲构成什么？</p>
-
-<blockquote>
-<p>【解析】盗窃罪与故意毁坏财物罪的区别在于非法占有目的中的利用意思。盗窃罪要求的非法占有目的，包括为自己非法占有，也包括为第三人非法占有，也即为自己利用的意思，和为第三人利用的意思。这里的第三人不是泛指任何第三人，而是指与行为人有关联的第三人，如亲友等，不包括毫不认识的第三人。基于此，甲没有利用意思，没有非法占有目的，不构成盗窃罪，而构成故意毁坏财物罪。</p>
-</blockquote>
-
-<p>##52.【案例】
-甲周一盗窃到一辆自行车，价值二百元，周二盗窃到一辆自行车，价值二百元，周三盗窃电瓶车(价值二千元)，刚推走，被保安发现，保安抓，甲为抗拒抓捕，将保安打成轻伤。对甲如何处理？</p>
-
-<blockquote>
-<p>【解析】周三的盗窃用给后面的使用暴力，就构成转化抢劫，用给前面的两次盗窃，就构成多次盗窃。由于不能重复评价，择一重，定转化抢劫。前两次盗窃只能不作犯罪处理，而是治安处罚。</p>
-</blockquote>
-
-<p>##53.【案例】
-甲盗窃了乙的银行卡，由于没有密码，无法取钱，便找到乙，用刀将乙劫持到一个ATM机前，逼乙说出密码。乙第一次故意说错，甲未取成功，打乙，乙第二次说对，取成功，便放了乙。对甲如何处理？</p>
-
-<blockquote>
-<p>【解析】本案不适用“盗窃信用卡并使用，一律定盗窃”，因为该款的使用指平和手段使用。甲盗窃卡本身不重要。甲构成抢劫罪。</p>
-</blockquote>
-
-<p>##54.【案例】
-甲入室盗窃，窃得财物，被主人乙发现，甲逃，乙追，甲逃至户外，看到朋友丙，喊道：我强奸了他家女儿，你帮我断后。丙相信，答应照办，将乙打成轻伤。甲顺利逃脱。对甲丙如何处理？</p>
-
-<blockquote>
-<p>【解析】甲先盗窃，后为抗拒抓捕而利用他人对主人使用暴力，构成事后转化抢劫的间接正犯，但不构成入户抢劫，因为暴力发生在户外。丙不构成转化抢劫，因为不知道甲先前犯盗窃罪。丙至少知道甲是犯罪分子，帮助其逃匿，构成窝藏罪。丙又构成故意伤害罪，想象竞合，择一重论处。</p>
-</blockquote>
-
-<p>##55.【案例】
-假如一个人看到一辆校车停在悬崖边，摇摇欲坠。他冒险走进车里，把正熟睡的一个孩子抱起往外走。这时校车开始倾覆，来不及了。他情急之下，先把孩子顺车窗扔出到路边，然后自己也跳出车窗，幸运逃出。结果那个孩子被扔出落地时，后脑恰好撞在了路边石头而死。那么这个人有法律责任吗？</p>
-
-<blockquote>
-<p>【解析】从故意犯罪角度，行为人的行为是降低危险的行为，不是危害行为，从此处无罪。从过失犯罪的角度，行为制造了实害结果，表明行为制造了法益侵害结果，但又基于紧急避险的理由，无罪。</p>
-</blockquote>
-
-<p>##56.【案例】
-甲欲抢劫乙珍藏的珠宝，知道该珠宝藏在乙的卧室，提刀闯入乙家抢劫，乙赶紧跑向卧室，反锁门，用力抵抗，甲几番攻门未果，悻悻之余，便拿走客厅的音响。对甲如何处理？</p>
-
-<blockquote>
-<p>【解析】甲对珠宝构成抢劫罪未遂。甲对音响构成盗窃罪既遂，不构成抢劫罪，是因为在拿音响时，不存在“为非法占有音响，对乙实施强制手段，压制乙反抗，乙因无法反抗而放弃音响”。注意，这里不是拘禁型抢劫。如果甲为了抢劫音响，乙不给，甲强行将乙关进卧室，乙无法出来阻止甲拿音响，甲顺利拿走音响，则构成拘禁型抢劫。对甲数罪并罚。</p>
-</blockquote>
-
-<p>##57.【案例】
-丙欠甲高利贷无法还，甲称砍掉你一个小手指，就不用还了。丙答应。甲一刀下去，却砍断丙的大拇指和食指。两天后，丙死亡。原来，乙得知此事，事先悄悄在甲刀口上涂抹了毒药。对甲乙如何处理？</p>
-
-<blockquote>
-<p>【解析】甲构成故意伤害罪重伤，第一，超出被害人承诺的范围。第二，由于手指在一起紧挨着，有间接故意。乙构成故意杀人罪间接正犯，利用甲的不知情，借刀杀人。</p>
-</blockquote>
-
-<p>##58.【案例】
-甲上门推销打印机的墨盒，在给乙介绍产品后，乙表示不买。甲请求乙在一个文件上签字，谎称该文件是向公司证明自己向乙上门推销过产品，实际是证明向乙出售了产品，乙欠货款五千元的合同书。乙由于在接打电话，没有仔细看文件，便相信甲的说法签了字。甲构成什么？</p>
-
-<blockquote>
-<p>【解析】乙客观上有处分行为，但主观上没有处分意识，故甲不构成诈骗罪。甲构成盗窃罪，盗窃债权，但仅有这种行为在民事上并不会让乙承受债务，故甲的盗窃罪构成未遂。</p>
-</blockquote>
-
-<p>##59.【案例】
-甲乙丙三人共同出资成立A公司，甲乙各占40%股份，丙占20%股份，由乙任法定代表人，保管公司公章。一年后，甲伪造公司公章和乙的人名章及其他材料，在工商局将丙的20%股份转移到自己名下，乙丙对此并不知情。对甲如何处理？</p>
-
-<blockquote>
-<p>【解析】虽然甲欺骗了工商局的工作人员，但工作人员只负责形式审查，并无处分股份的权限，其处理转让手续并非处分行为，故甲并不构成三角诈骗。甲的行为性质是盗窃行为，但工商局变更登记只具有公示效力，不会产生股份变动。股权以股东名册为准。股东名册未变化，股权便未变化。故甲的行为不具有盗窃股权的危险性和可能性。甲不构成盗窃罪。甲构成伪造公司企业印章罪。</p>
-</blockquote>
-
-<p>##60.【案例】
-莱温斯基欺骗克林顿：咱们的事，我告诉了我闺蜜，我闺蜜告诉了她男友甲，甲让我转告你，给一百万封口费，否则曝光。克很担心恐惧，便给莱一百万，让给甲。莱构成什么？</p>
-
-<blockquote>
-<p>【解析】莱构成诈骗罪，不构成敲诈勒索罪，因为胁迫的模型是甲以恶害向乙通告，乙若不答应，甲会对乙施加恶害，由此使乙对甲产生恐惧心理，乙基于恐惧心理而答应甲的要求。</p>
-</blockquote>
-
-<p>##61.【案例】
-甲乙伪装成城管执法人员，看到丙在违法摆烧烤摊，便强行将该摊点工具抬上卡车，丙阻拦不住，看着甲乙驾车离去，不断咒骂。甲乙构成什么？</p>
-
-<blockquote>
-<p>【解析】盗窃罪、抢夺罪、抢劫罪是完全违背被害人意愿，将其占有的财物转移为自己占有。诈骗罪是被害人基于有瑕疵的意愿，“自愿”地处分财物。被害人具有处分财物的选择自由、意志自由及“自愿性”。甲乙虽有欺骗，丙虽有受骗，但甲乙强行拉走财物，丙对此无选择自由，并非“自愿”地处分财物。故甲乙构成诈骗罪，但属于未遂。
+<div  id='write'  class = 'is-node show-fences-line-number'><h1><a name='header-n0' class='md-header-anchor '></a>柏浪涛的刑法案例</h1><h2><a name='header-n2' class='md-header-anchor '></a>01.【案例】</h2><p>甲男微信摇到乙女，谈好六百，甲至乙处，乙在服务中得知甲只带三十，生气叫来两男殴打后，称若不给三万，此事告知你妈。后谈定，甲三天后领到工资两千送上。甲出来后本想报案，但想到此时抓乙等只能定未遂，便三天后送上两千，并再加送一千，因查了法律，三千才够起刑点，后报案。如何处理？</p><blockquote><p>【解析】乙威胁告知甲妈，对一般人不会产生恐惧心理，不构成敲诈勒索，但乙若知道甲对告知其母会恐惧，则乙属于敲诈，也即当被害人低于一般人时，行为人明知这点而加以利用，符合敲诈罪行为。案中乙应是知道的，否则不会以此威胁，甲也产生了恐惧。乙成立敲诈罪，但是未遂，因为甲给钱时已不是基于恐惧心理。</p></blockquote><h2><a name='header-n8' class='md-header-anchor '></a>02.【案例】</h2><p>甲乙站在桥上，甲想教训乙，以伤害的故意用木棒朝乙打来，乙急忙后退闪躲，不料不慎跌落桥下，被河水淹死。甲构成：故意杀人罪既遂？故意伤害罪(既遂)致人死亡？故意伤害罪(未遂)致人死亡？故意伤害罪既遂与过失致死罪想象竞合，择一重？两罪并罚？</p><blockquote><p>【解析】甲无疑构成故意伤害罪(过失)致人死亡这个结果加重犯。但故意伤害罪这个基本犯是未遂，虽然死亡结果与伤害行为有因果关系，虽然死亡结果可以评价为伤害结果，但甲对该死亡结果只有过失，而无故意，若是故意则会构成故意杀人罪。故意伤害罪既遂要求对伤害结果持故意心理，而非过失。</p></blockquote><h2><a name='header-n14' class='md-header-anchor '></a>03.【案例】</h2><p>甲欲杀害乙，用刀砍伤乙的手臂，手臂流血，鉴定为轻伤，此时甲被抓捕。乙因患罕见的血友病，流血不止，抢救无效死亡。经查实，甲对乙患此病毫不知情，也没有知道的可能性。甲构成：故意杀人罪既遂？未遂？故意杀人罪未遂与过失致死罪想象竞合，择一重？</p><blockquote><p>【解析】观点展示：意见一，客观上行为与死亡无因果关系，因为轻伤本身不会导致死亡，故杀人未遂。意见二，客观上有因果关系，因为没有轻伤，人不会死，故杀人既遂。意见三，客观上有因果关系，但主观上没有认识到这种行为会死人，故杀人未遂，若有认识到的可能性，又触犯过失致死，想象竞合择一重</p></blockquote><h2><a name='header-n20' class='md-header-anchor '></a>04.【案例】</h2><p>（编自《心迷宫》）甲蹲在悬崖边上拉屎。乙欲害死甲，欲使甲掉下悬崖，故意在旁边问甲要不要抽根烟。甲：不用。乙：拉屎很无聊，来一根吧！便故意将一根烟扔向甲，但故意扔向偏悬崖外的方位。甲下意识地努力伸手去够，脚下打滑，掉下悬崖摔死。乙构成？</p><blockquote><p>【解析】甲在主观上对危险有认识能力，也有认识，在客观上对危险有控制支配能力，属于被害人自陷风险。乙扔烟的行为便不是杀人的实行行为，在客观上便无罪。题干用乙主观杀人故意来干扰，但应先判断客观。《刑法攻略》上有个类似案例，乙扔钱到湖中，甲跳进捡，淹死。乙无罪</p></blockquote><h2><a name='header-n26' class='md-header-anchor '></a>05.【案例】</h2><p>圣诞这天，小芳要与狗蛋分手，转身要离去，狗蛋拿出刀，谈条件：你若不走，我不动手，若走，就动手杀了你！小芳看狗蛋目露凶光，怕其真动手，便又扑向怀里：小样，把刀收起来。狗蛋便收起刀。狗蛋构成故意杀人罪的：犯意表示？预备阶段的中止？实行阶段的中止？还是犯罪预备或未遂？</p><blockquote><p>【解析】首先，狗蛋是附条件的中止，而非未遂。其次，拔刀威胁，对小芳已构成现实紧迫的人身威胁，属于已经着手。所以构成实行阶段的中止。本案陷阱在于，容易将附条件的中止中的附条件当作是否着手的条件，其实该条件是是否走向既遂的条件，不是是否威胁的条件。</p></blockquote><h2><a name='header-n32' class='md-header-anchor '></a>06.【案例】</h2><p>狗蛋拐骗到了一个小男孩，拐骗儿童罪已经既遂，带回老家，告知老婆小芳小孩是拐来的，让养着。小芳第二天带小孩找当警察的哥哥铁牛，告知小孩是拐来的，给办个户口。铁牛便给办了。小芳第三天带小孩来到村小学，告知校长是拐来的，让给办入学手续，校长给办了。这些大人们怎么处理？</p><blockquote><p>【解析】由于拐骗儿童罪是继续犯，所以既遂后有人参与帮助继续拐骗状态的，能够成立承继的共犯。因此，小芳，警察都构成拐骗罪共犯，校长不构成。</p></blockquote><h2><a name='header-n38' class='md-header-anchor '></a>07.【案例】</h2><p>狗蛋欲抢劫小芳放在身边的包，将小芳推向一边(并无伤害或杀害故意)，准备拿包时，发现小芳头部恰巧碰在草丛中的一块石头上，小芳昏迷。狗蛋看小芳昏迷的脸庞如此迷人，便不再拿其包，并送到医院，但仍抢救无效死亡。对狗蛋如何处理？抢劫罪中止？既遂？抢劫罪致人死亡？</p><blockquote><p>【解析】 ①将人推倒在地取其物，属对人暴力而非对物暴力，属抢劫，而非抢夺。②恰巧碰草丛中石头，对死亡无预见可能性，属意外事件。若现场是工地，则属过失。所以不是抢劫致死。③未取物，抢劫属中止。即使按那错误司法解释，即轻伤构成既遂，此轻伤也应是故意或过失所为。</p></blockquote><h2><a name='header-n44' class='md-header-anchor '></a>08.【案例】</h2><p>小芳欲杀狗蛋，计划先用安眠药吃昏狗蛋，然后用绳勒死。狗蛋昏了后，小芳准备勒时，看到狗蛋睡着的样子都那么帅，想起昔日时光，又放弃，离去。三十分钟后，由于小芳之前误将安眠药的量投得过大，狗蛋昏死了。对小芳如何处理？</p><blockquote><p>【解析】观点展示：多数意见认为小芳构成故意杀人罪既遂。少数意见认为小芳第一个行为构成过失致死罪，因为当时无杀人故意。第二个行为构成杀人中止，能杀死而放弃。因为是两个行为，不是想象竞合择一重，而是两罪并罚。在德国，第二种意见是多数意见。</p></blockquote><h2><a name='header-n50' class='md-header-anchor '></a>09.【案例】</h2><p>（编自《心迷宫》）：白虎敲诈村长儿子甲的钱财，二人在野树林里撕扯，白虎被推倒地，碰到一片碎石，昏迷重伤。甲以为死亡，逃离。村长赶至，以为白虎死亡，为帮儿子，围上柴禾，点燃，制造白虎醉酒抽烟不慎点燃柴禾烧死自己的假象。白虎被烧死。村长父子如何处理？</p><blockquote><p>【解析】甲若是防卫过当，则应负过失致人重伤罪，但甲仅仅是推一把，行为并不过当，所以不负过失致人重伤罪。但甲离开后，假若白虎重伤导致死亡，则甲构成不作为的过失致人死亡罪。但白虎的死亡是由村长造成，村长触犯过失致人死亡罪和帮助毁灭证据罪，想象竞合择一重。</p></blockquote><h2><a name='header-n56' class='md-header-anchor '></a>10.【案例】</h2><p>芈月传中，假如秦武王本不愿举鼎，某大臣甲欲害之，用激将法力促其举鼎。秦武王遂举鼎，结果体力不支，砸死自己。对甲如何处理？理由？</p><blockquote><p>【解析】秦王，成年人，一对危险有认识能力，也认识到，二有控制能力，仍去做，属被害人自陷风险，自己担责。大臣不存在欺骗。</p></blockquote><h2><a name='header-n62' class='md-header-anchor '></a>11.【案例】</h2><p>某地，甲的妻子乙重病，因长期治疗导致家庭困顿。甲无奈便使用自己的社保卡为妻子买药治病，累计价值一万元药品。甲是否构成诈骗罪？无罪说的一个理由是，所涉社保基金是夫妻共同财产。对此该如何评价？若有罪，有无可辩护的减轻处罚理由？</p><blockquote><p>【解析】如果是用卡中余额买药，买时不要求身份属性，则不是诈骗。如果要求身份属性，是诈骗。实务那张判决书在描述事实时没有交待清楚，还有可能是到医院让医生开处方药，医生明知不是同一人而开，行为人是诈骗，属于二者间诈骗，还是三角诈骗？医生构成什么角色？都需要进一步探究。</p></blockquote><h2><a name='header-n68' class='md-header-anchor '></a>12.【案例】</h2><p>某地，孕妇甲在乘坐公交车时，忽要生了，请求司机停车开门，司机坚持认为未到下一站，按规定不能停车开门。由于交通拥堵，行驶缓慢，及至下一站时，甲羊水流失过多，胎儿窒息，在送往医院途中窒息死亡。司机是否构成犯罪？何罪？其辩护理由是遵守交通规定，没有错。如何看待？</p><blockquote><p>【解析】司机构成不作为的过失致人重伤罪。在遵守公司规定和履行救助义务之间，应选择后者，因为生命健康法益更重要。胎儿无法评价为人，伤害胎儿只能评价为伤害母体。司机对胎儿死亡不是故意，而是过失。不履行救助义务就是不作为。行为同时符合民法和刑法时，优先适用刑法。</p></blockquote><h2><a name='header-n74' class='md-header-anchor '></a>13.【案例】</h2><p>某地，甲的妻子乙在医院难产，需紧急剖腹产，但甲拒绝签字，要求继续顺产，此时乙已昏迷。鉴于乙和胎儿有生命危险，医生在没有甲签字的情形下，自行实施剖腹产，母乙平安。但甲控告医生的剖腹行为是非法行为，构成故意伤害罪。医生有无刑法上的理由辩护？若医生听从甲，放任死亡，有无罪？</p><blockquote><p>【解析】医生无罪，理由有： <br/>
+①紧急避险，为救生命牺牲医院制度。<br/>
+②义务冲务，在遵守医院制度与履行救死扶伤义务冲突时，可只履行后者。<br/>
+③推定的被害人承诺，推定孕妇有承诺。若医生不救，涉嫌遗弃罪。这些只是纯刑法层面分析。我国医疗现状及处理与此相差甚远。</p></blockquote><h2><a name='header-n83' class='md-header-anchor '></a>14.【案例】</h2><p>德国案例，甲绑架了乙(11岁)，甲被捕，让告知乙被藏匿地点，甲拒告知，及至第三天，警方由于担心乙会饿死，请来医生见证，对甲刑讯逼供，致重伤，甲忍受不了，终于说出地点。警方寻至，发现乙已死，系甲绑架后随即勒死。警察是否构成刑讯逼供罪，故意伤害罪？还是属于正当防卫，假想防卫？</p><blockquote><p>【解析】假设人质没死获救，德国主流观点是构成刑讯逼供等犯罪，理由是被告人的权利是基本权利，不能被当作工具。我国有力观点是只要符合严格条件可构成正当防卫，依该观点，本案是假想防卫。从保护人质角度讲，我赞同我国有力观点，但从我国警察执法状况看，又担心滥用。无唯一答案，观点展示。</p></blockquote><h2><a name='header-n89' class='md-header-anchor '></a>15.【案例】</h2><p>甲欲杀乙，从某蛋糕店购买一个草莓蛋糕，注入毒液到下层部位，送给乙。乙刚吃完上层草莓，便呕吐不止。查明草莓已发霉，乙中毒，因乙是过敏体质，引起过敏休克死亡。甲构成杀人既遂？未遂？蛋糕店老板是否构成过失致人死亡？</p><blockquote><p>【解析】甲，客观行为与乙死亡无因果关系，所以是杀人未遂。蛋糕店老板，客观行为与乙死亡有因果关系，但主观上是意外事件。如果明知变质而销售，是生产销售不符合安全标准食品行为。若量很大，构成犯罪。有的同学对特殊体质问题一刀切，特殊体质与甲没关系，与老板，则不影响其因果关系。</p></blockquote><h2><a name='header-n95' class='md-header-anchor '></a>16.【案例】</h2><p>甲因打架被派出所治安拘留十日。五年后，甲找工作，应聘某单位，被录用，在办理入职手续时，单位要求甲提供无违法犯罪证明。甲找派出所，派出所因其曾被治安拘留，拒绝提供该证明。甲因失业已久，求职心切，便花二百元，从乙处购买了伪造的该证明。甲事后被抓。对甲如何处理？</p><blockquote><p>【解析】派出所出具的无违法犯罪证明属于国家公文。买卖国家公文罪中，买卖包括购买和贩卖，这里的国家公文包括虚假的公文。因此甲构成此罪。但考虑到曾经只是违法，长期失业，不具有期待可能性，或期待可能性降低，可免责或减轻责任。</p></blockquote><h2><a name='header-n101' class='md-header-anchor '></a>17.【案例】</h2><p>小芳因传销被警察抓到派出所，关在五层。男友狗蛋翻窗来救小芳，两人商量，并经小芳同意，狗蛋用绳子绑住小芳，自己抓住绳子这头将小芳从窗外徐徐下吊，中途狗蛋臂力不支，导致绳子从手中滑落。小芳大喊一声狗蛋！掉下摔死。对狗蛋怎么处理？</p><blockquote><p>【解析】由于未交待小芳是否涉嫌刑事犯罪，故对脱逃罪可暂且不表。虽然小芳作为被害人同意了狗蛋的危险行为，但狗蛋是实行行为人，支配了危险的发展，客观上应对死亡结果负责，主观上有过于自信的过失，构成过失致人死亡罪。这种情形与一般的被害人自陷风险有所区别。</p></blockquote><h2><a name='header-n107' class='md-header-anchor '></a>18.【案例】</h2><p>小芳因传销又被警察抓到派出所。小芳悄悄告诉前来看自己的男友狗蛋：给我弄瓶老鼠药，我喝点，吓唬下警察，让他们怕我，赶紧放我。狗蛋感觉这办法好，遂照办。小芳喝后中毒死亡。对狗蛋如何处理？</p><blockquote><p>【解析】首先注意，该案不属于帮助他人自杀，小芳没想自杀。小芳属于被害人自陷风险，且是实行行为人，而狗蛋只是帮助被害人自陷风险，因被害人自陷风险，自己负责，所以帮助者无责任(帮助他人自杀是特例)。这与案例17的区别在于，后者中虽然被害人小芳自愿陷入风险，但狗蛋是危险的实行行为人。</p></blockquote><h2><a name='header-n113' class='md-header-anchor '></a>19.【案例】</h2><p>狗蛋因喜欢上铁牛同志，甩了女友小芳，小芳羞怒，欲杀之，看到前方树下黑暗处站一人(铁牛)，以为是狗蛋，向其开枪，枪法太臭，打偏了，打死了附近路过的行人。事后查明，死者竟是狗蛋，原来狗蛋与铁牛相约在此地见面，铁牛先到，狗蛋晚到(来的晚不如来的早)。对小芳如何处理？</p><blockquote><p>【解析】小芳既有对象错误，又有打击错误，是两种错误的结合，这是考试增加难度的一种方式，这个点尚未考过。依主流的法定符合说，定杀人既遂。依少数的具体符合说，杀人未遂与过失致死竞合，择一重，定杀人未遂。</p></blockquote><h2><a name='header-n119' class='md-header-anchor '></a>20.【案例】</h2><p>狗蛋是精神病患者，但有生理需求。某晚，邻居小芳来借醋，狗蛋突然使用暴力强奸小芳。狗蛋母亲在门外看到，心想儿子都三十岁了，还没沾过女人身体，便不制止，并望风。该案如何分析？</p><blockquote><p>【解析】违法是连带的，责任是个别的。二人共同制造了违法事实，责任分别评价。狗蛋母亲构成强奸罪片面帮助犯，不阻止是不作为帮助，望风是作为帮助，作为吸收不作为，最终认定为作为帮助。</p></blockquote><h2><a name='header-n125' class='md-header-anchor '></a>21.【案例】</h2><p>蓝某晚上睡觉，忽然感觉有人偷窃其养殖的家禽，小偷陈某被发现，随即奔逃，蓝某追赶欲抓捕，当时雨天路滑，蓝某伸手从后面抓扯住陈某衣袖，陈某用力后甩挣脱蓝某，随即陈某侧身摔倒在水泥路面上，致颅脑损伤死亡。追赶行为是：A正当防卫,B防卫过当,C过失致人死亡,D意外事件</p><blockquote><p>【解析】一，小偷手中无家禽。1.客观上主人追赶行为与小偷死亡无相当的因果关系，死亡结果不能归责于主人。2.主观上主人对死亡结果无预见可能性，无过失，是意外事件。二，若小偷手中有家禽，主人夺回财物行为属正当防卫，防卫手段不过当，死亡结果与防卫行为无相当因果关系。</p></blockquote><h2><a name='header-n131' class='md-header-anchor '></a>22.【案例】</h2><p>甲将一店家收银台用于收款的二维码偷换成自己的。乙购物后先扫描了二维码，告诉店家自己有急事先离开，在回家路上会继续完成支付，店家答应。由于店家的微信支付账号未用商号名称，而是个人支付账户，乙扫描二维码后，在支付时以为甲的账号是店家账号，便向甲账号支付了货款。甲构成何罪？谁是被害人？A.盗窃罪；B.侵占罪；C.诈骗罪，两者间诈骗；D.诈骗罪，三角诈骗。</p><blockquote><p>【解析】有观点认为甲是盗窃罪，盗窃了店家钱财。然盗窃罪是将他人占有的财物转移为自己占有，而甲并未将店家占有的财物转移为自己占有，因为店家尚未占有乙的钱财，乙也未将费用转移到店家。例如乙要向店家丙还款，甲冒充丙，欺骗乙，使乙向甲还款。甲构成诈骗罪，不属于三角诈骗，因为受骗人和受害人都是乙</p></blockquote><h2><a name='header-n137' class='md-header-anchor '></a>23.【案例】</h2><p>甲欲入户强奸丙女，欺骗乙，帮我入户盗窃望风。乙答应照办。甲顺利入户强奸了丙。根据不同学说，该如何处理？</p><blockquote><p>【解析】依完全犯罪共同说，甲乙不构成共同犯罪，乙无罪。依部分犯罪共同说，甲乙构成非法侵入住宅罪的共同犯罪，甲另构成强奸罪。依行为共同说，其中温和派观点同部分犯罪共同说，其中彻底派认为，甲乙在违法阶层构成强奸罪共同犯罪(违法是连带的)，在责任阶层，乙无罪(责任是个别的)。</p></blockquote><h2><a name='header-n143' class='md-header-anchor '></a>24.【案例】</h2><p>甲于1996年2月29日出生(闰年)，2010年(非闰年，无2月29日)问同学自己今年的生日应哪天过？有答2月28，有答3月1日，后决定3月1日过。在当天生日party上，甲酒性大发，在伙伴们的起哄下，强奸了一位女同学。甲是否需要负刑事责任？</p><blockquote><p>【解析】既然在2月29日出生，那么在未来的2月份第29天才是生日，这一天在非闰年称为三月一日，这一天就是生日。第二天才算已满十四周岁。因此，生日当天不负刑事责任。</p></blockquote><h2><a name='header-n149' class='md-header-anchor '></a>25.【案例】</h2><p>顾客乙在商场收银台前排队，发现收银台有一钱包(顾客丙遗失的)，询问前面顾客甲：是不是你的钱包？甲对乙谎称是，并拿走。收银员看到整个这一幕，也相信了甲的话，在甲拿走时，未加阻挡，并说：是你的那你收好。对甲该如何处理？</p><blockquote><p>【解析】钱包转化为收银员占有。处分意识指意识到自己将自己占有的财物转移给他人占有。收银员没有意识到自己占有钱包，也便没有处分意识，因此甲不构成诈骗罪，而是盗窃罪。另一不定诈骗罪的理由是，甲欺骗对象是乙而非收银员，乙没有占有钱包，没有处分行为。诈骗罪要求，欺骗A，A产生认识错误并处分财物。</p></blockquote><h2><a name='header-n155' class='md-header-anchor '></a>25.【案例】</h2><p>顾客乙在商场收银台前排队，发现收银台有一钱包(顾客丙遗失的)，询问前面顾客甲：是不是你的钱包？甲对乙谎称是，并拿走。收银员看到整个这一幕，也相信了甲的话，在甲拿走时，未加阻挡，并说：是你的那你收好。对甲该如何处理？</p><blockquote><p>【解析】钱包转化为收银员占有。处分意识指意识到自己将自己占有的财物转移给他人占有。收银员没有意识到自己占有钱包，也便没有处分意识，因此甲不构成诈骗罪，而是盗窃罪。另一不定诈骗罪的理由是，甲欺骗对象是乙而非收银员，乙没有占有钱包，没有处分行为。诈骗罪要求，欺骗A，A产生认识错误并处分财物。</p></blockquote><h2><a name='header-n161' class='md-header-anchor '></a>26.【案例】</h2><p>甲指使杀手乙杀死丙，给乙看了丙的多张照片和生活视频，并多次带乙近距离偷看丙，指认丙。甲然后问乙：认识丙了吧？不会搞错对象吧？乙：丙烧成灰，我也认得。甲遂放心，等乙好消息。乙清晨藏在丙小区地下车库，看到丁出来，竟以为是丙，打死丁。甲构成：A.对象错误，B.打击错误，C.杀人既遂，D.杀人未遂，E.过失致人死亡罪</p><blockquote><p>【解析】甲构成打击错误。依法定符合说构成杀人罪教唆犯既遂。依具体符合说，内部两种观点，①对丙构成杀人罪教唆犯未遂，对丁构成过失致死罪，想象竞合；②对丙构成杀人罪教唆犯犯罪预备，因为乙对丙未着手，对丁构成过失致死，想象竞合。</p></blockquote><h2><a name='header-n167' class='md-header-anchor '></a>27.【案例】</h2><p>甲乙丙欲共同入户盗窃，并约定：若有追捕者，要向其开枪，阻吓其追捕，以帮助自己及同伙逃跑。三人窃得财物，出门逃离时，甲看到身后一个身影，由于是雾霾天，误以为是前来追捕的主人，实际是同伙丙，向其开枪，致其重伤。甲乙：A.构成盗窃罪和故意伤害，并罚；B.构成事后转化抢劫致人重伤？丙：A.仅构成盗窃罪；B.构成盗窃罪和故意伤害罪，并罚；C.构成转化抢劫致人重伤？</p><blockquote><p>【解析】甲乙构成抢劫致人重伤，对象错误也能转化抢劫。甲不是偶然防卫。偶然防卫是客观上制止了不法侵害，但主观上没意识到。追捕行为不是不法侵害，何况丙未追捕。在此不要与攻略上的案例搞混。基于部分实行全部责任，丙也转化抢劫，但不构成抢劫致人重伤，因为这里的致人重伤不能包括被害人自己。</p></blockquote><h2><a name='header-n173' class='md-header-anchor '></a>28.【案例】</h2><p>甲女因失恋，站在楼顶欲跳楼，楼下吃瓜群众围观，丙起哄：赶紧跳，我还等着上班呢！经此一激，甲向前迈了一步。楼下的乙(暗恋甲已久)很气愤，捡起一块砖将丙拍晕(轻伤)，丙消停了。甲见状也停止了脚步。丙：A.教唆他人自杀，构成犯罪；B.无罪。乙：A.正当防卫；B.防卫过当；C.紧急避险；D.故意伤害罪——摘自《车浩的刑法题》北京大学出版社</p><blockquote><p>【解析】一，丙不是教唆自杀，因为甲已有自杀念头，丙是心理性帮助自杀。对此，观点一认为不构成犯罪，理由是共犯从属性。观点二认为构成，因为生命需绝对保护。观点一目前在理论界渐呈多数说。二，乙。若认为丙构成犯罪，则乙是正当防卫。若认为丙不构成犯罪，但仍属轻微不法侵害，则乙属防卫过当，承担过失责任，而过失致人轻伤无罪。若认为丙不算不法侵害，观点一认为乙构成故意伤害罪，观点二认为乙构成紧急避险，甲的生命面临由丙促进的危险，为保护甲的生命，损害丙的轻微身体健康。</p></blockquote><h2><a name='header-n179' class='md-header-anchor '></a>29.【案例】</h2><p>甲是民办幼儿园园长，根据政策条件，可申请到财政补助十万元。申请人很多。甲向教育局申请。局长乙答应批给，但要求甲收到后返还四万元。甲照办。对甲乙如何处理？</p><blockquote><p>【解析】由于甲得到十万元是合法所得，因此，不能算作与乙共同贪污所得。甲乙不构成贪污罪。甲构成行贿罪，乙构成受贿罪。行贿罪要求谋取不正当利益，这包括非法利益和谋取不正当竞争优势。</p></blockquote><h2><a name='header-n185' class='md-header-anchor '></a>30.【案例】</h2><p>甲是民办幼儿园园长，根据政策条件，可申请到财政补助十万元。申请人很多。甲向教育局申请。局长乙答应批给，但要求甲申请十四万，让甲收到后返还四万元。甲照办。对甲乙如何处理？</p><blockquote><p>【解析】乙构成贪污罪，甲构成贪污罪共犯，配合乙贪污。甲虽然谋取了不正当的竞争优势，但这四万元不是甲所有的财物，不是甲送出的贿赂，故甲不构成行贿罪，乙也不构成受贿罪。</p></blockquote><h2><a name='header-n191' class='md-header-anchor '></a>31.【案例】</h2><p>甲是民办幼儿园园长，根据政策条件，不可能申请到财政补助十万元。甲向教育局申请，送局长乙四万元。局长乙批给甲十万元。对甲乙如何处理？请全面分析。</p><blockquote><p>【解析】①关于职务行为的法益，甲构成行贿罪，乙构成受贿罪。②关于财产法益，从甲的身份角度，甲构成盗窃罪实行犯，乙是盗窃罪帮助犯；从乙的身份角度，乙构成贪污罪实行犯，甲是共犯。注意，乙虽然自已没留下十万元，全部给甲，但贪污罪的非法占有目的，既包括为自已占有，也包括为第三人占有。甲想象竞合，择一重罪，然后与行贿罪并罚。乙想象竞合择一重，然后与受贿罪并罚。</p></blockquote><h2><a name='header-n197' class='md-header-anchor '></a>32.【案例】</h2><p>甲是民办幼儿园园长，根据政策条件，不可能申请到财政补助十万元。甲向教育局申请，对局长乙称：我目前没钱送你，你若批下十万元给我，我就将其中四万元给你。局长乙批给甲十万元。甲将其中四万元给乙。对甲乙如何处理？请全面分析。</p><blockquote><p>【解析】一，就财产法益而言，从乙的角度，乙明知甲不符合条件，将国家财产批给甲，构成贪污罪，贪污罪不要求为自己非法占有。甲是贪污罪的共犯。从甲的角度，构成盗窃罪，甲不可能是诈骗罪，因为乙没被骗，盗窃罪的成立条件最低，是转移占有型财产罪的兜底罪名，也即将非自己占有的财物通过平和手段转移为自已占有。乙是盗窃罪的共犯。每个人触犯两个罪，想象竞合择一重。比如选择都定贪污罪。二，就职务法益而言，乙构成受贿罪，甲构成行贿罪。三，罪数。甲的一、二罪，两个行为，应并罚。乙的一、二罪，两个行为，本应并罚，但由于贪污对象与受贿对象有包括关系，基于包括一罪原理，择一重论处，定贪污罪，因为数额更大。</p></blockquote><h2><a name='header-n203' class='md-header-anchor '></a>33.【案例】</h2><p>甲继承叔叔一座房产，请乙装修，乙在装修时，发现地板下埋藏有两枚铜币，刚放在地板上，甲进屋，看见铜币，问乙：是你的？乙：是我随身带的，掉出来了。甲便不说什么。乙收工时带走铜币。不计数额，乙构成？A.诈骗，B.盗窃，C.侵占。</p><blockquote><p>【解析】甲虽不知道有铜币，但甲占有，有概括的占有意思，但甲没有具体的占有意思，也就没有“将自己占有的财物转移给他人占有”的处分意思，所以乙不构成诈骗罪。需指出，甲在客观上通过消极不作为将自己占有的财物转移给乙占有，也即有客观处分行为。乙构成盗窃罪。不构成侵占罪是因为乙事先在占有财物。</p></blockquote><h2><a name='header-n209' class='md-header-anchor '></a>34.【案例】</h2><p>被告人黄某某伙同被告人孙磊，以购买淘宝商品为诱饵，通过阿里旺旺向淘宝卖家发送带有病毒的二维码，诱使被害人用手机扫描该二维码后即中病毒，再利用被害人手机短信被屏蔽的情况截取此后发送到被害人手机号码上的短信，通过修改支付宝密码的方式，从而非法获取被害人傅某某、孙某某、蔡某、高某、邱某某银行卡内的原有金额共计32083.77元，另通过以被害人孙某某、高某、邱某某名义向淘宝申请贷款41800元，待淘宝将上述资金打入各被害人的支付宝内，被告人再通过上述方式将其中的40590元非法占为己有。被告人的两种行为构成何罪？</p><blockquote><p>【解析】被告人的行为都构成盗窃罪。盗窃罪与诈骗罪的区分在于，是否存在“受骗人基于认识错误而处分财物”这一环节。案中不存在这一环节，故被告人构成盗窃罪。</p></blockquote><h2><a name='header-n215' class='md-header-anchor '></a>35.【案例】</h2><p>警察甲下班途中，看到乙在拐卖妇女，便上前解救，乙威胁甲少管闲事。甲没有穿制服，但亮出警察证。乙并不畏惧，用刀砍甲。甲在下班途中，乙是否构成妨害公务罪第5款“暴力袭击正在依法执行职务的警察”？</p><blockquote><p>【解析】《人民警察法》第19条规定，人民警察在非工作时间，遇有其职责范围内的紧急情况，应当履行职责。因此，甲在下班途中，制止犯罪，属于依法执行公务。乙的行为属于妨害公务罪中的第5款行为。</p></blockquote><h2><a name='header-n221' class='md-header-anchor '></a>36.【案例】</h2><p>甲乙参加英语四级考试，在考场上恰好邻座。甲乙便暗中商议好，在交卷时，甲在自己试卷上写上乙的姓名，乙在自己试卷上写上甲的姓名，二人然后交卷。甲乙是否构成代替考试罪？</p><blockquote><p>【解析】一般的代替考试，是指被替考者找一个替考者（枪手）代替自己参加考试。但是，甲乙的行为也属于代替考试，因为替考的本质是实际参加考试者与答卷上填写的考生信息不一致，不是同一个人。因此，甲乙构成代替考试罪。</p></blockquote><h2><a name='header-n227' class='md-header-anchor '></a>37.【案例】</h2><p>在某个山村，甲使用暴力强奸乙女，被乙踹倒，掉进粪池，甲奋力向上爬，乙见状，怕甲上来有可能继续实施犯罪，用砖头砸甲，致甲重伤。乙是否构成正当防卫？</p><blockquote><p>【解析】关键看甲是否还保有继续作案的能力，如果粪坑较深，甲自救已很困难，则乙属于事后防卫，构成故意伤害罪；如果粪坑较浅，甲很容易爬上来，也即掉坑只是小挫折，不足以形成大障碍，则乙是正当防卫。</p></blockquote><h2><a name='header-n233' class='md-header-anchor '></a>38.【案例】</h2><p>一个男Gay（同性恋）看到一个少女误以为是位美少年(15岁)，强拉到一偏僻处，欲实施强奸时，发现其是一个女的，便提裤离去。这该怎么认定？</p><blockquote><p>【解析】依照刑法，男同强奸美少年（15岁），构成强制猥亵罪。男同发现被害人是女的，构成强制猥亵罪未遂，属于特定对象不存在而导致的未遂。此外应注意的是，依照刑法，男同强奸男童，构成猥亵儿童罪。女同强奸女童，构成猥亵儿童罪。</p></blockquote><h2><a name='header-n239' class='md-header-anchor '></a>39.【案例】</h2><p>小芳在自己家里与情夫狗剩亲热，不料被打猎回来的丈夫狗蛋撞见了。小芳见此情景，急忙喊：“他在强奸我，赶紧抓强奸犯！”狗蛋便用枪托将狗剩打晕，造成重伤。</p><blockquote><p>【解析】狗剩没有实施强奸罪，狗蛋误以为狗剩实施强奸罪，属于假想防卫，不构成故意伤害罪，而构成过失致人重伤罪。由于狗剩是小芳邀请来家里的，不构成非法侵入住宅罪。小芳利用狗蛋的不知情，伤害狗剩，构成故意伤害罪的间接正犯。</p></blockquote><h2><a name='header-n245' class='md-header-anchor '></a>40.【案例】</h2><p>赵某，男，20周岁，某天下午，尾随一女青年钱某进入闹市区的公共厕所。钱某进入女厕部，关上隔挡门，赵某站在隔挡门外，将裤子脱至膝盖，等候钱某出来。钱某出来后，发现一个男的脱了裤子站在面前，大惊失色，大声质问。赵某趁机搂抱钱某，钱某在被亲吻搂抱中奋力反抗，赵某便扇钱某耳光，钱某脚踹赵某，并逃跑。赵某由于脱着裤子，无法及时追赶。钱某逃离。此类事件，赵某在一个月内又实施了两次，被害妇女均得以逃脱。赵某被捕后声称自己只有猥亵意图，没有强奸意图。事后鉴定，赵某精神正常，但有窥探癖。赵某构成强奸罪还是强制猥亵罪？</p><blockquote><p>【解析】两罪的区别在主观意图是强奸意图还是强制猥亵意图。对此，需要结合客观素材予以确定。在闹市区的公共厕所，随时有人进出，赵某脱了裤子在门外等待，这些举动表明赵某不是决意实施强奸。赵某意图将自己的下体暴露给妇女，并借此猥亵妇女，应构成强制猥亵罪。另外，当无法查明赵某的意图是强奸意图还是猥亵意图时，由于强奸意图与猥亵意图不是A与&gt;A的对立排斥关系，而是A与A+B的包容评价关系，强奸意图可以包容评价为猥亵意图，所以可以认定为具有猥亵意图。这种认定不会侵犯人权。</p></blockquote><h2><a name='header-n251' class='md-header-anchor '></a>41.【案例】</h2><p>有个太子，担心被其他皇子暗杀，出门打猎时，让太监与自己互换衣服。某皇子派的杀手将太监当作太子，向其射箭，但箭法太烂，射偏了，却未料射中附近的太子，太子死。杀手以为没完成任务，逃遁。对皇子和杀手如何处理？</p><blockquote><p>【解析】杀手对太监是对象错误，该错误不重要，对太子是打击错误，法定符合说认为，杀手对太监是杀人未遂，对太子是杀人既遂，想象竞合定杀人既遂，依此，皇子是教唆犯既遂。具体符合说认为，杀手对太监是杀人未遂，对太子是过失致人死亡，想象竞合定杀人未遂，依此，皇子是教唆犯未遂。</p></blockquote><h2><a name='header-n257' class='md-header-anchor '></a>42.【案例】</h2><p>甲男来到乙女理发店，见只有乙一人，便抢劫，未料乙是跆拳道高手，将甲制服，捆绑到地下室，给甲强行灌春药，然后让甲为自己性服务，如此持续了三天三夜，才释放甲。甲拿起衣服走出地下室时，倒地不起，很快没气。法医鉴定，因心脏功能衰竭而死。对甲乙如何处理？</p><blockquote><p>【解析】乙女制服甲构成正当防卫，后构成非法拘禁罪，强制猥亵罪，故意伤害罪致人死亡，并罚。详解并罚的原因，虽然强制猥亵的强制手段是拘禁，本应与拘禁罪想象竞合，但是，三天拘禁期内不可能一直在实施猥亵，如果只能猥亵，侵犯人身自由这个法益就没得到评价。虽然强制猥亵的手段包括伤害，但只定强制猥亵，没有评价身体健康法益，因为强制猥亵罪没有结果加重犯，且强灌春药本身就是故意伤害。</p></blockquote><h2><a name='header-n263' class='md-header-anchor '></a>43.【案例】</h2><p>甲因停车问题，与小区保安发生矛盾，保安乙丙将甲打成重伤，乙丙赶紧打电话向保安队长丁汇报，丁指示：乙送人去医院，丙负责将摄像头摄像记录消毁，因为打人场面有摄像头录下。丙正在消毁时，警察赶到，丙已消毁一部分。对乙丙丁如何处理？</p><blockquote><p>【解析】乙丙构成故意伤害罪。丁教唆本犯销毁证据，构成帮助毁灭证据罪，该罪的帮助包括教唆。丁不构成包庇罪，该罪是向司法机关积极作假证明，帮助掩盖罪行。丁，一没向司法机关，二没积极作假证明如伪造证据。</p></blockquote><h2><a name='header-n269' class='md-header-anchor '></a>44.【案例】</h2><p>张某在李某的酒店组织卖淫，李某知情，收取房租。乙是保镖，丙是保安，丁是管账人，戊是收银员。哪些人构成协助组织卖淫罪？李某构成什么？</p><blockquote><p>【解析】李某构成容留卖淫罪。乙，丁构成协助组织卖淫罪。</p></blockquote><h2><a name='header-n275' class='md-header-anchor '></a>45.【案例】</h2><p>乙不欠甲钱，甲用刀逼迫乙写下乙欠甲十万元的欠条。甲持欠条起诉乙，法官相信，判乙败诉，强制执行了乙的财产。甲构成什么？</p><blockquote><p>【解析】注意区分。情形一，甲欠乙钱，甲使用暴力强迫乙写下收条，使用暴力免除债务，构成抢劫罪，抢劫财产性利益。情形二，本案，根据行为与行为对象同时存在原则，使用暴力时，尚不存在行为对象，既不存在可抢劫的财物，也不存在可抢劫的财产性利益。这一点与情形一有所不同。故甲不构成抢劫罪。这种强迫行为在日本构成强迫罪，我国刑法没有单纯的强迫罪，故这种行为只能无罪处理。甲的起诉行为既构成虚假诉讼罪既遂，又构成诈骗罪，诉讼诈骗，想象竞合择一重。</p></blockquote><h2><a name='header-n281' class='md-header-anchor '></a>46.【案例】</h2><p>乙有套房，甲伪造乙的身份证等相关材料，对丙称自己有套房，可卖给丙。二人来到房产中心，甲递交伪造材料，对工作人员丁称，自己要将自己的一套房(实为乙的)卖给丙。丁见材料齐全，便办理了过户手续。甲构成什么？</p><blockquote><p>【解析】房屋本身难以盗窃，但房屋的产权可以盗窃或诈骗。工作人员丁虽是受骗人，但没有处分他人房屋产权的权限，工作职责只是按照产权人的指示办理过户手续，故甲不构成三角诈骗，而是盗窃罪。甲对丙，观点一是诈骗罪，因为丙有财产损失，观点二是不构成诈骗罪。若依观点一，甲一个行为同时构成盗窃罪和诈骗罪，想象竞合，择一重。甲伪造身份证构成伪造身份证件罪，与后罪是牵连犯关系，择一重。</p></blockquote><h2><a name='header-n287' class='md-header-anchor '></a>47.【案例】</h2><p>甲公司将二十张手机充值卡交给乙，委托乙出售。乙将其中三张卡的薄膜刮开，看到充值密码，给自己和朋友的三个手机号码充值，然后又将薄膜覆盖好，予以出售。购买者发现充不了值，找乙。乙称自己是代理，不知情，请找甲公司。不考虑数额，乙构成什么？侵占还是盗窃，诈骗？</p><blockquote><p>【解析】本案暗含一个事实：乙将二十张充值卡售出的钱交给了甲公司。甲公司委托乙出售，乙可以自己刮开，自己充值，只要将相应价款给甲公司即可。故乙对甲公司不构成盗窃罪，甲公司没有损失。如果改为：甲公司让乙仅仅保管，三天后原物返还，甲刮开充值又覆盖，然后返还，则乙构成盗窃罪，盗窃封缄物，乙虽占有卡，但没占有里面的财产利益。乙对买家构成诈骗罪。</p></blockquote><h2><a name='header-n293' class='md-header-anchor '></a>48.【案例】</h2><p>甲以为某批画作是文物，走私进境，实际是淫秽物品。对甲如何处理？</p><blockquote><p>【解析】走私文物罪的走私方向是出口。将文物带进境内，是被允许的，此时的文物可以包容评价为普通财物。甲以为是文物而走私进境，没有犯走私文物罪的故意，只有犯走私普通货物罪的故意。甲客观上走私进来的是淫秽物品，淫秽物品可以包容评价为普通货物。所以，对甲以走私普通货物物品罪论处。</p></blockquote><h2><a name='header-n299' class='md-header-anchor '></a>49.【案例】</h2><p>甲欠乙十万元，向乙称，自己将欠乙的债务转移给丙公司，由丙公司负责向乙偿还，并出具丙公司与甲签订的债务转移协议，称若丙公司不偿还，可告它。乙表示同意，便持甲提供的协议等材料起诉丙公司，丙公司败诉，被强制执行。实际上，甲伪造了丙公司的一系列公章及相关协议。对甲如何处理？</p><blockquote><p>【解析】甲对丙构成三角诈骗(诉讼诈骗)的间接正犯(既遂)，利用不知情的乙实施，受骗人是法官，受害人是丙公司；甲同时构成虚假诉讼罪的间接正犯(既遂)；甲对乙构成诈骗罪，骗免债务，诈骗财产性利益(既遂)。一个行为，想象竞合，择一重。甲构成伪造公司印章罪，与上述诈骗罪属于牵连犯，择一重。</p></blockquote><h2><a name='header-n305' class='md-header-anchor '></a>50.【案例】</h2><p>乙欠朋友甲一万元，将一张存有三万元的银行卡交给甲，告知密码，让甲自己取一万元，然后归还卡。甲在ATM机上取了三万，隐瞒真相，将卡还给乙。乙事后发现卡中没钱了。甲构成什么？</p><blockquote><p>【解析】乙将卡交给甲，甲便占有卡(代为保管)，甲如果不还卡，属于侵占行为，但侵占一张卡，不使用不构成犯罪，因为主人不会有财产损失。如果使用，对人用，定信用卡诈骗罪，对机器使用，定盗窃罪。司法解释规定，捡拾一张卡对机器使用，定信用卡诈骗罪。但本案中，甲不属于捡拾，而属于代为保管，故不需要适用司法解释。由于甲对机器使用，定盗窃罪，数额是两万。</p></blockquote><h2><a name='header-n311' class='md-header-anchor '></a>51.【案例】</h2><p>甲坐在公交车上，看到乙钱包外露在口袋，便趁乙不备，拔出来，然后向车窗外扔去，看到街边一群不认识的人，故意扔到人群中，人群中的丙捡到了，拿走了。甲构成什么？</p><blockquote><p>【解析】盗窃罪与故意毁坏财物罪的区别在于非法占有目的中的利用意思。盗窃罪要求的非法占有目的，包括为自己非法占有，也包括为第三人非法占有，也即为自己利用的意思，和为第三人利用的意思。这里的第三人不是泛指任何第三人，而是指与行为人有关联的第三人，如亲友等，不包括毫不认识的第三人。基于此，甲没有利用意思，没有非法占有目的，不构成盗窃罪，而构成故意毁坏财物罪。</p></blockquote><h2><a name='header-n317' class='md-header-anchor '></a>52.【案例】</h2><p>甲周一盗窃到一辆自行车，价值二百元，周二盗窃到一辆自行车，价值二百元，周三盗窃电瓶车(价值二千元)，刚推走，被保安发现，保安抓，甲为抗拒抓捕，将保安打成轻伤。对甲如何处理？</p><blockquote><p>【解析】周三的盗窃用给后面的使用暴力，就构成转化抢劫，用给前面的两次盗窃，就构成多次盗窃。由于不能重复评价，择一重，定转化抢劫。前两次盗窃只能不作犯罪处理，而是治安处罚。</p></blockquote><h2><a name='header-n323' class='md-header-anchor '></a>53.【案例】</h2><p>甲盗窃了乙的银行卡，由于没有密码，无法取钱，便找到乙，用刀将乙劫持到一个ATM机前，逼乙说出密码。乙第一次故意说错，甲未取成功，打乙，乙第二次说对，取成功，便放了乙。对甲如何处理？</p><blockquote><p>【解析】本案不适用“盗窃信用卡并使用，一律定盗窃”，因为该款的使用指平和手段使用。甲盗窃卡本身不重要。甲构成抢劫罪。</p></blockquote><h2><a name='header-n329' class='md-header-anchor '></a>54.【案例】</h2><p>甲入室盗窃，窃得财物，被主人乙发现，甲逃，乙追，甲逃至户外，看到朋友丙，喊道：我强奸了他家女儿，你帮我断后。丙相信，答应照办，将乙打成轻伤。甲顺利逃脱。对甲丙如何处理？</p><blockquote><p>【解析】甲先盗窃，后为抗拒抓捕而利用他人对主人使用暴力，构成事后转化抢劫的间接正犯，但不构成入户抢劫，因为暴力发生在户外。丙不构成转化抢劫，因为不知道甲先前犯盗窃罪。丙至少知道甲是犯罪分子，帮助其逃匿，构成窝藏罪。丙又构成故意伤害罪，想象竞合，择一重论处。</p></blockquote><h2><a name='header-n335' class='md-header-anchor '></a>55.【案例】</h2><p>假如一个人看到一辆校车停在悬崖边，摇摇欲坠。他冒险走进车里，把正熟睡的一个孩子抱起往外走。这时校车开始倾覆，来不及了。他情急之下，先把孩子顺车窗扔出到路边，然后自己也跳出车窗，幸运逃出。结果那个孩子被扔出落地时，后脑恰好撞在了路边石头而死。那么这个人有法律责任吗？</p><blockquote><p>【解析】从故意犯罪角度，行为人的行为是降低危险的行为，不是危害行为，从此处无罪。从过失犯罪的角度，行为制造了实害结果，表明行为制造了法益侵害结果，但又基于紧急避险的理由，无罪。</p></blockquote><h2><a name='header-n341' class='md-header-anchor '></a>56.【案例】</h2><p>甲欲抢劫乙珍藏的珠宝，知道该珠宝藏在乙的卧室，提刀闯入乙家抢劫，乙赶紧跑向卧室，反锁门，用力抵抗，甲几番攻门未果，悻悻之余，便拿走客厅的音响。对甲如何处理？</p><blockquote><p>【解析】甲对珠宝构成抢劫罪未遂。甲对音响构成盗窃罪既遂，不构成抢劫罪，是因为在拿音响时，不存在“为非法占有音响，对乙实施强制手段，压制乙反抗，乙因无法反抗而放弃音响”。注意，这里不是拘禁型抢劫。如果甲为了抢劫音响，乙不给，甲强行将乙关进卧室，乙无法出来阻止甲拿音响，甲顺利拿走音响，则构成拘禁型抢劫。对甲数罪并罚。</p></blockquote><h2><a name='header-n347' class='md-header-anchor '></a>57.【案例】</h2><p>丙欠甲高利贷无法还，甲称砍掉你一个小手指，就不用还了。丙答应。甲一刀下去，却砍断丙的大拇指和食指。两天后，丙死亡。原来，乙得知此事，事先悄悄在甲刀口上涂抹了毒药。对甲乙如何处理？</p><blockquote><p>【解析】甲构成故意伤害罪重伤，第一，超出被害人承诺的范围。第二，由于手指在一起紧挨着，有间接故意。乙构成故意杀人罪间接正犯，利用甲的不知情，借刀杀人。</p></blockquote><h2><a name='header-n353' class='md-header-anchor '></a>58.【案例】</h2><p>甲上门推销打印机的墨盒，在给乙介绍产品后，乙表示不买。甲请求乙在一个文件上签字，谎称该文件是向公司证明自己向乙上门推销过产品，实际是证明向乙出售了产品，乙欠货款五千元的合同书。乙由于在接打电话，没有仔细看文件，便相信甲的说法签了字。甲构成什么？</p><blockquote><p>【解析】乙客观上有处分行为，但主观上没有处分意识，故甲不构成诈骗罪。甲构成盗窃罪，盗窃债权，但仅有这种行为在民事上并不会让乙承受债务，故甲的盗窃罪构成未遂。</p></blockquote><h2><a name='header-n359' class='md-header-anchor '></a>59.【案例】</h2><p>甲乙丙三人共同出资成立A公司，甲乙各占40%股份，丙占20%股份，由乙任法定代表人，保管公司公章。一年后，甲伪造公司公章和乙的人名章及其他材料，在工商局将丙的20%股份转移到自己名下，乙丙对此并不知情。对甲如何处理？</p><blockquote><p>【解析】虽然甲欺骗了工商局的工作人员，但工作人员只负责形式审查，并无处分股份的权限，其处理转让手续并非处分行为，故甲并不构成三角诈骗。甲的行为性质是盗窃行为，但工商局变更登记只具有公示效力，不会产生股份变动。股权以股东名册为准。股东名册未变化，股权便未变化。故甲的行为不具有盗窃股权的危险性和可能性。甲不构成盗窃罪。甲构成伪造公司企业印章罪。</p></blockquote><h2><a name='header-n365' class='md-header-anchor '></a>60.【案例】</h2><p>莱温斯基欺骗克林顿：咱们的事，我告诉了我闺蜜，我闺蜜告诉了她男友甲，甲让我转告你，给一百万封口费，否则曝光。克很担心恐惧，便给莱一百万，让给甲。莱构成什么？</p><blockquote><p>【解析】莱构成诈骗罪，不构成敲诈勒索罪，因为胁迫的模型是甲以恶害向乙通告，乙若不答应，甲会对乙施加恶害，由此使乙对甲产生恐惧心理，乙基于恐惧心理而答应甲的要求。</p></blockquote><h2><a name='header-n371' class='md-header-anchor '></a>61.【案例】</h2><p>甲乙伪装成城管执法人员，看到丙在违法摆烧烤摊，便强行将该摊点工具抬上卡车，丙阻拦不住，看着甲乙驾车离去，不断咒骂。甲乙构成什么？</p><blockquote><p>【解析】盗窃罪、抢夺罪、抢劫罪是完全违背被害人意愿，将其占有的财物转移为自己占有。诈骗罪是被害人基于有瑕疵的意愿，“自愿”地处分财物。被害人具有处分财物的选择自由、意志自由及“自愿性”。甲乙虽有欺骗，丙虽有受骗，但甲乙强行拉走财物，丙对此无选择自由，并非“自愿”地处分财物。故甲乙构成诈骗罪，但属于未遂。
 由于招摇撞骗罪不要求骗成功才既遂，故甲乙构成招摇撞骗罪既遂，与诈骗罪末遂想象竞合，择一重，定诈骗罪未遂。
 甲乙不构成抢劫罪，因为没有对人使用暴力。如果从丙手中夺取，则构成抢夺罪。如果对物平和手段，则构成盗窃罪，属于完全违背被害人意愿，将其财物转移为自已占有。
-最后，定诈骗罪未遂与抢夺罪(或盗窃罪)，并罚。</p>
-</blockquote>
-
-<p>##62.【案例】
-甲回家，在单元门口，看到四个陌生人(乙等)在往货车上抬一架钢琴，感觉该钢琴和自己家的钢琴一模一样，便问：你们这是抬的谁家钢琴？乙欺骗甲：是201室那家的，那主人要卖掉这架钢琴。甲信以为真，便让道，看着乙等抬走。对乙如何处理？</p>
-
-<blockquote>
-<p>【解析】乙将钢琴搬出甲家，便盗窃罪既遂。甲放乙走，客观上是种处分行为，但主观上没有处分意识，因为没有意识到钢琴是自己的财物。</p>
-</blockquote>
-
-<p>##63.【案例】
-甲在超市，将一款价值五百元的傻瓜相机从包装盒(不透明的大纸盒)中取出，放进一款价值五万元的单反相机，交给收银员乙。乙以为自己出售的是傻瓜相机，收五百元，让甲拿走。甲构成什么？</p>
-
-<blockquote>
-<p>【解析】乙有处分行为，关键看有无处分意识。处分意识，要求内心意识到所处分财物的存在。由于是不透明的纸盒，乙没有意识到里面的单反相机。故甲构成盗窃罪。这是第一种情况。第二种情况是，甲将傻瓜照相的价签贴到单反相机上，无不透明的外包装盒，是裸的样子，交给收银员，这是诈骗罪，因为有处分意识。第三种情况是，甲将照相机装进不透明的饼干盒，这是盗窃，因为没有意识到相机的存在，无处分意识。</p>
-</blockquote>
-
-<p>##64.【案例】
-甲伪装成超市保安，对顾客乙称带包不能入内，我可以帮你去存包。乙相信便将包交给甲。甲将包存入一小柜子后，拿着另一个空柜子的钥匙，返回交给乙。待乙走进超市，甲拿出正确钥匙，打开柜子取走包。甲构成什么？</p>
-
-<blockquote>
-<p>【解析】甲是否构成诈骗罪，关键看乙有无处分行为，即将自己占有的财物转移占有、处分占有给行为人。乙让甲代为存包，并没有处分占有，包仍为乙占有，只是占有状态有所松驰。乙若让甲拿回家代为保管，则属于处分了占有。因此，本案甲构成盗窃罪。乙若让甲将包存到有保管员负责管理的存包处，则乙将包转移占有给了保管员。甲再偷走，构成盗窃保管员占有的财物。</p>
-</blockquote>
-
-<p>##65.【案例】
-甲在公路上看到一辆压路机，无人驾驶，等了半小时，未有人来驾驶，便认为这是他人的遗忘物，便找来乙，称：这个压路机是我的，卖给你。乙以二手压路机的价格买入。后压路机主人丙回来没有找到，便报警。对甲如何处理？</p>
-
-<blockquote>
-<p>【解析】①甲以为是遗忘物，实际是他人占有的财物，这种认识错误没有合理根据，不予认可。② 甲一个出卖行为，对丙构成盗窃罪，对乙是否构成诈骗罪，存在观点展示，观点一，构成诈骗罪，因为乙有财产损失，用正常价买到赃物。观点二，不构成诈骗罪，因为是善意取得，没有财产损失。若依观点一，盗窃罪与诈骗罪想象竞合，择一重。</p>
-</blockquote>
-
-<p>##66.【案例】</p>
-
-<p>甲以为乙精神正常，以非法占有为目的，欲诈骗乙的玩具，欺骗乙：借你的玩具玩两天。乙给了甲。实际上乙是精神病患者。对甲如何处理？</p>
-
-<blockquote>
-<p>【解析】由于精神病患者没有意思自治能力，其处分意识不被认可为诈骗罪的处分意识，故甲构成诈骗罪未遂。甲取得财物的行为在客观上是盗窃行为，但甲主观上的诈骗故意无法包容评价为盗窃故意，因为诈骗罪与盗窃罪不是包容评价关系，而是对立排斥关系，因此甲不构成盗窃罪。甲取得财物后若不归还则构成侵占罪。</p>
-</blockquote>
-
-<p>##67.【案例】
-甲在超市水果摊位，自己往塑料袋中放进许多枣，交给称重的工作人员乙，乙称重后贴上一公斤的标签，然后封好袋口，交给甲。甲又悄悄撕开袋口，往里装三颗枣，然后封好袋口，交给收银员丙，丙收了一公斤的货款，甲拎走。不计数额，甲对三颗枣构成什么？</p>
-
-<blockquote>
-<p>【解析】①甲偷往袋里装三个枣，貌似盗窃，但由于没有转移占有，此时这袋枣仍由超市占有，故该行为不构成盗窃罪。<br />
-②甲拿到收银员丙，丙客观上有处分这袋枣的行为，主观上有处分这袋枣的意识，只是该处分意识的内容存在错误，即对这袋枣的重量产生认识错误，以为是一公斤，实际多于一公斤。故甲构成诈骗罪。有人可能认为，丙没有看到多出来的三个枣，所以对这三个枣没有处分意识。然而，由于这三个枣和其他枣是同种类财物，整体上是一袋枣，故丙对其有概括的认识。如果甲向袋中藏一巧克力，而丙没看到，则甲对巧克力是盗窃。</p>
-</blockquote>
-
-<p>##68.【案例】
-金池长老借到唐僧袈裟后，不想还，便趁唐僧睡着，放火欲烧死唐僧，未能烧死。对金池如何处理？</p>
-
-<blockquote>
-<p>【解析】金池的一个杀人行为构成四个罪：侵占罪，故意杀人罪，抢劫罪，放火罪，想象竞合，择一重罪论处。注意，如果案件改为：唐僧讨要，金池拒不归还，第二天放火杀人，则前面构成侵占罪，后面杀人行为构成：杀人罪，抢劫罪，放火罪，三罪想象竞合，择一重，然后与侵占罪并罚。</p>
-</blockquote>
-
-<p>##69.【案例】
-乙给丙还书，见丙在公园长椅上睡着，便将书放丙身旁，便离开。甲坐到长椅上。丙醒来，看到书，问甲：是不是你的？甲谎称是。丙递给甲。甲拿走。甲构成什么？</p>
-
-<blockquote>
-<p>【解析】丙客观上有处分行为。处分意识，指意识到将自己占有的财物转移占有给他人。这有个前提：处分人意识到自己在占有该财物。丙没意识到自己在占有书，故没有处分意识。因此甲不构成诈骗罪，而构成盗窃罪。</p>
-</blockquote>
-
-<p>##70.【案例】
-乙下出租车时，将手机忘在车上。甲上车，司机这时发现手机，问甲：是不是你的？甲谎称是的。司机便让甲收好。甲构成什么？</p>
-
-<blockquote>
-<p>【解析】乙的手机转化为司机占有。诈骗罪要求受骗人有处分行为和处分意识。司机客观上有处分行为。处分意识，指意识到将自己占有的财物转移占有给他人。这有个前提：处分人意识到自己在占有该财物。司机没意识到自己在占有手机，故没有处分意识。因此甲不构成诈骗罪，而构成盗窃罪。</p>
-</blockquote>
-
-<p>##71.【案例】
-甲欺骗乙：借你车用两天。乙答应。甲拿到车后，又欺骗丙：用我的这车质押，借你五万元。丙答应。借款到期，丙找不到甲，行使质押权时发现车辆不是甲的。对甲如何处理？</p>
-
-<blockquote>
-<p>【解析】① 甲以非法占有的目的向乙借车，名为借，实为骗，构成诈骗罪。<br />
-② 甲将赃物质押给丙，是否构成诈骗罪，观点一，因为是赃物，该质押物有瑕疵，丙有财产损失，甲构成诈骗罪。观点二，丙善意取得，无财产损失，甲不构成诈骗罪。</p>
-</blockquote>
-
-<p>##72.【案例】
-甲盗窃了乙的包，乙追，甲逃。乙经过丙时，问丙有没有看到一个穿黄衣服的人(指甲)，丙为了帮助甲，欺骗乙说：看到了，他朝左边这条路跑了(实际朝右)。乙便朝左追赶。甲摆脱了追赶。对甲乙如何处理？</p>
-
-<blockquote>
-<p>【解析】甲盗窃了乙的包，意指盗窃罪已既遂。丙为了帮助甲，意指丙知道甲犯了盗窃罪，欺骗乙走错路，具有帮助甲逃匿的效果，构成窝藏罪，窝藏罪不限于将犯罪人藏起来，帮犯罪人逃匿的行为也是窝藏罪。</p>
-</blockquote>
-
-<p>##73.【案例】
-甲对某民营公司出纳乙谎称，我给母亲看病，请帮挪用五十万，三周内会归还。乙答应照办。甲实际用钱赌博，三周内归还了。对甲乙如何处理？</p>
-
-<blockquote>
-<p>【解析】甲乙在客观违法阶层构成挪用资金罪共同犯罪，甲是教唆犯，乙是实行犯。在主观责任阶层，甲应负责任，乙不负责任。违法是连带的，责任是个别的。</p>
-</blockquote>
-
-<p>##74.【案例】
-甲是钉子户，抗拒政府拆迁，在与拆迁人员对峙时，对妻子乙讲：给我买一瓶农药，我假装喝农药吓唬他们。乙照办。甲喝下一点后，口吐白沫。乙不救。甲中毒死亡。对乙如何处理？</p>
-
-<blockquote>
-<p>【解析】乙帮买药，甲自己喝药，这一阶段属于甲自陷风险。如果当时乙不在场，甲死亡，该死亡结果由甲负责。当乙在现场看到甲中毒，有死亡危险，乙有救助义务，因为甲陷入死亡危境，不是自己的真实意愿，这点不同于丈夫上吊自杀的案件(妻子有无救助义务，存在观点展示)，因此乙构成不作为犯罪，如遗弃罪。</p>
-</blockquote>
-
-<p>##75.【案例】
-甲，15周岁，辍学，进入乙公司做业务员。老板让甲拿六万元采购原材料。甲与女朋友丙(18周岁)商议好，丙“抢劫”了甲的六万元。甲向老板告知被抢劫了。老板未再追究。甲丙如何处理？</p>
-
-<blockquote>
-<p>【解析】甲构成职务侵占罪客观阶层的实行犯(职务侵占罪的起刑点是六万元)，最终不负责任。丙是职务侵占罪帮助犯，要负责任。丙不构成盗窃罪，因为盗窃罪要求违反占有人的意愿，转移占有，而丙没有违反甲的意愿。甲又构成客观阶层的诈骗罪，骗免债务，最终不负责任。丙是诈骗罪的帮助犯，要负责任。丙的两个罪，观点一，只定职务侵占罪，诈骗罪是不可罚的事后行为。观点二，重罪吸收轻罪。</p>
-</blockquote>
-
-<p>##76.【案例】
-甲有一驾校，欲以200万出售，乙和甲熟识，知道甲要以200万卖驾校，遂找到丙说，甲想以400万卖驾校，我们各出200万买他的驾校，由我出面买，我买下后，咱俩各占百分之五十股份。丙答应，给乙200万。乙拿着丙的200万以200万买了驾校，然后和丙办理了股东登记，每人占50%股份。事后，丙得知甲的真实出价，认为乙没有告知其真实交易价格，以诈骗罪向公安机关举报。问题：乙是否成立犯罪？该案为实务问题。</p>
-
-<blockquote>
-<p>【解析】本案关键问题在于丙有无财产损失。有意见认为没有，因为乙说给丙买来甲驾校的一半股份，这一点实现了。然而，甲驾校的一半股份只值100万，而丙花了200万，存在100万的损失。因此乙属于隐瞒真相，欺骗丙，使丙多处分了100万，因此构成诈骗罪。乙若是中间商，则有权加价，但乙是受托，不是中间商。</p>
-</blockquote>
-
-<p>##77.【案例】
-甲是某国有公司的财务人员，属于国家工作人员。甲所在公司与乙签订了销售合同，乙购买甲所在公司的货物，甲代表公司负责收取货款，由于甲所在公司的账户临时出问题，双方便约定，乙将货款汇入甲的个人账户，甲再交给公司。半年后，甲离职去了私企，不再是国家工作人员。但乙对此不知情。某日，乙询问甲：“上一批货物的货款还是打入你的账户？”甲顿时明白，自己原单位未通知乙自己离职的事情，便谎称“是的”。甲收到货款后未告知原单位。等到原单位得知真相后，要求甲返还，甲拒不返还。问题：甲构成贪污罪？诈骗罪？侵占罪？</p>
-
-<blockquote>
-<p>【解析】就真正身份犯而言，行为与行为主体的身份应同时具备。贪污罪的主体是国家工作人员。贪污罪的行为方式是利用职务便利，将公共财物非法据为己有。甲离职后，已经不属于国家工作人员，不具有贪污罪的主体身份。此时，甲非法将单位的公共财物据为己有，不构成贪污罪。甲的行为只构成普通的财产犯罪。</p>
-</blockquote>
-
-<p>在此注意，受贿罪司法解释规定：国家工作人员在职时为请托人谋取利益，约定离职后收受财物，构成受贿罪。该规定貌似违反了行为与行为主体的身份同时具备原则。其实，受贿罪的保护法益是职务的不可收买性，这一点与贪污罪不同，贪污罪的保护法益是职务的廉洁性，也即不能非法占有公共财物。当国家工作人员在职时为请托人谋取了利益，在职时对收受财物做了约定，那么职务行为的不可收买性便已经被侵害了，就已经成立受贿罪。离职后实现了约定，收受到了财物，只是表明受贿罪在成立的基础上进一步既遂了。</p>
-
-<p>判断甲构成哪个财产犯罪，需要先明确被害人。如果认为被害人是乙，则甲构成诈骗罪。具体而言，甲维持利用了乙已有的认识错误，使乙将财物处分给自己。但是，由于甲的原单位未向乙告知甲的离职事宜，因此，乙在支付货款时，汇错对象，不是乙的责任。也即乙属于已经履行了支付货款义务，乙没有财产损失，不是被害人。被害人应是甲的原单位。甲将原单位所有、自己占有的货款据为己有，行使所有权，也即拒不退还，构成侵占罪。注意，由于甲此时不是原单位职员，因此不构成职务侵占罪。</p>
-
-<p>有意见认为，甲构成诈骗罪，属于三角诈骗，也即受骗人是乙，受害人是甲的原单位。但是，三角诈骗要求受骗人基于认识错误处分被害人的财物，要求受骗人具有处分被害人财物的权利或地位。然而，当乙在处分财物（支付货款）时，乙处分的是自己所有并占有的财物，而非甲的原单位的财物。因此，甲不构成三角诈骗。</p>
-
-<p>##78.【案例】
-甲是国家工作人员，按照领导指示，前往外地从事公务活动。依据该单位财务规定，甲的差旅费采取实报实销。甲实际差旅开支是两万元，甲又额外找到三万元的假发票，名目是交通费、住宿费等。甲回到单位后，在财务处依照报销流程规则，报销了这三万元假发票。问题：甲构成何罪？</p>
-
-<blockquote>
-<p>【解析】对本案存在观点展示。第一种观点认为，甲构成贪污罪，因为甲利用了职务便利。第二种观点认为，甲不构成贪污罪，只构成诈骗罪。贪污罪中的利用职务便利要求在关键环节上利用职务便利。就骗取型的贪污罪而言，行为方式是，实施欺骗手段，使对方产生认识错误，对方基于认识错误而处分公共财物，行为人因此取得公共财物。利用职务便利要求在关键的第三步利用职务便利，也即利用职务便利，使对方基于认识错误而处分公共财物。本案中，甲在出差时从事公务，属于利用职务便利。但是，出差时所利用的公务与用假发票报销之间没有直接关系。用假发票报销时依照的是报销流程规则，此间并没有利用职务便利。故甲不构成贪污罪，而只构成诈骗罪。</p>
-</blockquote>
-
-<p>##79.【案例】
-甲单位（国有单位）征用村民土地，村民可以申领到土地征用补偿款，流程是村民拿着申领书到土地管理局盖章，然后再拿到甲单位领取补偿款。村民乙与土地管理局局长丙相勾结，乙多报土地上的果树数量，然后由丙负责加盖公章，然后乙拿着盖了章的申领书到甲单位领取补偿款。甲单位不知情，多支付了十万元补偿款。问题：乙丙构成何罪？</p>
-
-<blockquote>
-<p>【解析】乙构成诈骗罪，受骗人是甲单位，处分财产人也是甲单位，甲单位基于认识错误而处分财产。就乙的诈骗罪而言，丙构成共犯（帮助犯）。</p>
-</blockquote>
-
-<p>关于丙与乙勾结，导致甲单位的公款流失的问题，有意见认为丙构成贪污罪。然而，第一，丙只是利用职务便利为乙加盖公章，这只是一种证明行为，丙并没有将补偿款处分给乙。补偿款也不是丙所占有的财物。第二，丙并没有直接欺骗甲单位，没有从甲单位处骗取补偿款，这表明丙并没有实施贪污罪的实行行为。因此，丙不构成贪污罪。丙实际上只是实施了骗取补偿款的帮助行为。如果给丙定贪污罪，只能定贪污罪的帮助犯，但问题是，谁是贪污罪的实行犯？乙？乙没有国家工作人员身份，不可能构成贪污罪的实行犯。</p>
-
-<p>从实行行为角度看，乙是实行者，也即通过欺骗手段将公共财物非法转移为自己占有。乙构成诈骗罪的实行犯。丙的角色是帮助者，丙构成诈骗罪的帮助犯。</p>
-
-<p>注意，如果案件事实修改为：土地补偿款由土地管理局负责审核并发放，乙与丙勾结，丙审核通过乙的虚假材料，并向乙发放了补偿款，乙然后再与丙私分，则丙构成贪污罪的实行犯，乙构成贪污罪的帮助犯。此时，就乙的普通公民身份而言，乙不构成诈骗罪，因为丙没有受骗；乙构成盗窃罪，也即通过平和手段，将补偿款非法转移为自己占有。</p>
-
-<p>##80.【案例】
-甲为了骗取养老金，捏造虚假材料，然后找到社保局职员乙，乙负责审核领取养老金资格。甲给乙一万元，乙明知甲的材料是虚假的，仍予以审核通过。然后，甲凭借该资格，向社保局申领养老金。负责发放养老金的职员丙不知情，向甲发放了养老金。问题：甲乙构成何罪？</p>
-
-<blockquote>
-<p>【解析】甲构成诈骗罪，受骗人是丙，处分财产人也是丙，丙基于认识错误而处分财产。</p>
-
-<p>乙首先构成受贿罪。关于乙与甲勾结，导致社保局养老金流失的问题，有意见认为乙构成贪污罪。然而，第一，乙只是利用职务便利为甲授予了领取养老金的资格，并没有将养老金处分给甲。第二，乙并没有直接实施欺骗丙的行为，没有从丙处骗取公共财物，这表明乙并没有实施贪污罪的实行行为。因此，乙不构成贪污罪。乙实际上只是实施了骗取公共财物的帮助行为。如果给乙定贪污罪，只能定贪污罪的帮助犯，但问题是，谁是贪污罪的实行犯？甲？甲没有国家工作人员身份，不可能构成贪污罪的实行犯。</p>
-
-<p>从实行行为角度看，甲是实行者，也即通过欺骗手段将公共财物非法转移为自己占有。甲构成诈骗罪的实行犯。乙的角色是帮助者，乙构成诈骗罪的帮助犯。乙又构成受贿罪，数罪并罚。由于乙不构成贪污罪，故甲也不构成贪污罪的共犯（帮助犯）。</p>
-</blockquote>
-
-<p>##81.【案例】
-山西某地，老板乙请求官员甲办事，提出给好处，甲表示：自己不缺钱，而自己老家村里村民们一直想盖座庙，但没筹到资金。乙表示愿意出资为村民盖座庙。后庙盖成，庙门石碑上刻捐资者为乙，没有甲。但村民们都知道是甲为乡亲办了好事。后甲为乙办了事。甲是否构成受贿罪？乙是否构成行贿罪？</p>
-
-<blockquote>
-<p>【解析】受贿罪是指将自己的职务行为与他人的财物结成不正当对价关系，也即职务行为不能成为对方财物的对价，其中包括：官员收钱，然后将钱赠给第三人或捐给某希望小学；官员指示老板直接将钱交给第三人，让其拥有，或捐给某希望小学。因此，官员甲应构成受贿罪，至于有无留名不重要。应注意的是受贿罪的保护法益只有职务的不可收买性，不包括财物，这一点与贪污罪有所不同。</p>
-</blockquote>
-
-<p>##82.【案例】
-甲乙共谋非法占有毒贩丙的毒品。甲谎称向丙介绍毒品买卖，将丙骗到一个宾馆房间，对丙讲：“买主在隔壁房间，你们不想直接见面，买主要求先验货，你将货给我，我交给他验货，他验货完毕，收下货，将钱给我，我再给你。”丙答应，将毒品交给甲。甲拿到隔壁房间，交给乙。甲返回房间，趁丙不备，用绳索勒住丙脖子，勒死丙。甲乙将尸体装进大箱子，开车予以抛尸。问题：对甲乙如何处理？</p>
-
-<blockquote>
-<p>【解析】有意见认为，甲乙构成抢劫罪，属于抢劫罪中的抢劫（故意）致人死亡，同时触犯故意杀人罪，想象竞合，择一重罪论处。当甲欺骗丙，让丙将毒品交给自己时，丙并没有处分毒品的占有权，丙只是将甲临时拿去验货，而且验货地点就在隔壁房间，虽然毒品在甲手里，并拿到隔壁房间，但毒品仍处于丙的实际控制范围内，丙没有失去对毒品的占有。直到甲用绳子勒死丙，毒品才转移为甲乙占有。因此，甲乙不构成诈骗罪，而是构成抢劫罪（致人死亡）。</p>
-</blockquote>
-
-<p>然而，甲乙构成诈骗罪和故意杀人罪的共同犯罪，数罪并罚。不可否认，当丙将毒品交给甲，让甲拿到隔壁房间时，毒品虽然在甲手里，但此时丙并没有失去对毒品的占有。然而，丙与甲达成的约定是：若买家验货后认可货物，则将毒品交付给买家，由买家占有并所有，并收取买家货款；若买家验货后不认可货物，则甲将毒品返还丙。这是一个附条件的处分财物占有权、所有权的约定。这个条件就是买家认可货物。由于“买家”乙一定会认可货物，会收下货物，这个附加条件一定会具备。因此，当乙认可货物并收下货物时，丙便处分了货物的占有权、所有权。这种情形类似于：乙冒充买家直接与丙交易，丙将毒品交给乙，乙验货后收下货物，然后用假币冒充货款交给丙；乙构成诈骗罪，当丙将货物交给乙，乙验货后收下货物后，丙便处分了财物，乙便占有了财物。</p>
-
-<p>##83.【案例】
-刘某为非法占有张某财产，捏造欠条，向法院提起民事诉讼。法官赵某受理该案，在审理过程中发现刘某伪造证据，准备处理刘某。刘某对赵某讲：“你不要揭发我，你就判张某败诉，等张某执行判决，支付了我钱款后，我分你一半。”赵某答应照办。问题：刘某和赵某构成哪些犯罪？</p>
-
-<blockquote>
-<p>【解析】</p>
-
-<p>①刘某提起虚假诉讼的行为构成虚假诉讼罪（既遂），受理案件就是既遂时点。刘某的行为也构成诈骗罪，诈骗张某钱财，属于三角诈骗、诉讼诈骗，但构成诈骗罪未遂，因为赵某发觉有假。刘某同时触犯虚假诉讼罪与诈骗罪未遂，想象竞合，择一重罪论处。刘某不构成帮助伪造证据罪，因为刘某是当事人，不是帮助他人。</p>
-
-<p>②关于刘某与赵某共谋非法占有张某钱财的行为，刘某构成盗窃罪既遂，因为赵某没有受骗，刘某不可能构成诈骗罪，刘某通过平和手段，将张某占有的财物转移为自己占有，构成盗窃罪。赵某也构成盗窃罪，二人是盗窃罪的共同实行犯。赵某还构成民事枉法裁判罪，刘某构成民事枉法裁判罪的教唆犯。总结而言，刘某同时触犯盗窃罪（实行犯）和民事枉法裁判罪（教唆犯），想象竞合，择一重罪论处。赵某同时触犯盗窃罪（实行犯）和民事枉法裁判罪（实行犯），想象竞合，择一重罪论处。</p>
-
-<p>③由于刘某与赵某共同非法占有张某钱财，所以二者对张某的钱财属于分赃性质，不属于行贿与受贿关系。</p>
-
-<p>④罪数。对刘某第一个阶段的想象竞合，择一重罪论处；对刘某第二个阶段的想象竞合，择一重罪论处；然后数罪并罚。</p>
-</blockquote>
-
-<p>##84.【案例】
-（友情提示，该案少儿不宜）赵某是广州某四星级酒店老板。在2012年扫黄行动中，赵某被当地警方抓获。经查，证据能够证明的事项是，赵某组织服务员向住店客人提供以下有偿服务：①男服务员与男客人发生口交、肛交行为。②女服务员与男客人发生口交、肛交行为。③女服务员与女客人发生口交行为。④女服务员用手或乳房摩擦男客人生殖器。赵某被控告构成组织卖淫罪。但赵某的辩护律师认为，自己的当事人只是组织色情按摩服务，不构成组织卖淫罪。主审法官曾为此请示上一级法院。问题：赵某的哪些行为构成组织卖淫罪？</p>
-
-<blockquote>
-<p>【解析】组织卖淫罪中的“卖淫”，是指以营利为目的，满足不特定对象的性欲的行为。在对象性别上，没有特定限定，可以是男对男，女对女。在行为方式上，要求发生性交行为或类似性交行为（如口交、肛交）。用手、乳房摩擦生殖器，属于色情按摩服务，但不属于本罪中的卖淫。基于以上分析，情形①②③属于组织卖淫，情形④不属于组织卖淫。</p>
-</blockquote>
-
-<p>##85.【案例】
-甲乙共谋轮奸杨某（女）。二人共同使用暴力，将杨某制服。由甲先实施奸淫，因自身原因未得逞。乙说：闪开，我来。乙奸淫得逞。问题：甲乙是否均构成强奸罪既遂？是否构成“轮奸”？是否属于“轮奸”未遂？</p>
-
-<blockquote>
-<p>【解析】
-①甲乙构成强奸罪的共同正犯。根据部分实行全部责任原则，一个人既遂，那么另一个人对其既遂结果也要负责，也即另一人人也构成既遂。基于此，乙构成强奸罪既遂，那么甲也构成强奸罪既遂。也即二人构成强奸罪的共同犯罪，并且都既遂。<br />
-②轮奸，是指强奸罪的共同正犯的情形。这里的共同正犯也即共同实行犯，需要包括奸淫（发生性交）这一实行行为。例如，甲乙共同强奸丙女，甲只负责使用暴力制服，乙只负责奸淫。二人构成强奸罪的共同正犯，并且都既遂，但是二人不属于轮奸。如果二人的共同犯意是都会实施奸淫这一步，则构成轮奸。例如，甲乙共同强奸丙女，甲乙的计划是共同使用暴力制服，共同奸淫，二人构成轮奸。本案中的甲乙便是如此计划，因此构成轮奸。<br />
-③轮奸作为强奸罪的一种法定刑升格条件，一种法定加重处罚情节，是一种情节加重犯，其本身也有既遂与未遂问题。在甲乙构成轮奸的前提下，如果甲的奸淫行为得逞，乙的奸淫行为得逞，也即被害妇女遭受了两次奸淫，则甲乙的轮奸属于既遂。如果甲的奸淫行为得逞，乙的奸淫行为未能得逞，也即被害妇女只遭受一次奸淫，则甲乙的轮奸属于未遂，此时一方面适用针对轮奸的升格法定刑，另一方面适用未遂犯的规定可以从宽处罚。<br />
-在此需要注意基本犯的犯罪形态与情节加重犯的犯罪形态，二者是相互独立的。也即基本犯既遂，并不意味加重犯必然既遂。本案中，甲乙构成强奸罪，并且都既遂，因为二人是共同犯罪。这是基本犯层面的认定。甲乙构成情节加重犯“轮奸”，由于只有一人奸淫得逞，故属于轮奸未遂。最后总结，甲乙一方面构成强奸罪既遂（适用相应的法定刑），另一方面构成轮奸未遂（适用相应的法定刑），属于想象竞合，择一重刑论处。</p>
-</blockquote>
-
-<p>##86.【案例】
-①甲遭到赵某抢劫，在防卫时打死了赵某。甲潜逃到朋友乙家，告知实情。乙收留。后警方在乙家抓获了甲。甲被起诉，但法院判决甲构成正当防卫，作无罪处理。②丙带着朋友丁回家，发现妻子躺在血泊中，已经死亡。丙正准备报案，发现警察要来抓捕自己。原来戊杀了丙的妻子，并栽赃陷害丙，提前举报丙。丙带着丁逃亡。丁将丙藏在自己家里。后警方在丁家抓获了丙。丙被起诉，后法院查明真相，作无罪处理。问题：乙、丁是否构成窝藏罪？</p>
-
-<blockquote>
-<p>【解析】对窝藏罪的对象“犯罪的人”，不能从无罪推定的角度去理解，不能认为，只有法院最终判决有罪的人才是窝藏罪的对象，否则，大多数窝藏犯罪分子的行为都不构成窝藏罪。因此，这里的“犯罪的人”应当是足以使司法机关立案侦查追诉的人，也即包括未决犯和已决犯。窝藏最终被判无罪的人是否构成窝藏罪，需要具体分析。</p>
-
-<p>第一，窝藏罪的保护法益是正常的司法秩序与职能。原则，如果一个人必然会被司法机关列为侦查追诉的对象，那么这个人就是未决犯。一般人就不能窝藏这个未决犯，否则会妨害正常的司法秩序与职能。在第①种情形中，甲打死赵某，这种行为足以使司法机关立案侦查追诉。因此，乙窝藏甲，妨害了司法机关侦查追诉甲，构成窝藏罪。虽然甲最终无罪，但这也是经过立案侦查、起诉、审判之后的结论，要得出这个结论，就要求乙不能妨害这个司法过程。</p>
-
-<p>第二，虽然窝藏罪的保护法益是正常的司法秩序与职能，但是不能走极端，需要考虑到保障人权的一面。例如，在第②种情形中，丙没有制造任何法益侵害事实，没有实施任何犯罪行为，是被人诬告陷害而引起司法机关侦查追诉。这时候司法机关的侦查追诉在本源上就是错误的，此时对这种本源上错误的司法机关的侦查追诉过程就不能一味地保护。丁是目击者，知道丙确实无罪，窝藏丙，是为了保护丙不被诬告陷害，避免丙受到错误逮捕和起诉，主观上没有妨害正常正当的司法秩序的恶意。因此，对丁不能以窝藏罪论处。</p>
-</blockquote>
-
-<p>##87.【案例】
-甲女，17周岁，中学毕业。乙男，30周岁，甲的邻居。乙带甲到深圳打工。甲暂住乙的出租屋。甲没有找到工作，盘缠花完，向乙借了两千元。乙提出与甲发生性关系，可以免除债务。甲不同意。某日夜里，乙对甲说，如不同意，就将其赶出房屋。甲便准备收拾行李离开。乙又骗说，深圳夜里杀人、强奸的案件很多，一个女孩子很危险。甲很害怕，便被迫答应了乙的要求。问题：乙是否构成胁迫型强奸罪？</p>
-
-<blockquote>
-<p>【解析】有意见认为，乙构成强奸罪，因为乙威胁将甲赶出家门，又欺骗外面很危险，在精神上对甲形成恐惧心理，形成强制力。甲属于忍辱就奸。但是，甲借住在乙家中，乙有权不让甲继续住下去。强奸罪中的胁迫是指以恶害相通告，使妇女产生恐惧心理，这种恐惧心理足以使妇女不敢反抗。案件事实表明，当乙以赶出门相胁迫，甲决定离开，并没有被这种恶害所威慑住。这表明，甲作为17周岁的人，具有独立的判断能力。之后，乙又骗称深圳夜里很危险。这种说法不能评价为胁迫，因为胁迫是指以恶害相通告，你若不答应，我就对你施加恶害。乙欺骗说外面很危险，并不符合胁迫的行为模型。因此，乙不构成强奸罪。这表明，并非一切违背妇女意愿的行为都构成强奸罪。</p>
-</blockquote>
-
-<p>##88.【案例】
-甲来到某个自行车行买自行车。老板乙接待介绍，甲挑中一款自行车，与乙谈好价格3000元，要发票。此时，老板娘丙从外面回到店里。乙便将甲介绍给丙，对丙说：“你给这位客人开票，3000元，就那辆自行车”，说完乙便去一旁忙别的事。丙误以为乙已经收了货款，自己只负责开发票，便带领甲到里间开票。开完发票，丙便忙其他事情了。由于丙以为乙已经收了款，而乙以为丙会收款，故二人均未向甲收款。甲察觉到夫妻间的不默契，于是大摇大摆推走了自行车。问题：甲构成何罪？盗窃罪？诈骗罪？</p>
-
-<blockquote>
-<p>【解析】盗窃罪与诈骗罪的关键区分在于，是否存在诈骗罪的第三步，也即被害人基于认识错误而处分财物。甲存在欺骗行为。第一，欺骗方式。丙误以为乙已经收了款，便没有向甲索要货款。丙的这种认识错误是自己产生的。但甲维持利用了丙已有的认识错误。维持利用对方已有的认识错误也是一种欺骗方式。第二，欺骗类型。甲属于不作为的欺骗。作为买家，有告知卖家自己尚未付款的义务，因为支付货款是买家的基本义务。作为卖家，有告知自己产品有质量瑕疵的义务，因为提供合格产品是卖家的基本义务。但是注意，作为买家，没有告知卖家“东西卖便宜了”的义务。例如，乙摆摊卖文物，标价1万，甲自知价值10万，没有告知乙，以1万元买到手。甲不构成不作为欺骗。</p>
-
-<p>本案中，当甲觉察到丙以为自己付了款，此时便产生了非法占有目的，但此时自行车尚在丙的占有之下，甲尚未占有。如果甲已经占有，则涉及侵占罪的问题。甲通过不作为方式，维持利用了丙已有的认识错误，导致丙基于认识错误而处分了财物。所谓处分财物，就是让甲将自行车推走了，或默许甲将自行车推走。在此注意，被害人的处分行为包括两种情形，一是被害人积极的举动，例如被害人亲自将财物交付到行为人手中；二是被害人消极的静止，例如被害人许可行为人将财物拿走。这两种情形没有本质区别。本案中，被害人丙的处分行为就是许可甲将财物拿走。综上，甲构成诈骗罪。</p>
-</blockquote>
-
-<p>##89.【案例】
-张某在自己家里非法生产着色类食品添加剂“柠檬黄”，然后销售给制作馒头的王某，销售金额共计5万元。王某在制作馒头时，添加“柠檬黄”，然后销售这种馒头。顾客误以为这种黄灿灿的馒头是馒头的自然颜色，喜欢购买。王某销售金额共计5万元。经鉴定，食用这种馒头不足以造成严重食物中毒。但食品管理机关禁止在馒头中添加“柠檬黄”。另外，生产“柠檬黄”不需要行政法特别许可，但需要一般的生产经营许可证。问题：对张某、王某该如何处理？</p>
-
-<blockquote>
-<p>【解析】
+最后，定诈骗罪未遂与抢夺罪(或盗窃罪)，并罚。</p></blockquote><h2><a name='header-n380' class='md-header-anchor '></a>62.【案例】</h2><p>甲回家，在单元门口，看到四个陌生人(乙等)在往货车上抬一架钢琴，感觉该钢琴和自己家的钢琴一模一样，便问：你们这是抬的谁家钢琴？乙欺骗甲：是201室那家的，那主人要卖掉这架钢琴。甲信以为真，便让道，看着乙等抬走。对乙如何处理？</p><blockquote><p>【解析】乙将钢琴搬出甲家，便盗窃罪既遂。甲放乙走，客观上是种处分行为，但主观上没有处分意识，因为没有意识到钢琴是自己的财物。</p></blockquote><h2><a name='header-n386' class='md-header-anchor '></a>63.【案例】</h2><p>甲在超市，将一款价值五百元的傻瓜相机从包装盒(不透明的大纸盒)中取出，放进一款价值五万元的单反相机，交给收银员乙。乙以为自己出售的是傻瓜相机，收五百元，让甲拿走。甲构成什么？</p><blockquote><p>【解析】乙有处分行为，关键看有无处分意识。处分意识，要求内心意识到所处分财物的存在。由于是不透明的纸盒，乙没有意识到里面的单反相机。故甲构成盗窃罪。这是第一种情况。第二种情况是，甲将傻瓜照相的价签贴到单反相机上，无不透明的外包装盒，是裸的样子，交给收银员，这是诈骗罪，因为有处分意识。第三种情况是，甲将照相机装进不透明的饼干盒，这是盗窃，因为没有意识到相机的存在，无处分意识。</p></blockquote><h2><a name='header-n392' class='md-header-anchor '></a>64.【案例】</h2><p>甲伪装成超市保安，对顾客乙称带包不能入内，我可以帮你去存包。乙相信便将包交给甲。甲将包存入一小柜子后，拿着另一个空柜子的钥匙，返回交给乙。待乙走进超市，甲拿出正确钥匙，打开柜子取走包。甲构成什么？</p><blockquote><p>【解析】甲是否构成诈骗罪，关键看乙有无处分行为，即将自己占有的财物转移占有、处分占有给行为人。乙让甲代为存包，并没有处分占有，包仍为乙占有，只是占有状态有所松驰。乙若让甲拿回家代为保管，则属于处分了占有。因此，本案甲构成盗窃罪。乙若让甲将包存到有保管员负责管理的存包处，则乙将包转移占有给了保管员。甲再偷走，构成盗窃保管员占有的财物。</p></blockquote><h2><a name='header-n398' class='md-header-anchor '></a>65.【案例】</h2><p>甲在公路上看到一辆压路机，无人驾驶，等了半小时，未有人来驾驶，便认为这是他人的遗忘物，便找来乙，称：这个压路机是我的，卖给你。乙以二手压路机的价格买入。后压路机主人丙回来没有找到，便报警。对甲如何处理？</p><blockquote><p>【解析】①甲以为是遗忘物，实际是他人占有的财物，这种认识错误没有合理根据，不予认可。② 甲一个出卖行为，对丙构成盗窃罪，对乙是否构成诈骗罪，存在观点展示，观点一，构成诈骗罪，因为乙有财产损失，用正常价买到赃物。观点二，不构成诈骗罪，因为是善意取得，没有财产损失。若依观点一，盗窃罪与诈骗罪想象竞合，择一重。</p></blockquote><h2><a name='header-n404' class='md-header-anchor '></a>66.【案例】</h2><p>甲以为乙精神正常，以非法占有为目的，欲诈骗乙的玩具，欺骗乙：借你的玩具玩两天。乙给了甲。实际上乙是精神病患者。对甲如何处理？</p><blockquote><p>【解析】由于精神病患者没有意思自治能力，其处分意识不被认可为诈骗罪的处分意识，故甲构成诈骗罪未遂。甲取得财物的行为在客观上是盗窃行为，但甲主观上的诈骗故意无法包容评价为盗窃故意，因为诈骗罪与盗窃罪不是包容评价关系，而是对立排斥关系，因此甲不构成盗窃罪。甲取得财物后若不归还则构成侵占罪。</p></blockquote><h2><a name='header-n410' class='md-header-anchor '></a>67.【案例】</h2><p>甲在超市水果摊位，自己往塑料袋中放进许多枣，交给称重的工作人员乙，乙称重后贴上一公斤的标签，然后封好袋口，交给甲。甲又悄悄撕开袋口，往里装三颗枣，然后封好袋口，交给收银员丙，丙收了一公斤的货款，甲拎走。不计数额，甲对三颗枣构成什么？</p><blockquote><p>【解析】①甲偷往袋里装三个枣，貌似盗窃，但由于没有转移占有，此时这袋枣仍由超市占有，故该行为不构成盗窃罪。<br/>
+②甲拿到收银员丙，丙客观上有处分这袋枣的行为，主观上有处分这袋枣的意识，只是该处分意识的内容存在错误，即对这袋枣的重量产生认识错误，以为是一公斤，实际多于一公斤。故甲构成诈骗罪。有人可能认为，丙没有看到多出来的三个枣，所以对这三个枣没有处分意识。然而，由于这三个枣和其他枣是同种类财物，整体上是一袋枣，故丙对其有概括的认识。如果甲向袋中藏一巧克力，而丙没看到，则甲对巧克力是盗窃。</p></blockquote><h2><a name='header-n417' class='md-header-anchor '></a>68.【案例】</h2><p>金池长老借到唐僧袈裟后，不想还，便趁唐僧睡着，放火欲烧死唐僧，未能烧死。对金池如何处理？</p><blockquote><p>【解析】金池的一个杀人行为构成四个罪：侵占罪，故意杀人罪，抢劫罪，放火罪，想象竞合，择一重罪论处。注意，如果案件改为：唐僧讨要，金池拒不归还，第二天放火杀人，则前面构成侵占罪，后面杀人行为构成：杀人罪，抢劫罪，放火罪，三罪想象竞合，择一重，然后与侵占罪并罚。</p></blockquote><h2><a name='header-n423' class='md-header-anchor '></a>69.【案例】</h2><p>乙给丙还书，见丙在公园长椅上睡着，便将书放丙身旁，便离开。甲坐到长椅上。丙醒来，看到书，问甲：是不是你的？甲谎称是。丙递给甲。甲拿走。甲构成什么？</p><blockquote><p>【解析】丙客观上有处分行为。处分意识，指意识到将自己占有的财物转移占有给他人。这有个前提：处分人意识到自己在占有该财物。丙没意识到自己在占有书，故没有处分意识。因此甲不构成诈骗罪，而构成盗窃罪。</p></blockquote><h2><a name='header-n429' class='md-header-anchor '></a>70.【案例】</h2><p>乙下出租车时，将手机忘在车上。甲上车，司机这时发现手机，问甲：是不是你的？甲谎称是的。司机便让甲收好。甲构成什么？</p><blockquote><p>【解析】乙的手机转化为司机占有。诈骗罪要求受骗人有处分行为和处分意识。司机客观上有处分行为。处分意识，指意识到将自己占有的财物转移占有给他人。这有个前提：处分人意识到自己在占有该财物。司机没意识到自己在占有手机，故没有处分意识。因此甲不构成诈骗罪，而构成盗窃罪。</p></blockquote><h2><a name='header-n435' class='md-header-anchor '></a>71.【案例】</h2><p>甲欺骗乙：借你车用两天。乙答应。甲拿到车后，又欺骗丙：用我的这车质押，借你五万元。丙答应。借款到期，丙找不到甲，行使质押权时发现车辆不是甲的。对甲如何处理？</p><blockquote><p>【解析】① 甲以非法占有的目的向乙借车，名为借，实为骗，构成诈骗罪。<br/>
+② 甲将赃物质押给丙，是否构成诈骗罪，观点一，因为是赃物，该质押物有瑕疵，丙有财产损失，甲构成诈骗罪。观点二，丙善意取得，无财产损失，甲不构成诈骗罪。</p></blockquote><h2><a name='header-n442' class='md-header-anchor '></a>72.【案例】</h2><p>甲盗窃了乙的包，乙追，甲逃。乙经过丙时，问丙有没有看到一个穿黄衣服的人(指甲)，丙为了帮助甲，欺骗乙说：看到了，他朝左边这条路跑了(实际朝右)。乙便朝左追赶。甲摆脱了追赶。对甲乙如何处理？</p><blockquote><p>【解析】甲盗窃了乙的包，意指盗窃罪已既遂。丙为了帮助甲，意指丙知道甲犯了盗窃罪，欺骗乙走错路，具有帮助甲逃匿的效果，构成窝藏罪，窝藏罪不限于将犯罪人藏起来，帮犯罪人逃匿的行为也是窝藏罪。</p></blockquote><h2><a name='header-n448' class='md-header-anchor '></a>73.【案例】</h2><p>甲对某民营公司出纳乙谎称，我给母亲看病，请帮挪用五十万，三周内会归还。乙答应照办。甲实际用钱赌博，三周内归还了。对甲乙如何处理？</p><blockquote><p>【解析】甲乙在客观违法阶层构成挪用资金罪共同犯罪，甲是教唆犯，乙是实行犯。在主观责任阶层，甲应负责任，乙不负责任。违法是连带的，责任是个别的。</p></blockquote><h2><a name='header-n454' class='md-header-anchor '></a>74.【案例】</h2><p>甲是钉子户，抗拒政府拆迁，在与拆迁人员对峙时，对妻子乙讲：给我买一瓶农药，我假装喝农药吓唬他们。乙照办。甲喝下一点后，口吐白沫。乙不救。甲中毒死亡。对乙如何处理？</p><blockquote><p>【解析】乙帮买药，甲自己喝药，这一阶段属于甲自陷风险。如果当时乙不在场，甲死亡，该死亡结果由甲负责。当乙在现场看到甲中毒，有死亡危险，乙有救助义务，因为甲陷入死亡危境，不是自己的真实意愿，这点不同于丈夫上吊自杀的案件(妻子有无救助义务，存在观点展示)，因此乙构成不作为犯罪，如遗弃罪。</p></blockquote><h2><a name='header-n460' class='md-header-anchor '></a>75.【案例】</h2><p>甲，15周岁，辍学，进入乙公司做业务员。老板让甲拿六万元采购原材料。甲与女朋友丙(18周岁)商议好，丙“抢劫”了甲的六万元。甲向老板告知被抢劫了。老板未再追究。甲丙如何处理？</p><blockquote><p>【解析】甲构成职务侵占罪客观阶层的实行犯(职务侵占罪的起刑点是六万元)，最终不负责任。丙是职务侵占罪帮助犯，要负责任。丙不构成盗窃罪，因为盗窃罪要求违反占有人的意愿，转移占有，而丙没有违反甲的意愿。甲又构成客观阶层的诈骗罪，骗免债务，最终不负责任。丙是诈骗罪的帮助犯，要负责任。丙的两个罪，观点一，只定职务侵占罪，诈骗罪是不可罚的事后行为。观点二，重罪吸收轻罪。</p></blockquote><h2><a name='header-n466' class='md-header-anchor '></a>76.【案例】</h2><p>甲有一驾校，欲以200万出售，乙和甲熟识，知道甲要以200万卖驾校，遂找到丙说，甲想以400万卖驾校，我们各出200万买他的驾校，由我出面买，我买下后，咱俩各占百分之五十股份。丙答应，给乙200万。乙拿着丙的200万以200万买了驾校，然后和丙办理了股东登记，每人占50%股份。事后，丙得知甲的真实出价，认为乙没有告知其真实交易价格，以诈骗罪向公安机关举报。问题：乙是否成立犯罪？该案为实务问题。</p><blockquote><p>【解析】本案关键问题在于丙有无财产损失。有意见认为没有，因为乙说给丙买来甲驾校的一半股份，这一点实现了。然而，甲驾校的一半股份只值100万，而丙花了200万，存在100万的损失。因此乙属于隐瞒真相，欺骗丙，使丙多处分了100万，因此构成诈骗罪。乙若是中间商，则有权加价，但乙是受托，不是中间商。</p></blockquote><h2><a name='header-n472' class='md-header-anchor '></a>77.【案例】</h2><p>甲是某国有公司的财务人员，属于国家工作人员。甲所在公司与乙签订了销售合同，乙购买甲所在公司的货物，甲代表公司负责收取货款，由于甲所在公司的账户临时出问题，双方便约定，乙将货款汇入甲的个人账户，甲再交给公司。半年后，甲离职去了私企，不再是国家工作人员。但乙对此不知情。某日，乙询问甲：“上一批货物的货款还是打入你的账户？”甲顿时明白，自己原单位未通知乙自己离职的事情，便谎称“是的”。甲收到货款后未告知原单位。等到原单位得知真相后，要求甲返还，甲拒不返还。问题：甲构成贪污罪？诈骗罪？侵占罪？</p><blockquote><p>【解析】就真正身份犯而言，行为与行为主体的身份应同时具备。贪污罪的主体是国家工作人员。贪污罪的行为方式是利用职务便利，将公共财物非法据为己有。甲离职后，已经不属于国家工作人员，不具有贪污罪的主体身份。此时，甲非法将单位的公共财物据为己有，不构成贪污罪。甲的行为只构成普通的财产犯罪。</p></blockquote><p>在此注意，受贿罪司法解释规定：国家工作人员在职时为请托人谋取利益，约定离职后收受财物，构成受贿罪。该规定貌似违反了行为与行为主体的身份同时具备原则。其实，受贿罪的保护法益是职务的不可收买性，这一点与贪污罪不同，贪污罪的保护法益是职务的廉洁性，也即不能非法占有公共财物。当国家工作人员在职时为请托人谋取了利益，在职时对收受财物做了约定，那么职务行为的不可收买性便已经被侵害了，就已经成立受贿罪。离职后实现了约定，收受到了财物，只是表明受贿罪在成立的基础上进一步既遂了。</p><p>判断甲构成哪个财产犯罪，需要先明确被害人。如果认为被害人是乙，则甲构成诈骗罪。具体而言，甲维持利用了乙已有的认识错误，使乙将财物处分给自己。但是，由于甲的原单位未向乙告知甲的离职事宜，因此，乙在支付货款时，汇错对象，不是乙的责任。也即乙属于已经履行了支付货款义务，乙没有财产损失，不是被害人。被害人应是甲的原单位。甲将原单位所有、自己占有的货款据为己有，行使所有权，也即拒不退还，构成侵占罪。注意，由于甲此时不是原单位职员，因此不构成职务侵占罪。</p><p>有意见认为，甲构成诈骗罪，属于三角诈骗，也即受骗人是乙，受害人是甲的原单位。但是，三角诈骗要求受骗人基于认识错误处分被害人的财物，要求受骗人具有处分被害人财物的权利或地位。然而，当乙在处分财物（支付货款）时，乙处分的是自己所有并占有的财物，而非甲的原单位的财物。因此，甲不构成三角诈骗。</p><h2><a name='header-n484' class='md-header-anchor '></a>78.【案例】</h2><p>甲是国家工作人员，按照领导指示，前往外地从事公务活动。依据该单位财务规定，甲的差旅费采取实报实销。甲实际差旅开支是两万元，甲又额外找到三万元的假发票，名目是交通费、住宿费等。甲回到单位后，在财务处依照报销流程规则，报销了这三万元假发票。问题：甲构成何罪？</p><blockquote><p>【解析】对本案存在观点展示。第一种观点认为，甲构成贪污罪，因为甲利用了职务便利。第二种观点认为，甲不构成贪污罪，只构成诈骗罪。贪污罪中的利用职务便利要求在关键环节上利用职务便利。就骗取型的贪污罪而言，行为方式是，实施欺骗手段，使对方产生认识错误，对方基于认识错误而处分公共财物，行为人因此取得公共财物。利用职务便利要求在关键的第三步利用职务便利，也即利用职务便利，使对方基于认识错误而处分公共财物。本案中，甲在出差时从事公务，属于利用职务便利。但是，出差时所利用的公务与用假发票报销之间没有直接关系。用假发票报销时依照的是报销流程规则，此间并没有利用职务便利。故甲不构成贪污罪，而只构成诈骗罪。</p></blockquote><h2><a name='header-n490' class='md-header-anchor '></a>79.【案例】</h2><p>甲单位（国有单位）征用村民土地，村民可以申领到土地征用补偿款，流程是村民拿着申领书到土地管理局盖章，然后再拿到甲单位领取补偿款。村民乙与土地管理局局长丙相勾结，乙多报土地上的果树数量，然后由丙负责加盖公章，然后乙拿着盖了章的申领书到甲单位领取补偿款。甲单位不知情，多支付了十万元补偿款。问题：乙丙构成何罪？</p><blockquote><p>【解析】乙构成诈骗罪，受骗人是甲单位，处分财产人也是甲单位，甲单位基于认识错误而处分财产。就乙的诈骗罪而言，丙构成共犯（帮助犯）。</p></blockquote><p>关于丙与乙勾结，导致甲单位的公款流失的问题，有意见认为丙构成贪污罪。然而，第一，丙只是利用职务便利为乙加盖公章，这只是一种证明行为，丙并没有将补偿款处分给乙。补偿款也不是丙所占有的财物。第二，丙并没有直接欺骗甲单位，没有从甲单位处骗取补偿款，这表明丙并没有实施贪污罪的实行行为。因此，丙不构成贪污罪。丙实际上只是实施了骗取补偿款的帮助行为。如果给丙定贪污罪，只能定贪污罪的帮助犯，但问题是，谁是贪污罪的实行犯？乙？乙没有国家工作人员身份，不可能构成贪污罪的实行犯。</p><p>从实行行为角度看，乙是实行者，也即通过欺骗手段将公共财物非法转移为自己占有。乙构成诈骗罪的实行犯。丙的角色是帮助者，丙构成诈骗罪的帮助犯。</p><p>注意，如果案件事实修改为：土地补偿款由土地管理局负责审核并发放，乙与丙勾结，丙审核通过乙的虚假材料，并向乙发放了补偿款，乙然后再与丙私分，则丙构成贪污罪的实行犯，乙构成贪污罪的帮助犯。此时，就乙的普通公民身份而言，乙不构成诈骗罪，因为丙没有受骗；乙构成盗窃罪，也即通过平和手段，将补偿款非法转移为自己占有。</p><h2><a name='header-n502' class='md-header-anchor '></a>80.【案例】</h2><p>甲为了骗取养老金，捏造虚假材料，然后找到社保局职员乙，乙负责审核领取养老金资格。甲给乙一万元，乙明知甲的材料是虚假的，仍予以审核通过。然后，甲凭借该资格，向社保局申领养老金。负责发放养老金的职员丙不知情，向甲发放了养老金。问题：甲乙构成何罪？</p><blockquote><p>【解析】甲构成诈骗罪，受骗人是丙，处分财产人也是丙，丙基于认识错误而处分财产。</p><p>乙首先构成受贿罪。关于乙与甲勾结，导致社保局养老金流失的问题，有意见认为乙构成贪污罪。然而，第一，乙只是利用职务便利为甲授予了领取养老金的资格，并没有将养老金处分给甲。第二，乙并没有直接实施欺骗丙的行为，没有从丙处骗取公共财物，这表明乙并没有实施贪污罪的实行行为。因此，乙不构成贪污罪。乙实际上只是实施了骗取公共财物的帮助行为。如果给乙定贪污罪，只能定贪污罪的帮助犯，但问题是，谁是贪污罪的实行犯？甲？甲没有国家工作人员身份，不可能构成贪污罪的实行犯。</p><p>从实行行为角度看，甲是实行者，也即通过欺骗手段将公共财物非法转移为自己占有。甲构成诈骗罪的实行犯。乙的角色是帮助者，乙构成诈骗罪的帮助犯。乙又构成受贿罪，数罪并罚。由于乙不构成贪污罪，故甲也不构成贪污罪的共犯（帮助犯）。</p></blockquote><h2><a name='header-n512' class='md-header-anchor '></a>81.【案例】</h2><p>山西某地，老板乙请求官员甲办事，提出给好处，甲表示：自己不缺钱，而自己老家村里村民们一直想盖座庙，但没筹到资金。乙表示愿意出资为村民盖座庙。后庙盖成，庙门石碑上刻捐资者为乙，没有甲。但村民们都知道是甲为乡亲办了好事。后甲为乙办了事。甲是否构成受贿罪？乙是否构成行贿罪？</p><blockquote><p>【解析】受贿罪是指将自己的职务行为与他人的财物结成不正当对价关系，也即职务行为不能成为对方财物的对价，其中包括：官员收钱，然后将钱赠给第三人或捐给某希望小学；官员指示老板直接将钱交给第三人，让其拥有，或捐给某希望小学。因此，官员甲应构成受贿罪，至于有无留名不重要。应注意的是受贿罪的保护法益只有职务的不可收买性，不包括财物，这一点与贪污罪有所不同。</p></blockquote><h2><a name='header-n518' class='md-header-anchor '></a>82.【案例】</h2><p>甲乙共谋非法占有毒贩丙的毒品。甲谎称向丙介绍毒品买卖，将丙骗到一个宾馆房间，对丙讲：“买主在隔壁房间，你们不想直接见面，买主要求先验货，你将货给我，我交给他验货，他验货完毕，收下货，将钱给我，我再给你。”丙答应，将毒品交给甲。甲拿到隔壁房间，交给乙。甲返回房间，趁丙不备，用绳索勒住丙脖子，勒死丙。甲乙将尸体装进大箱子，开车予以抛尸。问题：对甲乙如何处理？</p><blockquote><p>【解析】有意见认为，甲乙构成抢劫罪，属于抢劫罪中的抢劫（故意）致人死亡，同时触犯故意杀人罪，想象竞合，择一重罪论处。当甲欺骗丙，让丙将毒品交给自己时，丙并没有处分毒品的占有权，丙只是将甲临时拿去验货，而且验货地点就在隔壁房间，虽然毒品在甲手里，并拿到隔壁房间，但毒品仍处于丙的实际控制范围内，丙没有失去对毒品的占有。直到甲用绳子勒死丙，毒品才转移为甲乙占有。因此，甲乙不构成诈骗罪，而是构成抢劫罪（致人死亡）。</p></blockquote><p>然而，甲乙构成诈骗罪和故意杀人罪的共同犯罪，数罪并罚。不可否认，当丙将毒品交给甲，让甲拿到隔壁房间时，毒品虽然在甲手里，但此时丙并没有失去对毒品的占有。然而，丙与甲达成的约定是：若买家验货后认可货物，则将毒品交付给买家，由买家占有并所有，并收取买家货款；若买家验货后不认可货物，则甲将毒品返还丙。这是一个附条件的处分财物占有权、所有权的约定。这个条件就是买家认可货物。由于“买家”乙一定会认可货物，会收下货物，这个附加条件一定会具备。因此，当乙认可货物并收下货物时，丙便处分了货物的占有权、所有权。这种情形类似于：乙冒充买家直接与丙交易，丙将毒品交给乙，乙验货后收下货物，然后用假币冒充货款交给丙；乙构成诈骗罪，当丙将货物交给乙，乙验货后收下货物后，丙便处分了财物，乙便占有了财物。</p><h2><a name='header-n526' class='md-header-anchor '></a>83.【案例】</h2><p>刘某为非法占有张某财产，捏造欠条，向法院提起民事诉讼。法官赵某受理该案，在审理过程中发现刘某伪造证据，准备处理刘某。刘某对赵某讲：“你不要揭发我，你就判张某败诉，等张某执行判决，支付了我钱款后，我分你一半。”赵某答应照办。问题：刘某和赵某构成哪些犯罪？</p><blockquote><p>【解析】</p></blockquote><blockquote><p>①刘某提起虚假诉讼的行为构成虚假诉讼罪（既遂），受理案件就是既遂时点。刘某的行为也构成诈骗罪，诈骗张某钱财，属于三角诈骗、诉讼诈骗，但构成诈骗罪未遂，因为赵某发觉有假。刘某同时触犯虚假诉讼罪与诈骗罪未遂，想象竞合，择一重罪论处。刘某不构成帮助伪造证据罪，因为刘某是当事人，不是帮助他人。<br/></p><p>②关于刘某与赵某共谋非法占有张某钱财的行为，刘某构成盗窃罪既遂，因为赵某没有受骗，刘某不可能构成诈骗罪，刘某通过平和手段，将张某占有的财物转移为自己占有，构成盗窃罪。赵某也构成盗窃罪，二人是盗窃罪的共同实行犯。赵某还构成民事枉法裁判罪，刘某构成民事枉法裁判罪的教唆犯。总结而言，刘某同时触犯盗窃罪（实行犯）和民事枉法裁判罪（教唆犯），想象竞合，择一重罪论处。赵某同时触犯盗窃罪（实行犯）和民事枉法裁判罪（实行犯），想象竞合，择一重罪论处。<br/></p><p>③由于刘某与赵某共同非法占有张某钱财，所以二者对张某的钱财属于分赃性质，不属于行贿与受贿关系。<br/></p><p>④罪数。对刘某第一个阶段的想象竞合，择一重罪论处；对刘某第二个阶段的想象竞合，择一重罪论处；然后数罪并罚。</p></blockquote><h2><a name='header-n541' class='md-header-anchor '></a>84.【案例】</h2><p>（友情提示，该案少儿不宜）赵某是广州某四星级酒店老板。在2012年扫黄行动中，赵某被当地警方抓获。经查，证据能够证明的事项是，赵某组织服务员向住店客人提供以下有偿服务：①男服务员与男客人发生口交、肛交行为。②女服务员与男客人发生口交、肛交行为。③女服务员与女客人发生口交行为。④女服务员用手或乳房摩擦男客人生殖器。赵某被控告构成组织卖淫罪。但赵某的辩护律师认为，自己的当事人只是组织色情按摩服务，不构成组织卖淫罪。主审法官曾为此请示上一级法院。问题：赵某的哪些行为构成组织卖淫罪？</p><blockquote><p>【解析】组织卖淫罪中的“卖淫”，是指以营利为目的，满足不特定对象的性欲的行为。在对象性别上，没有特定限定，可以是男对男，女对女。在行为方式上，要求发生性交行为或类似性交行为（如口交、肛交）。用手、乳房摩擦生殖器，属于色情按摩服务，但不属于本罪中的卖淫。基于以上分析，情形①②③属于组织卖淫，情形④不属于组织卖淫。</p></blockquote><h2><a name='header-n547' class='md-header-anchor '></a>85.【案例】</h2><p>甲乙共谋轮奸杨某（女）。二人共同使用暴力，将杨某制服。由甲先实施奸淫，因自身原因未得逞。乙说：闪开，我来。乙奸淫得逞。问题：甲乙是否均构成强奸罪既遂？是否构成“轮奸”？是否属于“轮奸”未遂？</p><blockquote><p>【解析】
+①甲乙构成强奸罪的共同正犯。根据部分实行全部责任原则，一个人既遂，那么另一个人对其既遂结果也要负责，也即另一人人也构成既遂。基于此，乙构成强奸罪既遂，那么甲也构成强奸罪既遂。也即二人构成强奸罪的共同犯罪，并且都既遂。<br/>
+②轮奸，是指强奸罪的共同正犯的情形。这里的共同正犯也即共同实行犯，需要包括奸淫（发生性交）这一实行行为。例如，甲乙共同强奸丙女，甲只负责使用暴力制服，乙只负责奸淫。二人构成强奸罪的共同正犯，并且都既遂，但是二人不属于轮奸。如果二人的共同犯意是都会实施奸淫这一步，则构成轮奸。例如，甲乙共同强奸丙女，甲乙的计划是共同使用暴力制服，共同奸淫，二人构成轮奸。本案中的甲乙便是如此计划，因此构成轮奸。<br/>
+③轮奸作为强奸罪的一种法定刑升格条件，一种法定加重处罚情节，是一种情节加重犯，其本身也有既遂与未遂问题。在甲乙构成轮奸的前提下，如果甲的奸淫行为得逞，乙的奸淫行为得逞，也即被害妇女遭受了两次奸淫，则甲乙的轮奸属于既遂。如果甲的奸淫行为得逞，乙的奸淫行为未能得逞，也即被害妇女只遭受一次奸淫，则甲乙的轮奸属于未遂，此时一方面适用针对轮奸的升格法定刑，另一方面适用未遂犯的规定可以从宽处罚。<br/>
+在此需要注意基本犯的犯罪形态与情节加重犯的犯罪形态，二者是相互独立的。也即基本犯既遂，并不意味加重犯必然既遂。本案中，甲乙构成强奸罪，并且都既遂，因为二人是共同犯罪。这是基本犯层面的认定。甲乙构成情节加重犯“轮奸”，由于只有一人奸淫得逞，故属于轮奸未遂。最后总结，甲乙一方面构成强奸罪既遂（适用相应的法定刑），另一方面构成轮奸未遂（适用相应的法定刑），属于想象竞合，择一重刑论处。</p></blockquote><h2><a name='header-n557' class='md-header-anchor '></a>86.【案例】</h2><p>①甲遭到赵某抢劫，在防卫时打死了赵某。甲潜逃到朋友乙家，告知实情。乙收留。后警方在乙家抓获了甲。甲被起诉，但法院判决甲构成正当防卫，作无罪处理。②丙带着朋友丁回家，发现妻子躺在血泊中，已经死亡。丙正准备报案，发现警察要来抓捕自己。原来戊杀了丙的妻子，并栽赃陷害丙，提前举报丙。丙带着丁逃亡。丁将丙藏在自己家里。后警方在丁家抓获了丙。丙被起诉，后法院查明真相，作无罪处理。问题：乙、丁是否构成窝藏罪？</p><blockquote><p>【解析】对窝藏罪的对象“犯罪的人”，不能从无罪推定的角度去理解，不能认为，只有法院最终判决有罪的人才是窝藏罪的对象，否则，大多数窝藏犯罪分子的行为都不构成窝藏罪。因此，这里的“犯罪的人”应当是足以使司法机关立案侦查追诉的人，也即包括未决犯和已决犯。窝藏最终被判无罪的人是否构成窝藏罪，需要具体分析。</p><p>第一，窝藏罪的保护法益是正常的司法秩序与职能。原则，如果一个人必然会被司法机关列为侦查追诉的对象，那么这个人就是未决犯。一般人就不能窝藏这个未决犯，否则会妨害正常的司法秩序与职能。在第①种情形中，甲打死赵某，这种行为足以使司法机关立案侦查追诉。因此，乙窝藏甲，妨害了司法机关侦查追诉甲，构成窝藏罪。虽然甲最终无罪，但这也是经过立案侦查、起诉、审判之后的结论，要得出这个结论，就要求乙不能妨害这个司法过程。</p><p>第二，虽然窝藏罪的保护法益是正常的司法秩序与职能，但是不能走极端，需要考虑到保障人权的一面。例如，在第②种情形中，丙没有制造任何法益侵害事实，没有实施任何犯罪行为，是被人诬告陷害而引起司法机关侦查追诉。这时候司法机关的侦查追诉在本源上就是错误的，此时对这种本源上错误的司法机关的侦查追诉过程就不能一味地保护。丁是目击者，知道丙确实无罪，窝藏丙，是为了保护丙不被诬告陷害，避免丙受到错误逮捕和起诉，主观上没有妨害正常正当的司法秩序的恶意。因此，对丁不能以窝藏罪论处。</p></blockquote><h2><a name='header-n567' class='md-header-anchor '></a>87.【案例】</h2><p>甲女，17周岁，中学毕业。乙男，30周岁，甲的邻居。乙带甲到深圳打工。甲暂住乙的出租屋。甲没有找到工作，盘缠花完，向乙借了两千元。乙提出与甲发生性关系，可以免除债务。甲不同意。某日夜里，乙对甲说，如不同意，就将其赶出房屋。甲便准备收拾行李离开。乙又骗说，深圳夜里杀人、强奸的案件很多，一个女孩子很危险。甲很害怕，便被迫答应了乙的要求。问题：乙是否构成胁迫型强奸罪？</p><blockquote><p>【解析】有意见认为，乙构成强奸罪，因为乙威胁将甲赶出家门，又欺骗外面很危险，在精神上对甲形成恐惧心理，形成强制力。甲属于忍辱就奸。但是，甲借住在乙家中，乙有权不让甲继续住下去。强奸罪中的胁迫是指以恶害相通告，使妇女产生恐惧心理，这种恐惧心理足以使妇女不敢反抗。案件事实表明，当乙以赶出门相胁迫，甲决定离开，并没有被这种恶害所威慑住。这表明，甲作为17周岁的人，具有独立的判断能力。之后，乙又骗称深圳夜里很危险。这种说法不能评价为胁迫，因为胁迫是指以恶害相通告，你若不答应，我就对你施加恶害。乙欺骗说外面很危险，并不符合胁迫的行为模型。因此，乙不构成强奸罪。这表明，并非一切违背妇女意愿的行为都构成强奸罪。</p></blockquote><h2><a name='header-n573' class='md-header-anchor '></a>88.【案例】</h2><p>甲来到某个自行车行买自行车。老板乙接待介绍，甲挑中一款自行车，与乙谈好价格3000元，要发票。此时，老板娘丙从外面回到店里。乙便将甲介绍给丙，对丙说：“你给这位客人开票，3000元，就那辆自行车”，说完乙便去一旁忙别的事。丙误以为乙已经收了货款，自己只负责开发票，便带领甲到里间开票。开完发票，丙便忙其他事情了。由于丙以为乙已经收了款，而乙以为丙会收款，故二人均未向甲收款。甲察觉到夫妻间的不默契，于是大摇大摆推走了自行车。问题：甲构成何罪？盗窃罪？诈骗罪？</p><blockquote><p>【解析】盗窃罪与诈骗罪的关键区分在于，是否存在诈骗罪的第三步，也即被害人基于认识错误而处分财物。甲存在欺骗行为。第一，欺骗方式。丙误以为乙已经收了款，便没有向甲索要货款。丙的这种认识错误是自己产生的。但甲维持利用了丙已有的认识错误。维持利用对方已有的认识错误也是一种欺骗方式。第二，欺骗类型。甲属于不作为的欺骗。作为买家，有告知卖家自己尚未付款的义务，因为支付货款是买家的基本义务。作为卖家，有告知自己产品有质量瑕疵的义务，因为提供合格产品是卖家的基本义务。但是注意，作为买家，没有告知卖家“东西卖便宜了”的义务。例如，乙摆摊卖文物，标价1万，甲自知价值10万，没有告知乙，以1万元买到手。甲不构成不作为欺骗。</p><p>本案中，当甲觉察到丙以为自己付了款，此时便产生了非法占有目的，但此时自行车尚在丙的占有之下，甲尚未占有。如果甲已经占有，则涉及侵占罪的问题。甲通过不作为方式，维持利用了丙已有的认识错误，导致丙基于认识错误而处分了财物。所谓处分财物，就是让甲将自行车推走了，或默许甲将自行车推走。在此注意，被害人的处分行为包括两种情形，一是被害人积极的举动，例如被害人亲自将财物交付到行为人手中；二是被害人消极的静止，例如被害人许可行为人将财物拿走。这两种情形没有本质区别。本案中，被害人丙的处分行为就是许可甲将财物拿走。综上，甲构成诈骗罪。</p></blockquote><h2><a name='header-n581' class='md-header-anchor '></a>89.【案例】</h2><p>张某在自己家里非法生产着色类食品添加剂“柠檬黄”，然后销售给制作馒头的王某，销售金额共计5万元。王某在制作馒头时，添加“柠檬黄”，然后销售这种馒头。顾客误以为这种黄灿灿的馒头是馒头的自然颜色，喜欢购买。王某销售金额共计5万元。经鉴定，食用这种馒头不足以造成严重食物中毒。但食品管理机关禁止在馒头中添加“柠檬黄”。另外，生产“柠檬黄”不需要行政法特别许可，但需要一般的生产经营许可证。问题：对张某、王某该如何处理？</p><blockquote><p>【解析】
 ①生产、销售有毒有害食品罪要求向食品中添加有毒、有害的非食品原料，如三聚氰胺。而“柠檬黄”属于食品添加剂，所以王某不构成生产、销售有毒有害食品罪。
 ②生产、销售不符合安全标准的食品罪是具体危险犯，要求足以造成严重食物中毒。而案件事实是，食用这种馒头不足以造成严重食物中毒，因此王某也不构成生产、销售不符合安全标准的食品罪。
 ③食品管理机关禁止在馒头中添加“柠檬黄”，而王某仍然添加，属于生产、销售伪劣产品，销售金额达到5万元，构成生产、销售伪劣产品罪既遂。
-④由于生产“柠檬黄”不需要行政法特别许可，因此，张某在自己家里非法生产“柠檬黄”不构成非法经营罪。案件事实没有指出张某生产的“柠檬黄”是否属于伪劣产品，因此，张某不构成生产、销售伪劣产品罪。</p>
-</blockquote>
-
-<p>##90.【案例】
-王某是艾滋病患者，为了报复社会，用针管抽了自己的血液后，来到某广场，向过往行人扎针，共计有五人被扎中。事后经检查，这五人没有被传染艾滋病。问题：王某构成投放危险物质罪？以危险方法危害公共安全罪？故意伤害罪？故意杀人罪？</p>
-
-<blockquote>
-<p>【解析】</p>
-
-<p>①危害公共安全犯罪中的“危害公共安全”要求制造的危险具有危及多数人的可能性。而用针管扎人，一次只能扎中一个人，不可能具有危及多数人的可能性。这种行为不构成危害公共安全犯罪。因此，王某不构成投放危险物质罪和以危险方法危害公共安全罪。在此注意，王某的行为是针对不特定人，但这种不特定是王某自己主观预设的犯罪对象不特定。这只是主观故意中的不确定故意。而危害公共安全要求客观手段具有危及多数人的可能性。对此二者应当注意区分。</p>
-
-<p>②由于艾滋病毒会对人的身体健康造成严重损害，因此蓄意给他人传染艾滋病的行为，属于故意伤害行为。王某构成故意伤害罪未遂。同时，王某的行为扰乱了社会秩序，构成寻衅滋事罪。这两罪想象竞合，择一重罪论处，最终以故意伤害罪未遂论处。王某构成五个故意伤害未遂，属于同种数罪，应数罪并罚。注意，在此不能只作一罪处理。</p>
-</blockquote>
-
-<p>##91.【案例】
-甲向前方十米远的乙开枪，子弹打偏，打死了附近的丙，甲没有预料到会打死丙，但有预见的可能性。事后查明，丙当时正要开枪打死乙，如果甲未能打死丙，丙就会打死乙，而甲对此事先并不知情。问题：甲构成故意杀人罪既遂？未遂？正当防卫？依据打击错误与偶然防卫的学说该如何分析？</p>
-
-<blockquote>
-<p>【解析】
-①甲构成打击错误，根据法定符合说，甲对乙构成故意杀人罪未遂，对丙构成故意杀人罪既遂，想象竞合，择一重罪论处，甲构成故意杀人罪既遂。根据具体符合说，甲对乙构成故意杀人罪未遂，对丙构成过失致人死亡罪，想象竞合，择一重罪论处，甲构成故意杀人罪未遂。</p>
-
-<p>②甲过失致丙死亡的行为属于偶然防卫，也即客观上制止了丙的不法侵害，但主观上没有意识到这一点。对此，观点一（结果无价值论）：甲制造了好结果，意味着甲的行为是好行为，甲不构成过失致人死亡罪，而构成正当防卫。观点二（行为无价值论）：甲制造了好结果，所以不构成过失致人死亡罪，但甲的行为还是坏行为，所以甲不构成正当防卫。</p>
-
-<p>③具体符合说与行为无价值论相结合，最终便会认为，甲对乙构成故意杀人罪未遂，甲对丙不构成过失致人死亡罪，最终甲构成故意杀人罪未遂。</p>
-
-<p>④法定符合说与结果无价值论无法结合，因为二者在看待甲导致丙的死亡问题上，存在矛盾，在看待甲的最终定罪问题上也存在矛盾。</p>
-</blockquote>
-
-<p>##92.【案例】
-李某邀请王某到餐馆吃饭喝酒，向王某劝酒，王某喝醉了，李某将王某送到王某的大学寝室，抱到床上，然后回自己寝室。半夜时分，王某的室友赵某发现王某呼吸有点急促，表情痛苦，身体有异样，便找李某，对其讲：“你请王某喝的酒，他现在身体有问题，你应该送他到医院。”李某未理睬。赵某见状，回到寝室也不管王某，并很快睡着了。第二天早上，赵某醒来发现王某已经去世。经鉴定，王某由于饮酒导致心脏病发作死亡。事后查明，案发当天，王某的寝室只住着王某与赵某；并查明，李某邀请王某喝酒时，王某向其告知了自己患有心脏病。问题：李某、赵某有无救助义务？是否构成不作为犯罪？</p>
-
-<blockquote>
-<p>【解析】
-①形式上看，李某请王某喝酒的行为为王某的身体创设了危险，属于先行行为，产生了作为义务。但是，李某邀请王某喝酒，属于生活行为，该生活行为一般不会给人制造危险。王某之所以产生危险，是由于其身体患有心脏病。而王某是自己身体的管理者，在自己身体不宜喝酒的情况下，仍然喝酒。而且，李某只是劝酒，没有采取威胁等手段强迫其喝酒。王某是在意志自由的情况下喝的酒，属于被害人自陷风险。此时，李某没有作为义务。</p>
-
-<p>②赵某与王某同居一室，共同生活，基于特定领域产生作为义务，也即第一，该寝室是赵某管理的领域，第二，在该领域内，赵某对王某的危险具有排他的支配作用，也即当时只有赵某能救王某。赵某的行为属于不作为，但是从等价性的程度来看，没有达到故意杀人罪的程度，只是达到遗弃罪的程度，构成遗弃罪。在此注意，遗弃罪的行为主体不要求是家庭成员，只要有救助义务，就可以构成该罪。</p>
-</blockquote>
-
-<p>##93.【案例】
-李某向从事苗圃生意的周某谎称，自己与交通局的领导已经协商好，可以处理某公路两侧的香樟树，可以卖给周某。周某不知情而相信，向李某支付了三万元。李某让周某挖走了10棵香樟树。问题：李某构成盗窃罪？盗伐林木罪？诈骗罪？</p>
-
-<blockquote>
-<p>【解析】
-①李某对交通局的财产构成盗窃罪的间接正犯，利用不知情者。</p>
-
-<p>②李某对交通局的树木构成盗伐林木罪的间接正犯。公共道路的林木属于盗伐林木罪的保护对象。成立该罪要求数量较大，司法解释规定是2立方米。一般情况下，盗窃罪与盗伐林木罪是法条竞合关系，适用特殊法优于一般法的原则，对李某以盗伐林木罪论处。</p>
-
-<p>③李某对周某是否构成诈骗罪，存在两种意见，主流意见认为构成诈骗罪，因为周某花费三万元（市场正常价）却买到有权利瑕疵的财物，交易目的失败，存在财产损失。</p>
-
-<p>④罪数。李某的一个行为（将交通局财物处分给周某）同时触犯盗伐林木罪与诈骗罪，想象竞合，择一重罪论处。</p>
-</blockquote>
-
-<p>##94.【案例】
-某公司要求职员在公司内部网络系统填写一个银行卡号，可以填写自己的卡号，也可以填写亲人的卡号。公司会每月向该卡号打钱，作为发放工资的方式。公司职员黄某侵入该网络系统，将职员田某栏目下的卡号篡改为自己的银行卡号。公司会计为田某发放工资时，以为该卡号是田某的真实卡号，将钱款打入该银行卡号。后田某发现自己银行卡未收到工资，询问公司会计，公司会计称钱已经打了。田某进入系统检查时，发现银行卡号不是自己的卡号，便报案。问题：谁是被害人？黄某构成盗窃罪？诈骗罪？行为对象是什么？</p>
-
-<blockquote>
-<p>【解析】
-①公司让职员填写一个银行卡号，该卡号不必是职员自己的。公司没有义务审核该卡号是不是职员的真实卡号。公司只要向该卡号打了钱，就表明公司向职员履行了付款义务。因此，公司不是被害人。</p>
-
-<p>②职员田某遭受了财产损失，应收到工资，却没收到，因此田某是被害人。</p>
-
-<p>③田某遭受财产损失，这里的财产不是田某已经现实占有的工资款项，因为公司会计直接将工资款项打入黄某卡号，田某自始至终没有占有该工资款项。这里的财产是田某的应收款项，也即田某对公司的债权，这是一项财产性利益。也即，田某在财产性利益上遭受了损失。</p>
-
-<p>④虽然黄某欺骗了公司会计，但由于公司不是被害人，所以黄某对公司会计不构成诈骗罪。</p>
-
-<p>⑤田某是被害人，丧失了对公司的债权。一般情况下，债权可以转让或让与，让与的主要法律后果为债权转移，新的债权人取得原债权人的地位。例如，田某可以基于自己的意愿将针对公司的债权转移给黄某，黄某取得针对公司的债权，公司须向黄某支付钱款。而本案中，黄某偷换了田某的卡号，意味着窃得田某的债权人地位，法律后果是将田某针对公司的债权转移给自己享有。与正常的债权转让相比，这种债权转让的特点是违反了田某的意愿。而盗窃行为的特点是违反权利人的意愿，将权利人占有的财物或享有的财产性利益转移为自己占有或享有。因此，黄某违反权利人田某的意愿，通过盗窃手段，将田某享有的财产性利益转移为自己享有，构成盗窃罪，盗窃的对象是财产性利益。</p>
-
-<p>⑥本案与偷换二维码案性质相似。关于偷换二维码案，我曾经的观点是诈骗罪，被害人是付账的顾客。但后来自己体验了一把扫描二维码支付（在国外两年落伍了，没用过二维码支付），发现，一般而言，顾客只要付款到商家指定的二维码账户，就算履行了付款义务，那么顾客就不是被害人，而商家是被害人，偷换者构成盗窃罪，盗窃对象是商家的债权或财产性利益。对该问题感兴趣的同学可以参见：柏浪涛：《论诈骗罪中的“处分意识”》，载《东方法学》2017年第2期。</p>
-</blockquote>
-
-<p>##95.【案例】
-徐某与张某赌博，张某赢取徐某5万元。徐某认为张某赌博使诈，怀恨在心。后徐某纠集钟某将张某劫持到一座山上，逼迫其退还赢取的5万元。张某不答应。徐某与钟某殴打张某，并向张某妻子吴某打电话，让其给徐某账户汇5万元，否则等着收尸。吴某答应照办。问题：徐某构成：非法拘禁罪？绑架罪？抢劫罪？</p>
-
-<blockquote>
-<p>【解析】
-①有观点认为，对本案应适用刑法第238条第3款“为索取债务非法扣押他人，定非法拘禁罪”，以及相应司法解释“为索取赌债而非法扣押他人，定非法拘禁罪”，认为徐某构成非法拘禁罪。这是错误的。本案中，徐某索取的不是赌债，而是赌输的钱。（审题要仔细，这是司考常见陷阱）</p>
-
-<p>②徐某第一阶段的劫持行为构成抢劫罪。第一，徐某具有非法占有他人财物的目的。张某对赢取徐某的钱财已经平稳占有，受刑法保护。徐某强行索回，既不属于正当防卫，也不属于自救行为。第二，徐某的手段是非法拘禁，足以压制张某反抗，属于拘禁型抢劫。</p>
-
-<p>③徐某第二阶段的劫持行为构成绑架罪。徐某在劫持张某的状态下，产生了向第三人吴某勒索财物的目的，并且向吴某勒索财物，符合绑架罪的构成要件。注意，在此不是索取债务（赌债），所以不能定非法拘禁罪。</p>
-
-<p>④罪数问题。徐某的两个行为分别构成抢劫罪和绑架罪，应数罪并罚。注意，相关司法解释规定：先绑架，后抢劫，择一重罪论处。该规定其实不妥当，按理对于独立的两个犯罪行为应数罪并罚。该规定只能被视为特殊规定。本案是先抢劫，后绑架，故不适用该司法解释。</p>
-</blockquote>
-
-<p>##96.【案例】
-张某欲承揽某项市政工程项目，由于自己没有具备施工资质的公司，便挂靠在甲公司名下，以该公司承揽该项目。为了承揽该项目，张某以甲公司的名义向建设局局长王某行贿50万，王某答应将市政项目交给甲公司。问，在这种挂靠的清醒中，甲公司是否构成单位行贿罪？</p>
-
-<blockquote>
-<p>【解析】甲公司要构成单位行贿罪，需要具备两点：①单位的整体意志，如按照单位决策机制决定实施犯罪；②为单位谋取非法利益。甲公司不符合这两点，所以不构成单位行贿罪。在这个案件事实中能够提取出张某个人实施行贿的犯罪事实，因此张某个人构成行贿罪。</p>
-</blockquote>
-
-<p>##97.【案例】
-一名乞丐甲进入李某家院子乞讨，由于长时间没有吃饭，饥饿昏倒。李某见此情景，并未施救。5小时候，邻居王某来李某家，发现甲，将其送往医院，由于耽误救治太久，导致重伤后果。问：李某有无救助义务？</p>
-
-<blockquote>
-<p>【解析】虽然甲是不速之客，但其并不是来李某家侵害李某的犯罪人。李某家是李某的特定领域，并且李某对甲的危险具有排他的支配作用，即只有李某能够救助。因此，李某有救助义务。</p>
-</blockquote>
-
-<p>##98.【案例】
-张某邀请朋友王某、李某来家里做客，并介绍二人认识。王某发现李某很有钱，便对李某实施抢劫。李某请求张某救助，张某不予救助，王某抢劫既遂。问：张某有无救助义务？</p>
-
-<blockquote>
-<p>【解析】张某家是张某的特定领域，并且张某对李某的危险具有排他的支配作用，即只有张某能够救助。因此张某有救助义务，在本案中张某构成不作为的帮助犯。</p>
-</blockquote>
-
-<p>##99.【案例】
-甲是驾校学员，乙是教练。甲驾车，乙坐在车上指导。行驶中，由于乙指示有误，甲的操作酿成车祸，车祸导致乙死亡。问：对甲如何处理？</p>
-
-<blockquote>
-<p>【解析】首先，危险的实行者是甲。其次，甲作为学员，对如何操作具有危险性或不具有危险性，没有明确认识，也没有控制能力。甲是听从乙的指挥而操作。因此，甲对乙的死亡不用负刑事责任，不构成过失致人死亡罪。</p>
-</blockquote>
-
-<p>##100.【案例】
-甲是乙家的保姆，照顾乙家两岁的孩子丙。甲给丙吃花生米时，花生卡主喉咙。甲赶紧叫来120急救医生，医生询问是什么原因引起的症状，甲谎称可能是孩子有哮喘，隐瞒花生卡喉咙的事实，导致医生无法针对性地采取急救措施，贻误救治，导致颅脑缺氧，虽抢救过来，但留下了重伤后遗症。甲是否构成不作为犯罪？</p>
-
-<blockquote>
-<p>【解析】第一，甲基于保姆身份，具有救助义务。第二，甲虽然部分履行了救助义务，也即叫来医生，但是甲故意隐瞒关键问题，属于不作为。第三，甲对于不作为而导致重伤后遗症的结果存在间接故意，构成不作为的间接故意伤害。</p>
-</blockquote>
-
-<p>##101.（加一个彩蛋）【案例】</p>
-
-<p>郎永淳醉驾被判三个月的反思：郎叫了代驾，而代驾正好是一个比较专业的团伙。他们的手段是代驾时开到你家附近就找种种借口强行下车离开，把你连人带车扔在马路上，以此坐地起价要求你加钱，否则你就别想回家，那一般人会怎么处理呢？肯定是觉得没剩几步路了，不吃这套，不接受这种勒索，自己坚持一下开车回家。可就在这个时候，警察突然出现了，然后把当事人抓了起来，一查是醉驾。对这种情况该如何处理？</p>
-
-<blockquote>
-<p>【解析】一分为二，郎在违法层面具有违法性，但危险驾驶罪是具体危险犯，如果距离很短且行人车辆很少，便没有产生具体危险。在责任层面，可能的免责事由是期待可能性，但法律还是能期待其不要醉驾，故无法免责，但可以减轻。代驾的勒索行为不构成敲诈勒索罪，因为没有达到使人产生恐惧心理的程度。</p>
-</blockquote>
-</article>
+④由于生产“柠檬黄”不需要行政法特别许可，因此，张某在自己家里非法生产“柠檬黄”不构成非法经营罪。案件事实没有指出张某生产的“柠檬黄”是否属于伪劣产品，因此，张某不构成生产、销售伪劣产品罪。</p></blockquote><h2><a name='header-n591' class='md-header-anchor '></a>90.【案例】</h2><p>王某是艾滋病患者，为了报复社会，用针管抽了自己的血液后，来到某广场，向过往行人扎针，共计有五人被扎中。事后经检查，这五人没有被传染艾滋病。问题：王某构成投放危险物质罪？以危险方法危害公共安全罪？故意伤害罪？故意杀人罪？</p><blockquote><p>【解析】</p></blockquote><blockquote><p>①危害公共安全犯罪中的“危害公共安全”要求制造的危险具有危及多数人的可能性。而用针管扎人，一次只能扎中一个人，不可能具有危及多数人的可能性。这种行为不构成危害公共安全犯罪。因此，王某不构成投放危险物质罪和以危险方法危害公共安全罪。在此注意，王某的行为是针对不特定人，但这种不特定是王某自己主观预设的犯罪对象不特定。这只是主观故意中的不确定故意。而危害公共安全要求客观手段具有危及多数人的可能性。对此二者应当注意区分。</p><p>②由于艾滋病毒会对人的身体健康造成严重损害，因此蓄意给他人传染艾滋病的行为，属于故意伤害行为。王某构成故意伤害罪未遂。同时，王某的行为扰乱了社会秩序，构成寻衅滋事罪。这两罪想象竞合，择一重罪论处，最终以故意伤害罪未遂论处。王某构成五个故意伤害未遂，属于同种数罪，应数罪并罚。注意，在此不能只作一罪处理。</p></blockquote><h2><a name='header-n602' class='md-header-anchor '></a>91.【案例】</h2><p>甲向前方十米远的乙开枪，子弹打偏，打死了附近的丙，甲没有预料到会打死丙，但有预见的可能性。事后查明，丙当时正要开枪打死乙，如果甲未能打死丙，丙就会打死乙，而甲对此事先并不知情。问题：甲构成故意杀人罪既遂？未遂？正当防卫？依据打击错误与偶然防卫的学说该如何分析？</p><blockquote><p>【解析】
+①甲构成打击错误，根据法定符合说，甲对乙构成故意杀人罪未遂，对丙构成故意杀人罪既遂，想象竞合，择一重罪论处，甲构成故意杀人罪既遂。根据具体符合说，甲对乙构成故意杀人罪未遂，对丙构成过失致人死亡罪，想象竞合，择一重罪论处，甲构成故意杀人罪未遂。</p><p>②甲过失致丙死亡的行为属于偶然防卫，也即客观上制止了丙的不法侵害，但主观上没有意识到这一点。对此，观点一（结果无价值论）：甲制造了好结果，意味着甲的行为是好行为，甲不构成过失致人死亡罪，而构成正当防卫。观点二（行为无价值论）：甲制造了好结果，所以不构成过失致人死亡罪，但甲的行为还是坏行为，所以甲不构成正当防卫。</p><p>③具体符合说与行为无价值论相结合，最终便会认为，甲对乙构成故意杀人罪未遂，甲对丙不构成过失致人死亡罪，最终甲构成故意杀人罪未遂。</p><p>④法定符合说与结果无价值论无法结合，因为二者在看待甲导致丙的死亡问题上，存在矛盾，在看待甲的最终定罪问题上也存在矛盾。</p></blockquote><h2><a name='header-n615' class='md-header-anchor '></a>92.【案例】</h2><p>李某邀请王某到餐馆吃饭喝酒，向王某劝酒，王某喝醉了，李某将王某送到王某的大学寝室，抱到床上，然后回自己寝室。半夜时分，王某的室友赵某发现王某呼吸有点急促，表情痛苦，身体有异样，便找李某，对其讲：“你请王某喝的酒，他现在身体有问题，你应该送他到医院。”李某未理睬。赵某见状，回到寝室也不管王某，并很快睡着了。第二天早上，赵某醒来发现王某已经去世。经鉴定，王某由于饮酒导致心脏病发作死亡。事后查明，案发当天，王某的寝室只住着王某与赵某；并查明，李某邀请王某喝酒时，王某向其告知了自己患有心脏病。问题：李某、赵某有无救助义务？是否构成不作为犯罪？</p><blockquote><p>【解析】
+①形式上看，李某请王某喝酒的行为为王某的身体创设了危险，属于先行行为，产生了作为义务。但是，李某邀请王某喝酒，属于生活行为，该生活行为一般不会给人制造危险。王某之所以产生危险，是由于其身体患有心脏病。而王某是自己身体的管理者，在自己身体不宜喝酒的情况下，仍然喝酒。而且，李某只是劝酒，没有采取威胁等手段强迫其喝酒。王某是在意志自由的情况下喝的酒，属于被害人自陷风险。此时，李某没有作为义务。</p><p>②赵某与王某同居一室，共同生活，基于特定领域产生作为义务，也即第一，该寝室是赵某管理的领域，第二，在该领域内，赵某对王某的危险具有排他的支配作用，也即当时只有赵某能救王某。赵某的行为属于不作为，但是从等价性的程度来看，没有达到故意杀人罪的程度，只是达到遗弃罪的程度，构成遗弃罪。在此注意，遗弃罪的行为主体不要求是家庭成员，只要有救助义务，就可以构成该罪。</p></blockquote><h2><a name='header-n624' class='md-header-anchor '></a>93.【案例】</h2><p>李某向从事苗圃生意的周某谎称，自己与交通局的领导已经协商好，可以处理某公路两侧的香樟树，可以卖给周某。周某不知情而相信，向李某支付了三万元。李某让周某挖走了10棵香樟树。问题：李某构成盗窃罪？盗伐林木罪？诈骗罪？</p><blockquote><p>【解析】
+①李某对交通局的财产构成盗窃罪的间接正犯，利用不知情者。</p><p>②李某对交通局的树木构成盗伐林木罪的间接正犯。公共道路的林木属于盗伐林木罪的保护对象。成立该罪要求数量较大，司法解释规定是2立方米。一般情况下，盗窃罪与盗伐林木罪是法条竞合关系，适用特殊法优于一般法的原则，对李某以盗伐林木罪论处。</p><p>③李某对周某是否构成诈骗罪，存在两种意见，主流意见认为构成诈骗罪，因为周某花费三万元（市场正常价）却买到有权利瑕疵的财物，交易目的失败，存在财产损失。</p><p>④罪数。李某的一个行为（将交通局财物处分给周某）同时触犯盗伐林木罪与诈骗罪，想象竞合，择一重罪论处。</p></blockquote><h2><a name='header-n637' class='md-header-anchor '></a>94.【案例】</h2><p>某公司要求职员在公司内部网络系统填写一个银行卡号，可以填写自己的卡号，也可以填写亲人的卡号。公司会每月向该卡号打钱，作为发放工资的方式。公司职员黄某侵入该网络系统，将职员田某栏目下的卡号篡改为自己的银行卡号。公司会计为田某发放工资时，以为该卡号是田某的真实卡号，将钱款打入该银行卡号。后田某发现自己银行卡未收到工资，询问公司会计，公司会计称钱已经打了。田某进入系统检查时，发现银行卡号不是自己的卡号，便报案。问题：谁是被害人？黄某构成盗窃罪？诈骗罪？行为对象是什么？</p><blockquote><p>【解析】
+①公司让职员填写一个银行卡号，该卡号不必是职员自己的。公司没有义务审核该卡号是不是职员的真实卡号。公司只要向该卡号打了钱，就表明公司向职员履行了付款义务。因此，公司不是被害人。</p><p>②职员田某遭受了财产损失，应收到工资，却没收到，因此田某是被害人。</p><p>③田某遭受财产损失，这里的财产不是田某已经现实占有的工资款项，因为公司会计直接将工资款项打入黄某卡号，田某自始至终没有占有该工资款项。这里的财产是田某的应收款项，也即田某对公司的债权，这是一项财产性利益。也即，田某在财产性利益上遭受了损失。</p><p>④虽然黄某欺骗了公司会计，但由于公司不是被害人，所以黄某对公司会计不构成诈骗罪。</p><p>⑤田某是被害人，丧失了对公司的债权。一般情况下，债权可以转让或让与，让与的主要法律后果为债权转移，新的债权人取得原债权人的地位。例如，田某可以基于自己的意愿将针对公司的债权转移给黄某，黄某取得针对公司的债权，公司须向黄某支付钱款。而本案中，黄某偷换了田某的卡号，意味着窃得田某的债权人地位，法律后果是将田某针对公司的债权转移给自己享有。与正常的债权转让相比，这种债权转让的特点是违反了田某的意愿。而盗窃行为的特点是违反权利人的意愿，将权利人占有的财物或享有的财产性利益转移为自己占有或享有。因此，黄某违反权利人田某的意愿，通过盗窃手段，将田某享有的财产性利益转移为自己享有，构成盗窃罪，盗窃的对象是财产性利益。</p><p>⑥本案与偷换二维码案性质相似。关于偷换二维码案，我曾经的观点是诈骗罪，被害人是付账的顾客。但后来自己体验了一把扫描二维码支付（在国外两年落伍了，没用过二维码支付），发现，一般而言，顾客只要付款到商家指定的二维码账户，就算履行了付款义务，那么顾客就不是被害人，而商家是被害人，偷换者构成盗窃罪，盗窃对象是商家的债权或财产性利益。对该问题感兴趣的同学可以参见：柏浪涛：《论诈骗罪中的“处分意识”》，载《东方法学》2017年第2期。</p></blockquote><h2><a name='header-n654' class='md-header-anchor '></a>95.【案例】</h2><p>徐某与张某赌博，张某赢取徐某5万元。徐某认为张某赌博使诈，怀恨在心。后徐某纠集钟某将张某劫持到一座山上，逼迫其退还赢取的5万元。张某不答应。徐某与钟某殴打张某，并向张某妻子吴某打电话，让其给徐某账户汇5万元，否则等着收尸。吴某答应照办。问题：徐某构成：非法拘禁罪？绑架罪？抢劫罪？</p><blockquote><p>【解析】
+①有观点认为，对本案应适用刑法第238条第3款“为索取债务非法扣押他人，定非法拘禁罪”，以及相应司法解释“为索取赌债而非法扣押他人，定非法拘禁罪”，认为徐某构成非法拘禁罪。这是错误的。本案中，徐某索取的不是赌债，而是赌输的钱。（审题要仔细，这是司考常见陷阱）</p><p>②徐某第一阶段的劫持行为构成抢劫罪。第一，徐某具有非法占有他人财物的目的。张某对赢取徐某的钱财已经平稳占有，受刑法保护。徐某强行索回，既不属于正当防卫，也不属于自救行为。第二，徐某的手段是非法拘禁，足以压制张某反抗，属于拘禁型抢劫。</p><p>③徐某第二阶段的劫持行为构成绑架罪。徐某在劫持张某的状态下，产生了向第三人吴某勒索财物的目的，并且向吴某勒索财物，符合绑架罪的构成要件。注意，在此不是索取债务（赌债），所以不能定非法拘禁罪。</p><p>④罪数问题。徐某的两个行为分别构成抢劫罪和绑架罪，应数罪并罚。注意，相关司法解释规定：先绑架，后抢劫，择一重罪论处。该规定其实不妥当，按理对于独立的两个犯罪行为应数罪并罚。该规定只能被视为特殊规定。本案是先抢劫，后绑架，故不适用该司法解释。</p></blockquote><h2><a name='header-n667' class='md-header-anchor '></a>96.【案例】</h2><p>张某欲承揽某项市政工程项目，由于自己没有具备施工资质的公司，便挂靠在甲公司名下，以该公司承揽该项目。为了承揽该项目，张某以甲公司的名义向建设局局长王某行贿50万，王某答应将市政项目交给甲公司。问，在这种挂靠的清醒中，甲公司是否构成单位行贿罪？</p><blockquote><p>【解析】甲公司要构成单位行贿罪，需要具备两点：①单位的整体意志，如按照单位决策机制决定实施犯罪；②为单位谋取非法利益。甲公司不符合这两点，所以不构成单位行贿罪。在这个案件事实中能够提取出张某个人实施行贿的犯罪事实，因此张某个人构成行贿罪。</p></blockquote><h2><a name='header-n673' class='md-header-anchor '></a>97.【案例】</h2><p>一名乞丐甲进入李某家院子乞讨，由于长时间没有吃饭，饥饿昏倒。李某见此情景，并未施救。5小时候，邻居王某来李某家，发现甲，将其送往医院，由于耽误救治太久，导致重伤后果。问：李某有无救助义务？</p><blockquote><p>【解析】虽然甲是不速之客，但其并不是来李某家侵害李某的犯罪人。李某家是李某的特定领域，并且李某对甲的危险具有排他的支配作用，即只有李某能够救助。因此，李某有救助义务。</p></blockquote><h2><a name='header-n679' class='md-header-anchor '></a>98.【案例】</h2><p>张某邀请朋友王某、李某来家里做客，并介绍二人认识。王某发现李某很有钱，便对李某实施抢劫。李某请求张某救助，张某不予救助，王某抢劫既遂。问：张某有无救助义务？</p><blockquote><p>【解析】张某家是张某的特定领域，并且张某对李某的危险具有排他的支配作用，即只有张某能够救助。因此张某有救助义务，在本案中张某构成不作为的帮助犯。</p></blockquote><h2><a name='header-n685' class='md-header-anchor '></a>99.【案例】</h2><p>甲是驾校学员，乙是教练。甲驾车，乙坐在车上指导。行驶中，由于乙指示有误，甲的操作酿成车祸，车祸导致乙死亡。问：对甲如何处理？</p><blockquote><p>【解析】首先，危险的实行者是甲。其次，甲作为学员，对如何操作具有危险性或不具有危险性，没有明确认识，也没有控制能力。甲是听从乙的指挥而操作。因此，甲对乙的死亡不用负刑事责任，不构成过失致人死亡罪。</p></blockquote><h2><a name='header-n691' class='md-header-anchor '></a>100.【案例】</h2><p>甲是乙家的保姆，照顾乙家两岁的孩子丙。甲给丙吃花生米时，花生卡主喉咙。甲赶紧叫来120急救医生，医生询问是什么原因引起的症状，甲谎称可能是孩子有哮喘，隐瞒花生卡喉咙的事实，导致医生无法针对性地采取急救措施，贻误救治，导致颅脑缺氧，虽抢救过来，但留下了重伤后遗症。甲是否构成不作为犯罪？</p><blockquote><p>【解析】第一，甲基于保姆身份，具有救助义务。第二，甲虽然部分履行了救助义务，也即叫来医生，但是甲故意隐瞒关键问题，属于不作为。第三，甲对于不作为而导致重伤后遗症的结果存在间接故意，构成不作为的间接故意伤害。</p></blockquote><h2><a name='header-n697' class='md-header-anchor '></a>101.（加一个彩蛋）【案例】</h2><p>郎永淳醉驾被判三个月的反思：郎叫了代驾，而代驾正好是一个比较专业的团伙。他们的手段是代驾时开到你家附近就找种种借口强行下车离开，把你连人带车扔在马路上，以此坐地起价要求你加钱，否则你就别想回家，那一般人会怎么处理呢？肯定是觉得没剩几步路了，不吃这套，不接受这种勒索，自己坚持一下开车回家。可就在这个时候，警察突然出现了，然后把当事人抓了起来，一查是醉驾。对这种情况该如何处理？</p><blockquote><p>【解析】一分为二，郎在违法层面具有违法性，但危险驾驶罪是具体危险犯，如果距离很短且行人车辆很少，便没有产生具体危险。在责任层面，可能的免责事由是期待可能性，但法律还是能期待其不要醉驾，故无法免责，但可以减轻。代驾的勒索行为不构成敲诈勒索罪，因为没有达到使人产生恐惧心理的程度。</p></blockquote></div>
                 <section class="author">
                     
                     <a class="name" href="/about..html"></a>
